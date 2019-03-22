@@ -1,6 +1,12 @@
-# TTT
+# TTT - Build a tic tac toe game in the command line. 
 
-**TODO: Add description**
+Rule 1: Follow TDD
+
+### Phase 1: 2 Local Players
+1. Outputs a board to command line
+2. Accepts player 1 input
+3. Checks for win
+4. Accepts player 2 input
 
 ## Installation
 
@@ -19,3 +25,14 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/elixir_tic_tac_toe](https://hexdocs.pm/elixir_tic_tac_toe).
 
+## Compile project
+`mix compile`
+
+## After compilation, start a iex session
+`iex -S mix`
+
+## Running Tests
+`mix test`
+
+## Automatic code formatting
+`mix format`
