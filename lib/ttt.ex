@@ -5,15 +5,11 @@ defmodule TTT do
   end
 
   def print_board() do
-    IO.puts(
-      ~s(1    |2    |3    \n     |     |     \n_____|_____|_____\n4    |5    |6    \n     |     |     \n_____|_____|_____\n7    |8    |9    \n     |     |     \n     |     |     \n)
-    )
+    IO.puts(GameText.get(:initial_board))
   end
 
   def play() do
     print_board()
-    IO.gets(
-      ~s(Player X - Select a numbered spot to start the game!\n)
-    )
+    IO.gets(GameText.get(:initial_player_prompt))
   end
 end
