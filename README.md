@@ -3,10 +3,20 @@
 Rule 1: Follow TDD
 
 ### Phase 1: 2 Local Players
-1. Outputs a board to command line
-2. Accepts player 1 input
+- Simple instructions for the user should be provided
+- Standard 3 X 3 board
+- "X" and "O" markers
+- Winner or tie games should be identified and game should end
+- Human vs Human (local)
+
+*Test plan:*
+1. Outputs a standard 3x3 board to command line 
+2. Accepts player input
 3. Checks for win
-4. Accepts player 2 input
+5. If win: Outputs win message with player
+If no win -- continue
+6. Updates board with current player marker
+7. Toggle current player
 
 ## Installation
 
