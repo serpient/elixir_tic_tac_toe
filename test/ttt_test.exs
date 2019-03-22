@@ -12,4 +12,11 @@ defmodule TTTTest do
            1    |2    |3    \n     |     |     \n_____|_____|_____\n4    |5    |6    \n     |     |     \n_____|_____|_____\n7    |8    |9    \n     |     |     \n     |     |     \n
            """
   end
+
+  test "CL outputs starter text for game" do
+    assert capture_io(fn -> TTT.play() end) == ~s"""
+    1    |2    |3    \n     |     |     \n_____|_____|_____\n4    |5    |6    \n     |     |     \n_____|_____|_____\n7    |8    |9    \n     |     |     \n     |     |     \n
+    Player X - Select a numbered spot to start the game!
+    """
+  end
 end
