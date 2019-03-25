@@ -4,12 +4,31 @@ defmodule TTT do
     |> IO.puts()
   end
 
-  def print_board() do
-    IO.puts(GameText.get(:initial_board))
+  def print_board(board_data) do
+    GameOutput.get_board(board_data)
+    |> IO.puts
+  end
+
+  def update_board(position_to_update, player_symbol, board_data) do
+    put_in board_data[position_to_update], player_symbol
+    |> print_board
   end
 
   def play() do
-    print_board()
-    IO.gets(GameText.get(:initial_player_prompt))
+    initial_board = %{
+      1 => "",
+      2 => "",
+      3 => "",
+      4 => "",
+      5 => "",
+      6 => "",
+      7 => "",
+      8 => "",
+      9 => "",
+    }
+    print_board(initial_board)
+    GameOutput.get_message(:initial_player_prompt)
+    |> IO.gets
+    |> update_board("X", initial_board)
   end
 end
