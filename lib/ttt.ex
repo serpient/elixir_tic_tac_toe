@@ -10,8 +10,13 @@ defmodule TTT do
   end
 
   def update_board(position_to_update, player_symbol, board_data) do
-    put_in board_data[position_to_update], player_symbol
+    Map.replace!(board_data, position_to_update, player_symbol)
     |> print_board
+  end
+
+  def game_start() do
+    GameOutput.get_message(:initial_player_prompt)
+    |> IO.gets
   end
 
   def play() do
@@ -27,8 +32,9 @@ defmodule TTT do
       9 => "",
     }
     print_board(initial_board)
-    GameOutput.get_message(:initial_player_prompt)
-    |> IO.gets
+    game_start()
+    |> to_string
+    |> String.to_integer
     |> update_board("X", initial_board)
   end
 end
