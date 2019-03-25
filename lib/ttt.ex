@@ -31,19 +31,43 @@ defmodule TTT do
     }
   end
 
+  def check_for_empty_spaces(board) do
+    Map.values(board)
+    |> Enum.any?(fn value -> value == " " end)
+  end
+
   def handle_play(returned_value, board, current_player) do
-    {status, value} = returned_value
-    if (status == :error) do
-      play(board, value, current_player)
-    else
-      play(value, :initial_player_prompt, get_other_player_symbol(current_player))
+    {status, updated_board} = returned_value
+
+    cond do
+      status == :error ->
+        handle_error(returned_value, board, current_player)
+
+      status == :ok ->
+        play(updated_board, :initial_player_prompt, get_other_player_symbol(current_player))
+    end
+  end
+
+  def handle_error(error, board, current_player) do
+    {_status, error_message} = error
+
+    cond do
+      error_message == :board_is_filled -> GameOutput.get_message(error_message) |> IO.puts()
+      true -> play(board, error_message, current_player)
     end
   end
 
   def play(board \\ initial_board(), prompt \\ :initial_player_prompt, current_player \\ "X") do
-    print_board(board)
-    get_player_input(prompt)
-    |> ProcessInput.handle_input(board, current_player)
-    |> handle_play(board, current_player)
+    case check_for_empty_spaces(board) do
+      false ->
+        handle_error({:error, :board_is_filled}, nil, nil)
+
+      true ->
+        print_board(board)
+
+        get_player_input(prompt)
+        |> ProcessInput.handle_input(board, current_player)
+        |> handle_play(board, current_player)
+    end
   end
 end
