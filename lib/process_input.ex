@@ -1,7 +1,12 @@
 defmodule ProcessInput do
-  def update_board(position_to_update, board_data, player_symbol) do
+  def update_board(position_to_update, board_data, player_symbol) when is_integer(position_to_update) do
     {:ok, Map.replace!(board_data, position_to_update, player_symbol)}
   end
+
+  def update_board(position_to_update, _board_data, _player_symbol) do
+    position_to_update
+  end
+
   def transform_to_integer(string) do
     Integer.parse(string)
   end
