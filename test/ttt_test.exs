@@ -95,7 +95,7 @@ defmodule TTT_Test do
       8 => " ",
       9 => " "
     }
-    assert ProcessInput.handle_input("1", initial_board, "O") == %{:error => :invalid_input}
+    assert ProcessInput.handle_input("1", initial_board, "O") == {:error, :duplicate_input}
   end
 
   test "IsEmpty fn returns false if position has player symbol." do
