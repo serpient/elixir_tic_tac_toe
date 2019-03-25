@@ -4,10 +4,6 @@ defmodule TTTTest do
   doctest TTT
   doctest GameOutput
 
-  test "prints out question for player input" do
-    assert capture_io(fn -> TTT.get_player_name() end) == "What is your name? \neof\n"
-  end
-
   test "prints 3x3 board to CL" do
     initial_board = %{
       1 => "",
