@@ -5,7 +5,8 @@ defmodule GameOutput do
         ~s(1    |2    |3    \n     |     |     \n_____|_____|_____\n4    |5    |6    \n     |     |     \n_____|_____|_____\n7    |8    |9    \n     |     |     \n     |     |     \n),
       initial_player_prompt: ~s(Player X - Select a numbered spot to start the game: ),
       duplicate_input: ~s(That spot is taken! Please choose another number: ),
-      invalid_input: ~s(Please enter a number: )
+      invalid_input: ~s(Please enter a number: ),
+      board_is_filled: ~s(No more positions to play!)
     }
 
     game_text[key]
