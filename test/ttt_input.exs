@@ -1,27 +1,9 @@
-defmodule TTT_Input do
+defmodule TTT_Process_Input do
   use ExUnit.Case
   import ExUnit.CaptureIO
   doctest TTT
   doctest GameOutput
   doctest ProcessInput
-
-  test "Prints 3x3 board to CL" do
-    initial_board = %{
-      1 => "",
-      2 => "",
-      3 => "",
-      4 => "",
-      5 => "",
-      6 => "",
-      7 => "",
-      8 => "",
-      9 => ""
-    }
-
-    assert capture_io(fn -> TTT.print_board(initial_board) end) ==
-             GameOutput.get_board(initial_board) <> "\n"
-  end
-
 
   test "After Player X input, board data is updated" do
     initial_board = %{
@@ -141,54 +123,5 @@ defmodule TTT_Input do
     }
 
     assert ProcessInput.handle_input("string", initial_board, "X") == {:error, :invalid_input}
-  end
-
-  test "After board is filled, don't allow more input and outputs message." do
-    initial_board = %{
-      1 => "X",
-      2 => "O",
-      3 => "X",
-      4 => "O",
-      5 => "X",
-      6 => "O",
-      7 => "X",
-      8 => "O",
-      9 => "X"
-    }
-
-    assert capture_io(fn -> TTT.play(initial_board, nil, "O") end) ==
-             GameOutput.get_message(:board_is_filled) <> "\n"
-  end
-
-  test "Checks for empty spots in board. False is filled." do
-    initial_board = %{
-      1 => "X",
-      2 => "O",
-      3 => "X",
-      4 => "O",
-      5 => "X",
-      6 => "O",
-      7 => "X",
-      8 => "O",
-      9 => "X"
-    }
-
-    assert TTT.check_for_empty_spaces(initial_board) == false
-  end
-
-  test "Returns true if there is still empty spots in board." do
-    initial_board = %{
-      1 => "X",
-      2 => "O",
-      3 => "X",
-      4 => "O",
-      5 => "X",
-      6 => "O",
-      7 => "X",
-      8 => "O",
-      9 => " "
-    }
-
-    assert TTT.check_for_empty_spaces(initial_board) == true
   end
 end
