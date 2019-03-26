@@ -49,4 +49,19 @@ defmodule TTT_Check_For_Wins_Test do
     }
     assert CheckForWins.analyze(initial_board) == {:error, :no_win}
   end
+
+  test "No wins if there are 3 in a row from both players" do
+    initial_board = %{
+      1 => " ",
+      2 => " ",
+      3 => " ",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => "O",
+      8 => "X",
+      9 => "O"
+    }
+    assert CheckForWins.analyze(initial_board) == {:error, :no_win}
+  end
 end
