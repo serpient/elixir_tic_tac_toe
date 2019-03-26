@@ -69,7 +69,7 @@ defmodule TTT_Play_Test do
       9 => " "
     }
 
-    assert TTT.play(initial_board, nil, "X") ==
+    assert TTT.handle_validation_result({:ok, initial_board}) ==
              "Player X " <> GameOutput.get_message(:wins_game) <> "\n"
   end
 end
