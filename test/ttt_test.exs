@@ -56,7 +56,7 @@ defmodule TTT_Play_Test do
     assert TTT.check_for_empty_spaces(initial_board) == true
   end
 
-  test "If Player X has horizontal win, stop game and output message" do
+  test "Handle Validation Result chains to Wins check" do
     initial_board = %{
       1 => "X",
       2 => "X",
@@ -69,7 +69,31 @@ defmodule TTT_Play_Test do
       9 => " "
     }
 
-    assert TTT.handle_validation_result({:ok, initial_board}) ==
-             "Player X " <> GameOutput.get_message(:wins_game) <> "\n"
+    assert TTT.handle_validation_result({:ok, initial_board}) == {:ok, :wins_game}
+  end
+
+  test "Wins_results chains to win game message" do
+    initial_board = %{
+      1 => "X",
+      2 => "X",
+      3 => "X",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " "
+    }
+
+    assert capture_io(fn ->
+             TTT.handle_win_check_result(
+               {:ok, :wins_game},
+               {:ok, initial_board},
+               "X",
+               initial_board
+             )
+           end) ==
+             GameOutput.get_board(initial_board) <> "\n" <>
+               "Player X - " <> GameOutput.get_message(:wins_game) <> "\n"
   end
 end
