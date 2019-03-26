@@ -7,15 +7,15 @@ defmodule TTT_Play_Test do
 
   test "Prints 3x3 board to CL" do
     initial_board = %{
-      1 => "",
-      2 => "",
-      3 => "",
-      4 => "",
-      5 => "",
-      6 => "",
-      7 => "",
-      8 => "",
-      9 => ""
+      1 => " ",
+      2 => " ",
+      3 => " ",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " "
     }
 
     assert capture_io(fn -> TTT.print_board(initial_board) end) ==
@@ -36,8 +36,9 @@ defmodule TTT_Play_Test do
     }
 
     assert capture_io(fn -> TTT.play(initial_board, nil, "O") end) ==
-              GameOutput.get_board(initial_board) <> "\n" <>
-             GameOutput.get_message(:board_is_filled) <> "\n"
+             GameOutput.get_board(initial_board) <>
+               "\n" <>
+               GameOutput.get_message(:board_is_filled) <> "\n"
   end
 
   test "Checks for empty spots in board. False is filled." do
