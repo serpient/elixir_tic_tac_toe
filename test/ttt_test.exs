@@ -90,11 +90,13 @@ defmodule TTT_Play_Test do
 
     assert capture_io(fn ->
              TTT.handle_win_check_result(
-               {:ok, :wins_game,initial_board},
+               {:wins_game, initial_board},
+               initial_board,
                "X"
              )
            end) ==
-             GameOutput.get_board(initial_board) <> "\n" <>
+             GameOutput.get_board(initial_board) <>
+               "\n" <>
                "Player X - " <> GameOutput.get_message(:wins_game) <> "\n"
   end
 end

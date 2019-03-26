@@ -12,7 +12,7 @@ defmodule TTT do
   def handle_win(updated_board, current_player) do
     GameOutput.print_board(updated_board)
 
-    "Player #{current_player} - " <> GameOutput.get_message(:wins_game)
+    ("Player #{current_player} - " <> GameOutput.get_message(:wins_game))
     |> IO.puts()
   end
 
@@ -25,12 +25,19 @@ defmodule TTT do
     end
   end
 
-  def handle_win_check_result(win_result, current_player) do
+  def handle_win_check_result(win_result, initial_board, current_player) do
     {win_result_code, updated_board} = win_result
 
     cond do
+      win_result_code == :error ->
+        handle_error(win_result, initial_board, current_player)
+
       win_result_code == :no_win ->
-        play(updated_board, :initial_player_prompt, GameOutput.get_other_player_symbol(current_player))
+        play(
+          updated_board,
+          :initial_player_prompt,
+          GameOutput.get_other_player_symbol(current_player)
+        )
 
       win_result_code == :wins_game ->
         handle_win(updated_board, current_player)
@@ -59,10 +66,10 @@ defmodule TTT do
         handle_error({:error, :board_is_filled}, nil, nil)
 
       true ->
-          get_player_input(current_player, prompt)
-          |> ProcessInput.handle_input(board, current_player)
-          |> CheckForWins.analyze
-          |> handle_win_check_result(current_player)
+        get_player_input(current_player, prompt)
+        |> ProcessInput.handle_input(board, current_player)
+        |> CheckForWins.analyze()
+        |> handle_win_check_result(board, current_player)
     end
   end
 end

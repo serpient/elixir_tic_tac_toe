@@ -37,16 +37,16 @@ defmodule ProcessInput do
     error
   end
 
-  def handle_validation_result(input_validation_result, board, current_player) do
+  def handle_validation_result(input_validation_result, _board, _current_player) do
     {status, _results} = input_validation_result
 
     cond do
-      status == :error -> TTT.handle_error(input_validation_result, board, current_player)
+      # TTT.handle_error(input_validation_result, board, current_player)
+      status == :error -> input_validation_result
       true -> input_validation_result
     end
   end
 
-  @spec handle_input(binary(), any(), any()) :: :ok | {any(), any()}
   def handle_input(input, board, current_player) do
     transform_to_integer(input)
     |> process_input(board, current_player)

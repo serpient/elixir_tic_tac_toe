@@ -31,18 +31,25 @@ defmodule CheckForWins do
   end
 
   def analyze(results) do
-    {_status, board} = results
-    horizontal = convert_horizontal_to_row(board) |> check_row
-
-    vertical = convert_vertical_to_row(board) |> check_row
-
-    diagonal = convert_diagonal_to_row(board) |> check_row
-
-    board_has_win? = [horizontal, vertical, diagonal]
+    {status, board} = results
 
     cond do
-      Enum.member?(board_has_win?, true) -> {:wins_game, board}
-      true -> {:no_win, board}
+      status == :error ->
+        results
+
+      true ->
+        horizontal = convert_horizontal_to_row(board) |> check_row
+
+        vertical = convert_vertical_to_row(board) |> check_row
+
+        diagonal = convert_diagonal_to_row(board) |> check_row
+
+        board_has_win? = [horizontal, vertical, diagonal]
+
+        cond do
+          Enum.member?(board_has_win?, true) -> {:wins_game, board}
+          true -> {:no_win, board}
+        end
     end
   end
 end
