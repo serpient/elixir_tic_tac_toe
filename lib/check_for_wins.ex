@@ -12,6 +12,14 @@ defmodule CheckForWins do
     Enum.map(1..3, fn row_idx -> [board[row_idx], board[row_idx + 3], board[row_idx + 6]] end)
   end
 
+  def convert_diagonal_to_row(board) do
+    Enum.map([1, 3], fn row_idx ->
+      cond do
+        row_idx == 1 -> [board[row_idx], board[row_idx + 4], board[row_idx + 8]]
+        row_idx == 3 -> [board[row_idx], board[row_idx + 2], board[row_idx + 4]]
+      end
+    end)
+  end
   def check_row(row_data) do
     wins_list = Enum.map(row_data, fn row -> is_win?(row, "X") || is_win?(row, "O") end)
 
@@ -26,14 +34,7 @@ defmodule CheckForWins do
 
     vertical = convert_vertical_to_row(board) |> check_row
 
-    diagonal =
-      Enum.map([1, 3], fn row_idx ->
-        cond do
-          row_idx == 1 -> [board[row_idx], board[row_idx + 4], board[row_idx + 8]]
-          row_idx == 3 -> [board[row_idx], board[row_idx + 2], board[row_idx + 4]]
-        end
-      end)
-      |> check_row
+    diagonal = convert_diagonal_to_row(board) |> check_row
 
     wins_type = [horizontal, vertical, diagonal]
 
