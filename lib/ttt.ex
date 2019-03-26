@@ -9,19 +9,10 @@ defmodule TTT do
     |> Enum.any?(fn value -> value == " " end)
   end
 
-  def handle_play(win_result_code, returned_value, current_player)
-      when win_result_code == :no_win do
-    {_status, updated_board} = returned_value
-    play(updated_board, nil, GameOutput.get_other_player_symbol(current_player))
-  end
-
-  def handle_play(win_result_code, returned_value, current_player)
-      when win_result_code == :wins_game do
-    {_status, updated_board} = returned_value
-
+  def handle_win(updated_board, current_player) do
     GameOutput.print_board(updated_board)
 
-    ("Player #{current_player} - " <> GameOutput.get_message(:wins_game))
+    "Player #{current_player} - " <> GameOutput.get_message(:wins_game)
     |> IO.puts()
   end
 
@@ -45,13 +36,14 @@ defmodule TTT do
 
   def handle_win_check_result(win_result, input_validation_result, current_player, board) do
     {win_result_status, win_result_code} = win_result
+    {_status, updated_board} = input_validation_result
 
     cond do
       win_result_code == :no_win ->
-        handle_play(win_result_code, input_validation_result, current_player)
+        play(updated_board, :initial_player_prompt, GameOutput.get_other_player_symbol(current_player))
 
       win_result_code == :wins_game ->
-        handle_play(win_result_code, input_validation_result, current_player)
+        handle_win(updated_board, current_player)
 
       win_result_status == :error ->
         handle_error(input_validation_result, board, current_player)
