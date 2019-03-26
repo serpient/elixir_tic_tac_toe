@@ -124,4 +124,19 @@ defmodule TTT_Process_Input_Test do
 
     assert ProcessInput.handle_input("string", initial_board, "X") == {:error, :invalid_input}
   end
+
+  test "Inputting a number NOT 1-9, will throw a error." do
+    initial_board = %{
+      1 => " ",
+      2 => " ",
+      3 => " ",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " "
+    }
+    assert ProcessInput.handle_input("10", initial_board, "X") == {:error, :invalid_input_range}
+  end
 end

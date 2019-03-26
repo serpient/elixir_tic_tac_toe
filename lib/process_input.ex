@@ -26,10 +26,10 @@ defmodule ProcessInput do
   end
 
   def validate_input(result, board, _current_player) when is_integer(result) do
-    if is_empty(result, board) do
-      result
-    else
-      {:error, :duplicate_input}
+    cond do
+      is_empty(result, board) == true -> result
+      result > 9 || result < 1 -> {:error, :invalid_input_range}
+      true -> {:error, :duplicate_input}
     end
   end
 

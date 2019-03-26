@@ -6,7 +6,8 @@ defmodule GameOutput do
       initial_player_prompt: ~s(Player X - Select a numbered spot to start the game: ),
       duplicate_input: ~s(That spot is taken! Please choose another number: ),
       invalid_input: ~s(Please enter a number: ),
-      board_is_filled: ~s(No more positions to play!)
+      board_is_filled: ~s(No more positions to play!),
+      invalid_input_range: ~s{Please enter a number from 1 - 9: }
     }
 
     game_text[key]
