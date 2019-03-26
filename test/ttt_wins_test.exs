@@ -16,6 +16,7 @@ defmodule TTT_Check_For_Wins_Test do
       8 => " ",
       9 => " "
     }
+
     assert CheckForWins.analyze(initial_board) == {:ok, :wins_game}
   end
 
@@ -31,6 +32,7 @@ defmodule TTT_Check_For_Wins_Test do
       8 => " ",
       9 => " "
     }
+
     assert CheckForWins.analyze(initial_board) == {:ok, :wins_game}
   end
 
@@ -46,6 +48,7 @@ defmodule TTT_Check_For_Wins_Test do
       8 => " ",
       9 => " "
     }
+
     assert CheckForWins.analyze(initial_board) == {:error, :no_win}
   end
 
@@ -61,6 +64,7 @@ defmodule TTT_Check_For_Wins_Test do
       8 => "X",
       9 => "O"
     }
+
     assert CheckForWins.analyze(initial_board) == {:error, :no_win}
   end
 
@@ -76,6 +80,7 @@ defmodule TTT_Check_For_Wins_Test do
       8 => " ",
       9 => " "
     }
+
     assert CheckForWins.analyze(initial_board) == {:ok, :wins_game}
   end
 
@@ -91,6 +96,7 @@ defmodule TTT_Check_For_Wins_Test do
       8 => "O",
       9 => " "
     }
+
     assert CheckForWins.analyze(initial_board) == {:ok, :wins_game}
   end
 
@@ -106,6 +112,7 @@ defmodule TTT_Check_For_Wins_Test do
       8 => " ",
       9 => "X"
     }
+
     assert CheckForWins.analyze(initial_board) == {:ok, :wins_game}
   end
 
@@ -121,6 +128,7 @@ defmodule TTT_Check_For_Wins_Test do
       8 => " ",
       9 => "X"
     }
+
     assert CheckForWins.analyze(initial_board) == {:error, :no_win}
   end
 
@@ -136,6 +144,7 @@ defmodule TTT_Check_For_Wins_Test do
       8 => " ",
       9 => "X"
     }
+
     assert CheckForWins.analyze(initial_board) == {:ok, :wins_game}
   end
 
@@ -151,6 +160,7 @@ defmodule TTT_Check_For_Wins_Test do
       8 => " ",
       9 => " "
     }
+
     assert CheckForWins.analyze(initial_board) == {:ok, :wins_game}
   end
 
@@ -166,6 +176,7 @@ defmodule TTT_Check_For_Wins_Test do
       8 => " ",
       9 => " "
     }
+
     assert CheckForWins.analyze(initial_board) == {:error, :no_win}
   end
 end

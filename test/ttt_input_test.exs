@@ -136,6 +136,7 @@ defmodule TTT_Process_Input_Test do
       8 => " ",
       9 => " "
     }
+
     assert ProcessInput.handle_input("10", initial_board, "X") == {:error, :invalid_input_range}
   end
 end

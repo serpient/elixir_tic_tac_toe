@@ -20,6 +20,7 @@ defmodule CheckForWins do
       end
     end)
   end
+
   def check_row(row_data) do
     wins_list = Enum.map(row_data, fn row -> is_win?(row, "X") || is_win?(row, "O") end)
 
