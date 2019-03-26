@@ -57,13 +57,12 @@ defmodule TTT do
   end
 
   def play(board \\ initial_board(), prompt \\ :initial_player_prompt, current_player \\ "X") do
+    print_board(board)
     case check_for_empty_spaces(board) do
       false ->
         handle_error({:error, :board_is_filled}, nil, nil)
 
       true ->
-        print_board(board)
-
         get_player_input(prompt)
         |> ProcessInput.handle_input(board, current_player)
         |> handle_play(board, current_player)

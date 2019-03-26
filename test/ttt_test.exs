@@ -36,6 +36,7 @@ defmodule TTT_Play_Test do
     }
 
     assert capture_io(fn -> TTT.play(initial_board, nil, "O") end) ==
+              GameOutput.get_board(initial_board) <> "\n" <>
              GameOutput.get_message(:board_is_filled) <> "\n"
   end
 
