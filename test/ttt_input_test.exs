@@ -139,4 +139,20 @@ defmodule TTT_Process_Input_Test do
 
     assert ProcessInput.handle_input("10", initial_board, "X") == {:error, :invalid_input_range}
   end
+
+  test "Handle Validation Result chains to Wins check" do
+    initial_board = %{
+      1 => "X",
+      2 => "X",
+      3 => "X",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " "
+    }
+
+    assert ProcessInput.handle_validation_result({:ok, initial_board}, initial_board, "X") == {:ok, initial_board}
+  end
 end

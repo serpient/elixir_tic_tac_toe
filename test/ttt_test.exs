@@ -75,22 +75,6 @@ defmodule TTT_Play_Test do
     assert TTT.check_for_empty_spaces(initial_board) == true
   end
 
-  test "Handle Validation Result chains to Wins check" do
-    initial_board = %{
-      1 => "X",
-      2 => "X",
-      3 => "X",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
-    }
-
-    assert TTT.handle_validation_result({:ok, initial_board}, initial_board, "X") == {:ok, :wins_game, initial_board}
-  end
-
   test "Wins_results chains to win game message" do
     initial_board = %{
       1 => "X",
