@@ -25,18 +25,17 @@ defmodule TTT do
     end
   end
 
-  def handle_validation_result(input_validation_result) do
+  def handle_validation_result(input_validation_result, board, current_player) do
     {status, results} = input_validation_result
 
     cond do
-      status == :error -> input_validation_result
+      status == :error -> handle_error(input_validation_result, board, current_player)
       status == :ok -> CheckForWins.analyze(results)
     end
   end
 
-  def handle_win_check_result(win_result, input_validation_result, current_player, board) do
-    {win_result_status, win_result_code} = win_result
-    {_status, updated_board} = input_validation_result
+  def handle_win_check_result(win_result, current_player) do
+    {_win_result_status, win_result_code, updated_board} = win_result
 
     cond do
       win_result_code == :no_win ->
@@ -44,9 +43,6 @@ defmodule TTT do
 
       win_result_code == :wins_game ->
         handle_win(updated_board, current_player)
-
-      win_result_status == :error ->
-        handle_error(input_validation_result, board, current_player)
     end
   end
 
@@ -72,12 +68,10 @@ defmodule TTT do
         handle_error({:error, :board_is_filled}, nil, nil)
 
       true ->
-        input_result =
           get_player_input(current_player, prompt)
           |> ProcessInput.handle_input(board, current_player)
-
-        handle_validation_result(input_result)
-        |> handle_win_check_result(input_result, current_player, board)
+          |> handle_validation_result(board, current_player)
+          |> handle_win_check_result(current_player)
     end
   end
 end
