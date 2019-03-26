@@ -18,6 +18,8 @@ If no win -- continue
 6. Updates board with current player marker
 7. Toggle current player
 
+![gif](https://media.giphy.com/media/SHdUoTyvbDLc1XRv4S/giphy.gif)
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
