@@ -24,6 +24,25 @@ defmodule TTT_Play_Test do
                GameOutput.get_message(:board_is_filled) <> "\n"
   end
 
+  test "Tie doesn't allow more input and outputs message." do
+    initial_board = %{
+      1 => "X",
+      2 => "X",
+      3 => "O",
+      4 => "O",
+      5 => "O",
+      6 => "X",
+      7 => "X",
+      8 => "O",
+      9 => "X"
+    }
+
+    assert capture_io(fn -> TTT.play(initial_board, nil, "O") end) ==
+             GameOutput.get_board(initial_board) <>
+               "\n" <>
+               GameOutput.get_message(:board_is_filled) <> "\n"
+  end
+
   test "Checks for empty spots in board. False is filled." do
     initial_board = %{
       1 => "X",
