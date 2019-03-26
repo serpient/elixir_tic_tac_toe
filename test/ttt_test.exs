@@ -80,4 +80,19 @@ defmodule TTT_Play_Test do
   test "Toggles player symbols. From O -> X" do
     assert TTT.get_other_player_symbol("O") == "X"
   end
+
+  test "If Player X has horizontal win, stop game and output message" do
+    initial_board = %{
+      1 => "X",
+      2 => "X",
+      3 => "X",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " "
+    }
+    assert TTT.play(initial_board, nil, "X") == "Player X - " <> GameOutput.get_message(:wins_game) <> "\n"
+  end
 end
