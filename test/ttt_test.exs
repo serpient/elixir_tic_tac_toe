@@ -5,23 +5,6 @@ defmodule TTT_Play_Test do
   doctest GameOutput
   doctest ProcessInput
 
-  test "Prints 3x3 board to CL" do
-    initial_board = %{
-      1 => " ",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
-    }
-
-    assert capture_io(fn -> TTT.print_board(initial_board) end) ==
-             GameOutput.get_board(initial_board) <> "\n"
-  end
-
   test "After board is filled, don't allow more input and outputs message." do
     initial_board = %{
       1 => "X",
@@ -71,14 +54,6 @@ defmodule TTT_Play_Test do
     }
 
     assert TTT.check_for_empty_spaces(initial_board) == true
-  end
-
-  test "Toggles player symbols. From X -> O" do
-    assert TTT.get_other_player_symbol("X") == "O"
-  end
-
-  test "Toggles player symbols. From O -> X" do
-    assert TTT.get_other_player_symbol("O") == "X"
   end
 
   test "If Player X has horizontal win, stop game and output message" do

@@ -7,7 +7,7 @@ defmodule GameOutput do
       board_is_filled: ~s(No more positions to play! The game is a tie.),
       invalid_input_range: ~s{Please enter a number from 1 - 9: },
       wins_game: ~s(Wins! \n\n),
-      nil: ~s(Select a numbered spot: ),
+      nil: ~s(Select a numbered spot: )
     }
 
     game_text[key]
@@ -23,5 +23,17 @@ defmodule GameOutput do
     margin_bottom = "\n\n\n"
 
     ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
+  end
+
+  def print_board(board_data) do
+    get_board(board_data)
+    |> IO.puts()
+  end
+
+  def get_other_player_symbol(player_symbol) do
+    cond do
+      player_symbol == "X" -> "O"
+      player_symbol == "O" -> "X"
+    end
   end
 end
