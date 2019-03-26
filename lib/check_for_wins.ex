@@ -30,7 +30,8 @@ defmodule CheckForWins do
     end
   end
 
-  def analyze(board) do
+  def analyze(results) do
+    {_status, board} = results
     horizontal = convert_horizontal_to_row(board) |> check_row
 
     vertical = convert_vertical_to_row(board) |> check_row
