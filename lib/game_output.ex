@@ -43,4 +43,9 @@ defmodule GameOutput do
     ("Player #{current_player} - " <> GameOutput.get_message(:wins_game))
     |> IO.puts()
   end
+
+  def get_player_input(player, message) do
+    ("Player #{player} - " <> GameOutput.get_message(message))
+    |> IO.gets()
+  end
 end

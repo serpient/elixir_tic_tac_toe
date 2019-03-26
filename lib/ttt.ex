@@ -1,9 +1,4 @@
 defmodule TTT do
-  def get_player_input(player, message) do
-    ("Player #{player} - " <> GameOutput.get_message(message))
-    |> IO.gets()
-  end
-
   def check_for_empty_spaces(board) do
     Map.values(board)
     |> Enum.any?(fn value -> value == " " end)
@@ -59,7 +54,7 @@ defmodule TTT do
         handle_error({:error, :board_is_filled}, nil, nil)
 
       true ->
-        get_player_input(current_player, prompt)
+        GameOutput.get_player_input(current_player, prompt)
         |> ProcessInput.handle_input(board, current_player)
         |> CheckForWins.analyze()
         |> handle_win_check_result(board, current_player)
