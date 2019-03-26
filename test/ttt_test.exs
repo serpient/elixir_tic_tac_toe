@@ -95,6 +95,6 @@ defmodule TTT_Play_Test do
     }
 
     assert TTT.play(initial_board, nil, "X") ==
-             "Player X - " <> GameOutput.get_message(:wins_game) <> "\n"
+             "Player X " <> GameOutput.get_message(:wins_game) <> "\n"
   end
 end
