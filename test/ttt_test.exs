@@ -88,7 +88,7 @@ defmodule TTT_Play_Test do
       9 => " "
     }
 
-    assert TTT.handle_validation_result({:ok, initial_board}) == {:ok, :wins_game}
+    assert TTT.handle_validation_result({:ok, initial_board}, initial_board, "X") == {:ok, :wins_game, initial_board}
   end
 
   test "Wins_results chains to win game message" do
@@ -106,10 +106,8 @@ defmodule TTT_Play_Test do
 
     assert capture_io(fn ->
              TTT.handle_win_check_result(
-               {:ok, :wins_game},
-               {:ok, initial_board},
-               "X",
-               initial_board
+               {:ok, :wins_game,initial_board},
+               "X"
              )
            end) ==
              GameOutput.get_board(initial_board) <> "\n" <>
