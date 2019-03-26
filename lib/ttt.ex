@@ -4,12 +4,11 @@ defmodule TTT do
     |> IO.puts()
   end
 
-  def get_other_player_symbol(player_symbol) when player_symbol == "X" do
-    "O"
-  end
-
-  def get_other_player_symbol(player_symbol) when player_symbol == "O" do
-    "X"
+  def get_other_player_symbol(player_symbol) do
+    cond do
+      player_symbol == "X" -> "O"
+      player_symbol == "O" -> "X"
+    end
   end
 
   def get_player_input(message) do
