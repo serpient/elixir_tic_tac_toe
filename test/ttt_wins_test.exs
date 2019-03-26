@@ -1,6 +1,5 @@
 defmodule TTT_Check_For_Wins_Test do
   use ExUnit.Case
-  import ExUnit.CaptureIO
   doctest TTT
   doctest GameOutput
   doctest CheckForWins
