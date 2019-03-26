@@ -11,8 +11,8 @@ defmodule TTT do
     end
   end
 
-  def get_player_input(message) do
-    GameOutput.get_message(message)
+  def get_player_input(player, message) do
+    "Player #{player} - " <> GameOutput.get_message(message)
     |> IO.gets()
   end
 
@@ -35,16 +35,18 @@ defmodule TTT do
     |> Enum.any?(fn value -> value == " " end)
   end
 
-  def handle_play(returned_value, board, current_player) do
-    {status, updated_board} = returned_value
+  def handle_play(win_result_code, returned_value, current_player) when win_result_code == :no_win do
+    {_status, updated_board} = returned_value
+    play(updated_board, nil, get_other_player_symbol(current_player))
+  end
 
-    cond do
-      status == :error ->
-        handle_error(returned_value, board, current_player)
+  def handle_play(win_result_code, returned_value, current_player) when win_result_code == :wins_game do
+    {_status, updated_board} = returned_value
 
-      status == :ok ->
-        play(updated_board, :initial_player_prompt, get_other_player_symbol(current_player))
-    end
+    print_board(updated_board)
+
+    "Player " <> current_player <> GameOutput.get_message(:wins_game)
+    |> IO.puts()
   end
 
   def handle_error(error, board, current_player) do
@@ -58,14 +60,27 @@ defmodule TTT do
 
   def play(board \\ initial_board(), prompt \\ :initial_player_prompt, current_player \\ "X") do
     print_board(board)
+
     case check_for_empty_spaces(board) do
       false ->
         handle_error({:error, :board_is_filled}, nil, nil)
 
       true ->
-        get_player_input(prompt)
-        |> ProcessInput.handle_input(board, current_player)
-        |> handle_play(board, current_player)
+        input_validation_result = get_player_input(current_player, prompt) |> ProcessInput.handle_input(board, current_player)
+
+        {status, _result} = input_validation_result
+        win_result = cond do
+          status == :error -> input_validation_result
+          status == :ok -> CheckForWins.analyze(board)
+        end
+
+        {win_result_status, win_result_code} = win_result
+        cond do
+          win_result_code == :no_win -> handle_play(win_result_code, input_validation_result, current_player)
+          win_result_code == :wins_game -> handle_play(win_result_code, input_validation_result, current_player)
+          win_result_status == :error -> handle_error(input_validation_result, board, current_player)
+        end
+
     end
   end
 end
