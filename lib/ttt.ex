@@ -9,13 +9,6 @@ defmodule TTT do
     |> Enum.any?(fn value -> value == " " end)
   end
 
-  def handle_win(updated_board, current_player) do
-    GameOutput.print_board(updated_board)
-
-    ("Player #{current_player} - " <> GameOutput.get_message(:wins_game))
-    |> IO.puts()
-  end
-
   def handle_error(error, board, current_player) do
     {_status, error_message} = error
 
@@ -40,7 +33,7 @@ defmodule TTT do
         )
 
       win_result_code == :wins_game ->
-        handle_win(updated_board, current_player)
+        GameOutput.print_win(updated_board, current_player)
     end
   end
 

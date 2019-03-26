@@ -36,4 +36,11 @@ defmodule GameOutput do
       player_symbol == "O" -> "X"
     end
   end
+
+  def print_win(board_data, current_player) do
+    print_board(board_data)
+
+    ("Player #{current_player} - " <> GameOutput.get_message(:wins_game))
+    |> IO.puts()
+  end
 end
