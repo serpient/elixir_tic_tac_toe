@@ -70,4 +70,8 @@ defmodule TTT_Play_Test do
 
     assert TTT.check_for_empty_spaces(initial_board) == true
   end
+
+  test "Toggles player symbols." do
+    assert TTT.get_other_player_symbol("X") == "O"
+  end
 end
