@@ -1,4 +1,4 @@
-defmodule TTT_Process_Input do
+defmodule TTT_Process_Input_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
   doctest TTT

@@ -1,4 +1,4 @@
-defmodule TTT_play do
+defmodule TTT_Play_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
   doctest TTT
