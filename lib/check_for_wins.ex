@@ -6,7 +6,7 @@ defmodule CheckForWins do
 
     cond do
       Enum.member?(wins, true) -> {:ok, :wins_game}
-      true -> {:no_win}
+      true -> {:error, :no_win}
     end
   end
 end
