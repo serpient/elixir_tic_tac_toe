@@ -26,7 +26,7 @@ defmodule TTT do
   end
 
   def handle_win_check_result(win_result, current_player) do
-    {_win_result_status, win_result_code, updated_board} = win_result
+    {win_result_code, updated_board} = win_result
 
     cond do
       win_result_code == :no_win ->

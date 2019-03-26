@@ -17,7 +17,7 @@ defmodule TTT_Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.analyze({:ok, initial_board}) == {:ok, :wins_game, initial_board}
+    assert CheckForWins.analyze({:ok, initial_board}) == {:wins_game, initial_board}
   end
 
   test "[Horizontal Wins] Player O wins if they have 3 matching horizontal symbols" do
@@ -33,7 +33,7 @@ defmodule TTT_Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.analyze({:ok, initial_board}) == {:ok, :wins_game, initial_board}
+    assert CheckForWins.analyze({:ok, initial_board}) == {:wins_game, initial_board}
   end
 
   test "[Horizontal Wins] No wins if no adjacent matches in row" do
@@ -49,7 +49,7 @@ defmodule TTT_Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.analyze({:ok, initial_board}) == {:error, :no_win, initial_board}
+    assert CheckForWins.analyze({:ok, initial_board}) == {:no_win, initial_board}
   end
 
   test "[Horizontal Wins] No wins if there are 3 in a row from both players" do
@@ -65,7 +65,7 @@ defmodule TTT_Check_For_Wins_Test do
       9 => "O"
     }
 
-    assert CheckForWins.analyze({:ok, initial_board}) == {:error, :no_win, initial_board}
+    assert CheckForWins.analyze({:ok, initial_board}) == {:no_win, initial_board}
   end
 
   test "[Vertical Wins] Player X Wins if there are 3 matching vertical" do
@@ -81,7 +81,7 @@ defmodule TTT_Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.analyze({:ok, initial_board}) == {:ok, :wins_game, initial_board}
+    assert CheckForWins.analyze({:ok, initial_board}) == {:wins_game, initial_board}
   end
 
   test "[Vertical Wins] Player O Wins if there are 3 matching vertical" do
@@ -97,7 +97,7 @@ defmodule TTT_Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.analyze({:ok, initial_board}) == {:ok, :wins_game, initial_board}
+    assert CheckForWins.analyze({:ok, initial_board}) == {:wins_game, initial_board}
   end
 
   test "[Vertical Wins] 3 matching in last column wins" do
@@ -113,7 +113,7 @@ defmodule TTT_Check_For_Wins_Test do
       9 => "X"
     }
 
-    assert CheckForWins.analyze({:ok, initial_board}) == {:ok, :wins_game, initial_board}
+    assert CheckForWins.analyze({:ok, initial_board}) == {:wins_game, initial_board}
   end
 
   test "[Vertical Wins] Does not win if there are non-matching" do
@@ -129,7 +129,7 @@ defmodule TTT_Check_For_Wins_Test do
       9 => "X"
     }
 
-    assert CheckForWins.analyze({:ok, initial_board}) == {:error, :no_win, initial_board}
+    assert CheckForWins.analyze({:ok, initial_board}) == {:no_win, initial_board}
   end
 
   test "[Diagonal Wins] 3 Matching Diagonal wins 1,5,9" do
@@ -145,7 +145,7 @@ defmodule TTT_Check_For_Wins_Test do
       9 => "X"
     }
 
-    assert CheckForWins.analyze({:ok, initial_board}) == {:ok, :wins_game, initial_board}
+    assert CheckForWins.analyze({:ok, initial_board}) == {:wins_game, initial_board}
   end
 
   test "[Diagonal Wins] 3 Matching Diagonal wins 3,5,7" do
@@ -161,7 +161,7 @@ defmodule TTT_Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.analyze({:ok, initial_board}) == {:ok, :wins_game, initial_board}
+    assert CheckForWins.analyze({:ok, initial_board}) == {:wins_game, initial_board}
   end
 
   test "[Diagonal Wins] Non-Matching Diagonal does not win 3,5,7" do
@@ -177,6 +177,6 @@ defmodule TTT_Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.analyze({:ok, initial_board}) == {:error, :no_win, initial_board}
+    assert CheckForWins.analyze({:ok, initial_board}) == {:no_win, initial_board}
   end
 end

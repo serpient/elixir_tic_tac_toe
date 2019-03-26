@@ -41,8 +41,8 @@ defmodule CheckForWins do
     board_has_win? = [horizontal, vertical, diagonal]
 
     cond do
-      Enum.member?(board_has_win?, true) -> {:ok, :wins_game, board}
-      true -> {:error, :no_win, board}
+      Enum.member?(board_has_win?, true) -> {:wins_game, board}
+      true -> {:no_win, board}
     end
   end
 end
