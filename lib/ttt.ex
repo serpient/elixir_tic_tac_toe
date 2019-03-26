@@ -34,12 +34,12 @@ defmodule TTT do
     end
   end
 
-  def handle_validation_result(input_validation_result, board) do
-    {status, _result} = input_validation_result
+  def handle_validation_result(input_validation_result) do
+    {status, results} = input_validation_result
 
     cond do
       status == :error -> input_validation_result
-      status == :ok -> CheckForWins.analyze(board)
+      status == :ok -> CheckForWins.analyze(results)
     end
   end
 
@@ -84,7 +84,7 @@ defmodule TTT do
           get_player_input(current_player, prompt)
           |> ProcessInput.handle_input(board, current_player)
 
-        handle_validation_result(input_result, board)
+        handle_validation_result(input_result)
         |> handle_win_check_result(input_result, current_player, board)
     end
   end
