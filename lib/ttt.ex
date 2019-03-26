@@ -56,7 +56,7 @@ defmodule TTT do
       true ->
         GameOutput.get_player_input(current_player, prompt)
         |> ProcessInput.handle_input(board, current_player)
-        |> CheckForWins.analyze()
+        |> CheckForWins.analyze
         |> handle_win_check_result(board, current_player)
     end
   end
