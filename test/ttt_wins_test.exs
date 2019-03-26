@@ -64,4 +64,19 @@ defmodule TTT_Check_For_Wins_Test do
     }
     assert CheckForWins.analyze(initial_board) == {:error, :no_win}
   end
+
+  test "Player X Wins if there are 3 matching vertical wins" do
+    initial_board = %{
+      1 => "X",
+      2 => " ",
+      3 => " ",
+      4 => "X",
+      5 => " ",
+      6 => " ",
+      7 => "X",
+      8 => " ",
+      9 => " "
+    }
+    assert CheckForWins.analyze(initial_board) == {:ok, :wins_game}
+  end
 end
