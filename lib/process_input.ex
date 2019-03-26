@@ -37,11 +37,21 @@ defmodule ProcessInput do
     error
   end
 
+  def handle_validation_result(input_validation_result, board, current_player) do
+    {status, results} = input_validation_result
+
+    cond do
+      status == :error -> TTT.handle_error(input_validation_result, board, current_player)
+      true -> results
+    end
+  end
+
   def handle_input(input, board, current_player) do
     transform_to_integer(input)
     |> process_input(board, current_player)
     |> validate_input(board, current_player)
     |> update_board(board, current_player)
+    |> handle_validation_result(board, current_player)
   end
 end
 
