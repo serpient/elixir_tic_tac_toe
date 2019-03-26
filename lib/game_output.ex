@@ -1,7 +1,7 @@
 defmodule GameOutput do
   def get_message(key) do
     game_text = %{
-      initial_player_prompt: ~s( - Select a numbered spot: ),
+      initial_player_prompt: ~s(Select a numbered spot: ),
       duplicate_input: ~s(That spot is taken! Please choose another number: ),
       invalid_input: ~s(Please enter a number: ),
       board_is_filled: ~s(No more positions to play! The game is a tie.),
