@@ -25,8 +25,8 @@ defmodule CheckForWins do
     wins_list = Enum.map(row_data, fn row -> is_win?(row, "X") || is_win?(row, "O") end)
 
     cond do
-      Enum.member?(wins_list, true) -> {:ok, :wins_game}
-      true -> {:error, :no_win}
+      Enum.member?(wins_list, true) -> true
+      true -> false
     end
   end
 
@@ -37,10 +37,10 @@ defmodule CheckForWins do
 
     diagonal = convert_diagonal_to_row(board) |> check_row
 
-    wins_type = [horizontal, vertical, diagonal]
+    board_has_win? = [horizontal, vertical, diagonal]
 
     cond do
-      Enum.member?(wins_type, {:ok, :wins_game}) -> {:ok, :wins_game}
+      Enum.member?(board_has_win?, true) -> {:ok, :wins_game}
       true -> {:error, :no_win}
     end
   end
