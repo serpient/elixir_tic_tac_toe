@@ -2,7 +2,7 @@ defmodule Tic_Tac_Toe_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
   doctest TicTacToe
-  doctest GameOutput
+  doctest GameIO
   doctest ProcessInput
 
   test "Tie doesn't allow more input and outputs message." do
@@ -18,8 +18,14 @@ defmodule Tic_Tac_Toe_Test do
       9 => "X"
     }
 
-    assert capture_io(fn -> TicTacToe.handle_win_check_result({:error, :board_is_filled, initial_board}, initial_board, "O") end) ==
-               GameOutput.get_message(:board_is_filled) <> "\n"
+    assert capture_io(fn ->
+             TicTacToe.handle_win_check_result(
+               {:error, :board_is_filled, initial_board},
+               initial_board,
+               "O"
+             )
+           end) ==
+             GameIO.get_message(:board_is_filled) <> "\n"
   end
 
   test "Wins_results chains to win game message" do
@@ -42,8 +48,8 @@ defmodule Tic_Tac_Toe_Test do
                "X"
              )
            end) ==
-             GameOutput.get_board(initial_board) <>
+             GameIO.get_board(initial_board) <>
                "\n" <>
-               "Player X - " <> GameOutput.get_message(:wins_game) <> "\n"
+               "Player X - " <> GameIO.get_message(:wins_game) <> "\n"
   end
 end
