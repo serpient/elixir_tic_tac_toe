@@ -1,6 +1,6 @@
-defmodule TTT_Process_Input_Test do
+defmodule Process_Input_Test do
   use ExUnit.Case
-  doctest TTT
+  doctest TicTacToe
   doctest GameOutput
   doctest ProcessInput
 

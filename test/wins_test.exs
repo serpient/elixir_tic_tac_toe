@@ -1,6 +1,6 @@
-defmodule TTT_Check_For_Wins_Test do
+defmodule Check_For_Wins_Test do
   use ExUnit.Case
-  doctest TTT
+  doctest TicTacToe
   doctest GameOutput
   doctest CheckForWins
 

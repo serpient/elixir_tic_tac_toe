@@ -1,4 +1,4 @@
-defmodule TTT_Game_Output_Test do
+defmodule Game_Output_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
   doctest GameOutput

@@ -1,7 +1,7 @@
-defmodule TTT_Play_Test do
+defmodule Tic_Tac_Toe_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
-  doctest TTT
+  doctest TicTacToe
   doctest GameOutput
   doctest ProcessInput
 
@@ -18,7 +18,7 @@ defmodule TTT_Play_Test do
       9 => "X"
     }
 
-    assert capture_io(fn -> TTT.handle_win_check_result({:error, :board_is_filled, initial_board}, initial_board, "O") end) ==
+    assert capture_io(fn -> TicTacToe.handle_win_check_result({:error, :board_is_filled, initial_board}, initial_board, "O") end) ==
                GameOutput.get_message(:board_is_filled) <> "\n"
   end
 
@@ -36,7 +36,7 @@ defmodule TTT_Play_Test do
     }
 
     assert capture_io(fn ->
-             TTT.handle_win_check_result(
+             TicTacToe.handle_win_check_result(
                {:ok, :wins_game, initial_board},
                initial_board,
                "X"

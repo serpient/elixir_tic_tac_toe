@@ -1,4 +1,4 @@
-defmodule TTT do
+defmodule TicTacToe do
   def handle_error(error, board, current_player) do
     {_status, error_message} = error
 
