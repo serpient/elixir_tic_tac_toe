@@ -153,7 +153,7 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    assert ProcessInput.handle_validation_result({:ok, initial_board}, initial_board, "X") ==
+    assert ProcessInput.handle_validation_result({:ok, initial_board}) ==
              {:ok, initial_board}
   end
 end
