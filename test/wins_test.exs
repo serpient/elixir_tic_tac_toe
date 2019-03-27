@@ -211,4 +211,54 @@ defmodule Check_For_Wins_Test do
 
     assert CheckForWins.has_empty_spaces?(initial_board) == true
   end
+
+
+  test "Winning board passed to Handle Win Check chains to analyze on :ok" do
+    initial_board = %{
+      1 => "X",
+      2 => "X",
+      3 => "X",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " "
+    }
+
+    assert CheckForWins.handle_win_check({:ok, initial_board}, initial_board, "X") == {:ok, :wins_game, initial_board}
+  end
+
+  test "Failing board passed to Handle Win Check chains to analyze on :ok" do
+    initial_board = %{
+      1 => "X",
+      2 => "X",
+      3 => "O",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " "
+    }
+
+    assert CheckForWins.handle_win_check({:ok, initial_board}, initial_board, "X") == {:error, :no_win, initial_board}
+  end
+
+  test "Error passed to Handle Win Check chains to analyze on :ok" do
+    initial_board = %{
+      1 => "X",
+      2 => "X",
+      3 => "O",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " "
+    }
+
+    assert CheckForWins.handle_win_check({:error, :invalid_input}, initial_board, "X") == {:error, :invalid_input, initial_board}
+  end
+
 end
