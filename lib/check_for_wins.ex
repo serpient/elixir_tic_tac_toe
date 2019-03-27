@@ -37,35 +37,27 @@ defmodule CheckForWins do
     |> Enum.any?(fn value -> value == " " end)
   end
 
-  def analyze(results) do
-    {status, board} = results
+  def analyze(board) do
+    horizontal = convert_horizontal_to_row(board) |> check_row
 
-    case status do
-      :error ->
-        results
+    vertical = convert_vertical_to_row(board) |> check_row
 
-      _ ->
-        horizontal = convert_horizontal_to_row(board) |> check_row
+    diagonal = convert_diagonal_to_row(board) |> check_row
 
-        vertical = convert_vertical_to_row(board) |> check_row
+    board_has_win? = [horizontal, vertical, diagonal]
 
-        diagonal = convert_diagonal_to_row(board) |> check_row
-
-        board_has_win? = [horizontal, vertical, diagonal]
-
-        cond do
-          Enum.member?(board_has_win?, true) -> {:ok, :wins_game, board}
-          has_empty_spaces?(board) == false -> {:error, :board_is_filled, board}
-          true -> {:error, :no_win, board}
-        end
+    cond do
+      Enum.member?(board_has_win?, true) -> {:ok, :wins_game, board}
+      has_empty_spaces?(board) == false -> {:error, :board_is_filled, board}
+      true -> {:error, :no_win, board}
     end
   end
 
   def handle_win_check(result, board, current_player) do
-    {input_validation_result_status, input_validation_result_message} = result
+    {result_code, result_value} = result
 
-    case input_validation_result_status do
-      :ok -> CheckForWins.analyze(input_validation_result_message)
+    case result_code do
+      :ok -> CheckForWins.analyze(result_value)
       :error -> TicTacToe.handle_error(result, board, current_player)
     end
   end
