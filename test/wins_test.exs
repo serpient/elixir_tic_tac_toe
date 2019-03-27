@@ -1,7 +1,7 @@
 defmodule Check_For_Wins_Test do
   use ExUnit.Case
   doctest TicTacToe
-  doctest GameOutput
+  doctest GameIO
   doctest CheckForWins
 
   test "[Horizontal Wins] Player X wins if they have 3 matching horizontal symbols" do
@@ -211,5 +211,4 @@ defmodule Check_For_Wins_Test do
 
     assert CheckForWins.has_empty_spaces?(initial_board) == true
   end
-
 end
