@@ -40,11 +40,11 @@ defmodule CheckForWins do
   def analyze(results) do
     {status, board} = results
 
-    cond do
-      status == :error ->
+    case status do
+      :error ->
         results
 
-      true ->
+      _ ->
         horizontal = convert_horizontal_to_row(board) |> check_row
 
         vertical = convert_vertical_to_row(board) |> check_row

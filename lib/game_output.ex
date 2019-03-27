@@ -32,9 +32,9 @@ defmodule GameOutput do
   end
 
   def get_other_player_symbol(player_symbol) do
-    cond do
-      player_symbol == "X" -> "O"
-      player_symbol == "O" -> "X"
+    case player_symbol do
+      "X" -> "O"
+      "O" -> "X"
     end
   end
 

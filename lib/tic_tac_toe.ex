@@ -2,9 +2,9 @@ defmodule TicTacToe do
   def handle_error(error, board, current_player) do
     {_status, error_message} = error
 
-    cond do
-      error_message == :board_is_filled -> GameOutput.get_message(error_message) |> IO.puts()
-      true -> play(board, error_message, current_player)
+    case error_message do
+      :board_is_filled -> GameOutput.get_message(error_message) |> IO.puts()
+      _ -> play(board, error_message, current_player)
     end
   end
 

@@ -41,9 +41,9 @@ defmodule ProcessInput do
   def handle_validation_result(input_validation_result) do
     {status, _results} = input_validation_result
 
-    cond do
-      status == :error -> input_validation_result
-      true -> input_validation_result
+    case status do
+      :error -> input_validation_result
+      _ -> input_validation_result
     end
   end
 
