@@ -1,4 +1,4 @@
-defmodule GameOutput do
+defmodule GameIO do
   def get_message(key) do
     game_text = %{
       initial_player_prompt: ~s(Select a numbered spot: ),
@@ -41,12 +41,12 @@ defmodule GameOutput do
   def print_win(board_data, current_player) do
     print_board(board_data)
 
-    ("Player #{current_player} - " <> GameOutput.get_message(:wins_game))
+    ("Player #{current_player} - " <> GameIO.get_message(:wins_game))
     |> IO.puts()
   end
 
   def get_player_input(player, message) do
-    ("Player #{player} - " <> GameOutput.get_message(message))
+    ("Player #{player} - " <> GameIO.get_message(message))
     |> IO.gets()
   end
 end
