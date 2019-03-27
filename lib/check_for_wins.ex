@@ -4,7 +4,8 @@ defmodule CheckForWins do
   end
 
   def convert_horizontal_to_row(board) do
-    Map.values(board)
+    board
+    |> Map.values
     |> Enum.chunk_every(3)
   end
 
@@ -31,7 +32,8 @@ defmodule CheckForWins do
   end
 
   def has_empty_spaces?(board) do
-    Map.values(board)
+    board
+    |> Map.values
     |> Enum.any?(fn value -> value == " " end)
   end
 

@@ -26,7 +26,8 @@ defmodule GameOutput do
   end
 
   def print_board(board_data) do
-    get_board(board_data)
+    board_data
+    |> get_board
     |> IO.puts()
   end
 

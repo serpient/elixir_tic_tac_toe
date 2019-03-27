@@ -13,7 +13,8 @@ defmodule ProcessInput do
   end
 
   def process_input(string, _board, _current_player) when is_tuple(string) do
-    Tuple.to_list(string)
+    string
+    |> Tuple.to_list
     |> Enum.fetch!(0)
   end
 
@@ -37,22 +38,22 @@ defmodule ProcessInput do
     error
   end
 
-  def handle_validation_result(input_validation_result, _board, _current_player) do
+  def handle_validation_result(input_validation_result) do
     {status, _results} = input_validation_result
 
     cond do
-      # TTT.handle_error(input_validation_result, board, current_player)
       status == :error -> input_validation_result
       true -> input_validation_result
     end
   end
 
   def handle_input(input, board, current_player) do
-    transform_to_integer(input)
+    input
+    |> transform_to_integer
     |> process_input(board, current_player)
     |> validate_input(board, current_player)
     |> update_board(board, current_player)
-    |> handle_validation_result(board, current_player)
+    |> handle_validation_result
   end
 end
 
