@@ -3,27 +3,27 @@ defmodule TicTacToe do
     {_status, error_message} = error
 
     case error_message do
-      :board_is_filled -> GameOutput.get_message(error_message) |> IO.puts()
+      :board_is_filled -> GameIO.get_message(error_message) |> IO.puts()
       _ -> play(board, error_message, current_player)
     end
   end
 
-  def handle_win_check_result(win_result, initial_board, current_player) do
-    {status, win_result_code, updated_board} = win_result
+  def handle_win_check_result(result, initial_board, current_player) do
+    {status, message, updated_board} = result
 
     cond do
       status == :error ->
-        handle_error({status, win_result_code}, initial_board, current_player)
+        handle_error({status, message}, initial_board, current_player)
 
-      win_result_code == :no_win ->
+      message == :no_win ->
         play(
           updated_board,
           :initial_player_prompt,
-          GameOutput.get_other_player_symbol(current_player)
+          GameIO.get_other_player_symbol(current_player)
         )
 
-      win_result_code == :wins_game ->
-        GameOutput.print_win(updated_board, current_player)
+      message == :wins_game ->
+        GameIO.print_win(updated_board, current_player)
     end
   end
 
@@ -42,11 +42,11 @@ defmodule TicTacToe do
         prompt \\ :initial_player_prompt,
         current_player \\ "X"
       ) do
-    GameOutput.print_board(board)
-
-    GameOutput.get_player_input(current_player, prompt)
+    GameIO.print_board(board)
+    GameIO.get_player_input(current_player, prompt)
     |> ProcessInput.handle_input(board, current_player)
-    |> CheckForWins.analyze()
+    |> UpdateBoard.handle_board_update(board, current_player)
+    |> CheckForWins.handle_win_check(board, current_player)
     |> handle_win_check_result(board, current_player)
   end
 end
