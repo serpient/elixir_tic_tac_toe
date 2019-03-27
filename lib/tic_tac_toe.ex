@@ -12,9 +12,6 @@ defmodule TicTacToe do
     {status, message, updated_board} = result
 
     cond do
-      status == :error ->
-        handle_error({status, message}, initial_board, current_player)
-
       message == :no_win ->
         play(
           updated_board,
@@ -24,6 +21,9 @@ defmodule TicTacToe do
 
       message == :wins_game ->
         GameIO.print_win(updated_board, current_player)
+
+      status == :error ->
+        handle_error({status, message}, initial_board, current_player)
     end
   end
 
@@ -43,6 +43,7 @@ defmodule TicTacToe do
         current_player \\ "X"
       ) do
     GameIO.print_board(board)
+
     GameIO.get_player_input(current_player, prompt)
     |> ProcessInput.handle_input(board, current_player)
     |> UpdateBoard.handle_board_update(board, current_player)
