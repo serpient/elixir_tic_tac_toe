@@ -25,6 +25,7 @@ defmodule Tic_Tac_Toe_Test do
                "O"
              )
            end) ==
+             GameIO.get_board(initial_board) <> "\n" <>
              GameIO.get_message(:game_is_a_tie) <> "\n"
   end
 

@@ -49,4 +49,10 @@ defmodule GameIO do
     ("Player #{player} - " <> GameIO.get_message(message))
     |> IO.gets()
   end
+
+  def print_tie(board_data) do
+    print_board(board_data)
+    GameIO.get_message(:game_is_a_tie)
+    |> IO.puts()
+  end
 end

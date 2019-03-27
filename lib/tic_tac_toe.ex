@@ -1,10 +1,10 @@
 defmodule TicTacToe do
-  def handle_error(error, board, current_player) do
+  def handle_error(error, initial_board, current_player, updated_board \\ %{}) do
     {_status, error_message} = error
 
     case error_message do
-      :game_is_a_tie -> GameIO.get_message(error_message) |> IO.puts()
-      _ -> play(board, error_message, current_player)
+      :game_is_a_tie -> GameIO.print_tie(updated_board)
+      _ -> play(initial_board, error_message, current_player)
     end
   end
 
@@ -23,7 +23,7 @@ defmodule TicTacToe do
         GameIO.print_win(updated_board, current_player)
 
       status == :error ->
-        handle_error({status, message}, initial_board, current_player)
+        handle_error({status, message}, initial_board, current_player, updated_board)
     end
   end
 
