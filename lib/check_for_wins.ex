@@ -53,12 +53,12 @@ defmodule CheckForWins do
     end
   end
 
-  def handle_win_check(result, board, current_player) do
+  def handle_win_check(result, board, _current_player) do
     {result_code, result_value} = result
 
     case result_code do
       :ok -> CheckForWins.analyze(result_value)
-      :error -> TicTacToe.handle_error(result, board, current_player)
+      :error -> Tuple.append(result, board)
     end
   end
 end
