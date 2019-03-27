@@ -4,7 +4,7 @@ defmodule GameIO do
       initial_player_prompt: ~s(Select a numbered spot: ),
       duplicate_input: ~s(That spot is taken! Please choose another number: ),
       invalid_input: ~s(Please enter a number: ),
-      board_is_filled: ~s(No more positions to play! The game is a tie.),
+      game_is_a_tie: ~s(No more positions to play! The game is a tie.),
       invalid_input_range: ~s{Please enter a number from 1 - 9: },
       wins_game: ~s(Wins! \n\n),
       nil: ~s(Select a numbered spot: )

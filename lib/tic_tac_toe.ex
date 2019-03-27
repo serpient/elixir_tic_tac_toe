@@ -3,7 +3,7 @@ defmodule TicTacToe do
     {_status, error_message} = error
 
     case error_message do
-      :board_is_filled -> GameIO.get_message(error_message) |> IO.puts()
+      :game_is_a_tie -> GameIO.get_message(error_message) |> IO.puts()
       _ -> play(board, error_message, current_player)
     end
   end

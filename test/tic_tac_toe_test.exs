@@ -20,12 +20,12 @@ defmodule Tic_Tac_Toe_Test do
 
     assert capture_io(fn ->
              TicTacToe.handle_win_check_result(
-               {:error, :board_is_filled, initial_board},
+               {:error, :game_is_a_tie, initial_board},
                initial_board,
                "O"
              )
            end) ==
-             GameIO.get_message(:board_is_filled) <> "\n"
+             GameIO.get_message(:game_is_a_tie) <> "\n"
   end
 
   test "Winning game outputs win game message" do
