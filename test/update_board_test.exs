@@ -43,6 +43,8 @@ defmodule Update_Board_Test do
       8 => " ",
       9 => " "
     }
-    assert UpdateBoard.handle_board_update({:error, :invalid_input}, initial_board, "X") == {:error, :invalid_input}
+
+    assert UpdateBoard.handle_board_update({:error, :invalid_input}, initial_board, "X") ==
+             {:error, :invalid_input}
   end
 end

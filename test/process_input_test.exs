@@ -16,6 +16,7 @@ defmodule Process_Input_Test do
       8 => " ",
       9 => " "
     }
+
     assert ProcessInput.handle_input("1", initial_board, "X") == {:ok, 1}
   end
 
@@ -31,6 +32,7 @@ defmodule Process_Input_Test do
       8 => " ",
       9 => " "
     }
+
     assert ProcessInput.handle_input("4", initial_board, "O") == {:ok, 4}
   end
 
