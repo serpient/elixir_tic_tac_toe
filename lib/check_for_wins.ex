@@ -5,7 +5,7 @@ defmodule CheckForWins do
 
   def convert_horizontal_to_row(board) do
     board
-    |> Map.values
+    |> Map.values()
     |> Enum.chunk_every(3)
   end
 
@@ -33,7 +33,7 @@ defmodule CheckForWins do
 
   def has_empty_spaces?(board) do
     board
-    |> Map.values
+    |> Map.values()
     |> Enum.any?(fn value -> value == " " end)
   end
 
@@ -58,6 +58,15 @@ defmodule CheckForWins do
           has_empty_spaces?(board) == false -> {:error, :board_is_filled, board}
           true -> {:error, :no_win, board}
         end
+    end
+  end
+
+  def handle_win_check(result, board, current_player) do
+    {input_validation_result_status, input_validation_result_message} = result
+
+    case input_validation_result_status do
+      :ok -> CheckForWins.analyze(input_validation_result_message)
+      :error -> TicTacToe.handle_error(result, board, current_player)
     end
   end
 end
