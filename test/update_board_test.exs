@@ -2,7 +2,7 @@ defmodule Update_Board_Test do
   use ExUnit.Case
   doctest UpdateBoard
 
-  test "On :ok, Handle Board updates board data" do
+  test "[handle_board_update] On :ok, updates board data and returns ok + updated data tuple" do
     initial_board = %{
       1 => "X",
       2 => "X",
@@ -31,7 +31,7 @@ defmodule Update_Board_Test do
              {:ok, updated_board}
   end
 
-  test "On :error, Handle Board returns the error" do
+  test "[handle_board_update] On :error, returns the error tuple" do
     initial_board = %{
       1 => "X",
       2 => "X",

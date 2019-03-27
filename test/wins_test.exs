@@ -4,7 +4,7 @@ defmodule Check_For_Wins_Test do
   doctest GameIO
   doctest CheckForWins
 
-  test "[Horizontal Wins] Player X wins if they have 3 matching horizontal symbols" do
+  test "[Horizontal Wins] Row 1 - Wins if they have 3 matching horizontal symbols" do
     initial_board = %{
       1 => "X",
       2 => "X",
@@ -20,7 +20,7 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.analyze(initial_board) == {:ok, :wins_game, initial_board}
   end
 
-  test "[Horizontal Wins] Player O wins if they have 3 matching horizontal symbols" do
+  test "[Horizontal Wins] Row 2 - Wins if they have 3 matching horizontal symbols" do
     initial_board = %{
       1 => " ",
       2 => " ",
@@ -52,7 +52,7 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.analyze(initial_board) == {:error, :no_win, initial_board}
   end
 
-  test "[Horizontal Wins] No wins if there are 3 in a row from both players" do
+  test "[Horizontal Wins] Row 3 - No wins if there are 3 in a row from both players" do
     initial_board = %{
       1 => " ",
       2 => " ",
@@ -68,7 +68,7 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.analyze(initial_board) == {:error, :no_win, initial_board}
   end
 
-  test "[Vertical Wins] Player X Wins if there are 3 matching vertical" do
+  test "[Vertical Wins] Column 1 - Wins if there are 3 matching vertical" do
     initial_board = %{
       1 => "X",
       2 => " ",
@@ -84,7 +84,7 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.analyze(initial_board) == {:ok, :wins_game, initial_board}
   end
 
-  test "[Vertical Wins] Player O Wins if there are 3 matching vertical" do
+  test "[Vertical Wins] Column 2 - Wins if there are 3 matching vertical" do
     initial_board = %{
       1 => "X",
       2 => "O",
@@ -100,7 +100,7 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.analyze(initial_board) == {:ok, :wins_game, initial_board}
   end
 
-  test "[Vertical Wins] 3 matching in last column wins" do
+  test "[Vertical Wins] Column 3 - Wins if there are 3 matching vertical" do
     initial_board = %{
       1 => " ",
       2 => " ",
@@ -132,7 +132,7 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.analyze(initial_board) == {:error, :no_win, initial_board}
   end
 
-  test "[Diagonal Wins] 3 Matching Diagonal wins 1,5,9" do
+  test "[Diagonal Wins] Diagonal 1 - 3 Matching Diagonal wins 1,5,9" do
     initial_board = %{
       1 => "X",
       2 => " ",
@@ -148,7 +148,7 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.analyze(initial_board) == {:ok, :wins_game, initial_board}
   end
 
-  test "[Diagonal Wins] 3 Matching Diagonal wins 3,5,7" do
+  test "[Diagonal Wins] Diagon 2 - 3 Matching Diagonal wins 3,5,7" do
     initial_board = %{
       1 => " ",
       2 => " ",
@@ -180,7 +180,7 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.analyze(initial_board) == {:error, :no_win, initial_board}
   end
 
-  test "Checks for empty spots in board. False is filled." do
+  test "[has_empty_spaces] Returns False if board is filled." do
     initial_board = %{
       1 => "X",
       2 => "O",
@@ -196,7 +196,7 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.has_empty_spaces?(initial_board) == false
   end
 
-  test "Returns true if there is still empty spots in board." do
+  test "[has_empty_spaces] Returns True if board has more spaces to play." do
     initial_board = %{
       1 => "X",
       2 => "O",
@@ -212,7 +212,7 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.has_empty_spaces?(initial_board) == true
   end
 
-  test "Winning board passed to Handle Win Check chains to analyze on :ok" do
+  test "[handle_win_check] Winning board is passed to analyze and results in ok tuple" do
     initial_board = %{
       1 => "X",
       2 => "X",
@@ -229,7 +229,7 @@ defmodule Check_For_Wins_Test do
              {:ok, :wins_game, initial_board}
   end
 
-  test "Failing board passed to Handle Win Check chains to analyze on :ok" do
+  test "[handle_win_check] Non winning board results in error tuple" do
     initial_board = %{
       1 => "X",
       2 => "X",
@@ -246,7 +246,7 @@ defmodule Check_For_Wins_Test do
              {:error, :no_win, initial_board}
   end
 
-  test "Error passed to Handle Win Check chains to analyze on :ok" do
+  test "[handle_win_check] Error passed to this function results in error tuple" do
     initial_board = %{
       1 => "X",
       2 => "X",

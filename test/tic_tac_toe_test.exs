@@ -5,7 +5,7 @@ defmodule Tic_Tac_Toe_Test do
   doctest GameIO
   doctest ProcessInput
 
-  test "Tie doesn't allow more input and outputs message." do
+  test "[handle_win_check_result] Tie result will end the game and output Tie message." do
     initial_board = %{
       1 => "X",
       2 => "X",
@@ -28,7 +28,7 @@ defmodule Tic_Tac_Toe_Test do
              GameIO.get_message(:game_is_a_tie) <> "\n"
   end
 
-  test "Winning game outputs win game message" do
+  test "[handle_win_check_result] Winning result will end the game and output Win Game message" do
     initial_board = %{
       1 => "X",
       2 => "X",
