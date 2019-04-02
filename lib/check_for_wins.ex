@@ -31,12 +31,6 @@ defmodule CheckForWins do
     end
   end
 
-  def has_empty_spaces?(board) do
-    board
-    |> Map.values()
-    |> Enum.any?(fn value -> value == " " end)
-  end
-
   def analyze(board) do
     horizontal = convert_horizontal_to_row(board) |> check_row
 
@@ -48,7 +42,7 @@ defmodule CheckForWins do
 
     cond do
       Enum.member?(board_has_win?, true) -> {:ok, :wins_game, board}
-      has_empty_spaces?(board) == false -> {:error, :game_is_a_tie, board}
+      Board.has_empty_spaces?(board) == false -> {:error, :game_is_a_tie, board}
       true -> {:error, :no_win, board}
     end
   end

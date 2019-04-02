@@ -180,38 +180,6 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.analyze(initial_board) == {:error, :no_win, initial_board}
   end
 
-  test "[has_empty_spaces] Returns False if board is filled." do
-    initial_board = %{
-      1 => "X",
-      2 => "O",
-      3 => "X",
-      4 => "O",
-      5 => "X",
-      6 => "O",
-      7 => "X",
-      8 => "O",
-      9 => "X"
-    }
-
-    assert CheckForWins.has_empty_spaces?(initial_board) == false
-  end
-
-  test "[has_empty_spaces] Returns True if board has more spaces to play." do
-    initial_board = %{
-      1 => "X",
-      2 => "O",
-      3 => "X",
-      4 => "O",
-      5 => "X",
-      6 => "O",
-      7 => "X",
-      8 => "O",
-      9 => " "
-    }
-
-    assert CheckForWins.has_empty_spaces?(initial_board) == true
-  end
-
   test "[handle_win_check] Winning board is passed to analyze and results in ok tuple" do
     initial_board = %{
       1 => "X",

@@ -85,35 +85,4 @@ defmodule Process_Input_Test do
     assert ProcessInput.handle_input("10", initial_board, "X") == {:error, :invalid_input_range}
   end
 
-  test "[is_empty] Returns false if position has player symbol." do
-    initial_board = %{
-      1 => "X",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
-    }
-
-    assert ProcessInput.is_empty(1, initial_board) == false
-  end
-
-  test "[is_empty] Returns true if position has no player symbol." do
-    initial_board = %{
-      1 => "X",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
-    }
-
-    assert ProcessInput.is_empty(2, initial_board) == true
-  end
 end

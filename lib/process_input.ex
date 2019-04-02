@@ -13,13 +13,9 @@ defmodule ProcessInput do
     {:error, :invalid_input}
   end
 
-  def is_empty(board_position, board) do
-    Map.get(board, board_position) == " "
-  end
-
   def validate_input(result, board, _current_player) when is_integer(result) do
     cond do
-      is_empty(result, board) == true -> {:ok, result}
+      Board.is_a_empty_space(result, board) == true -> {:ok, result}
       result > 9 || result < 1 -> {:error, :invalid_input_range}
       true -> {:error, :duplicate_input}
     end

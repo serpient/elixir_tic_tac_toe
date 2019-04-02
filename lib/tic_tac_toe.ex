@@ -46,7 +46,7 @@ defmodule TicTacToe do
 
     GameIO.get_player_input(current_player, prompt)
     |> ProcessInput.handle_input(board, current_player)
-    |> UpdateBoard.handle_board_update(board, current_player)
+    |> Board.handle_board_update(board, current_player)
     |> CheckForWins.handle_win_check(board, current_player)
     |> handle_win_check_result(board, current_player)
   end
