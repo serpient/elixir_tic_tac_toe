@@ -49,7 +49,7 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.analyze(initial_board) == {:error, :no_win, initial_board}
+    assert CheckForWins.analyze(initial_board) == {:ok, :no_win, initial_board}
   end
 
   test "[analyze][Horizontal Wins] Row 3 - No wins if there are 3 in a row from both players" do
@@ -65,7 +65,7 @@ defmodule Check_For_Wins_Test do
       9 => "O"
     }
 
-    assert CheckForWins.analyze(initial_board) == {:error, :no_win, initial_board}
+    assert CheckForWins.analyze(initial_board) == {:ok, :no_win, initial_board}
   end
 
   test "[analyze][Vertical Wins] Column 1 - Wins if there are 3 matching vertical" do
@@ -129,7 +129,7 @@ defmodule Check_For_Wins_Test do
       9 => "X"
     }
 
-    assert CheckForWins.analyze(initial_board) == {:error, :no_win, initial_board}
+    assert CheckForWins.analyze(initial_board) == {:ok, :no_win, initial_board}
   end
 
   test "[analyze][Diagonal Wins] Diagonal 1 - 3 Matching Diagonal wins 1,5,9" do
@@ -177,7 +177,7 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.analyze(initial_board) == {:error, :no_win, initial_board}
+    assert CheckForWins.analyze(initial_board) == {:ok, :no_win, initial_board}
   end
 
   test "[handle_win_check] Winning board is passed to analyze and results in ok tuple" do
@@ -211,7 +211,7 @@ defmodule Check_For_Wins_Test do
     }
 
     assert CheckForWins.handle_win_check({:ok, initial_board}, initial_board, "X") ==
-             {:error, :no_win, initial_board}
+             {:ok, :no_win, initial_board}
   end
 
   test "[handle_win_check] Error passed to this function results in error tuple" do

@@ -43,7 +43,7 @@ defmodule CheckForWins do
     cond do
       Enum.member?(board_has_win?, true) -> {:ok, :wins_game, board}
       Board.has_empty_spaces?(board) == false -> {:error, :game_is_a_tie, board}
-      true -> {:error, :no_win, board}
+      true -> {:ok, :no_win, board}
     end
   end
 
