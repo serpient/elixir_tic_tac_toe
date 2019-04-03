@@ -239,51 +239,6 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.is_win?(["X", "X", "X"], "O") == false
   end
 
-  test "[convert_horizontal_to_row] Converts board correctly" do
-    initial_board = %{
-      1 => "1",
-      2 => "2",
-      3 => "3",
-      4 => "4",
-      5 => "5",
-      6 => "6",
-      7 => "7",
-      8 => "8",
-      9 => "9"
-    }
-    assert CheckForWins.convert_horizontal_to_row(initial_board) == [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
-  end
-
-  test "[convert_vertical_to_row] Converts board correctly" do
-    initial_board = %{
-      1 => "1",
-      2 => "2",
-      3 => "3",
-      4 => "4",
-      5 => "5",
-      6 => "6",
-      7 => "7",
-      8 => "8",
-      9 => "9"
-    }
-    assert CheckForWins.convert_vertical_to_row(initial_board) == [["1", "4", "7"], ["2", "5", "8"], ["3", "6", "9"]]
-  end
-
-  test "[convert_diagonal_to_row] Converts board correctly" do
-    initial_board = %{
-      1 => "1",
-      2 => "2",
-      3 => "3",
-      4 => "4",
-      5 => "5",
-      6 => "6",
-      7 => "7",
-      8 => "8",
-      9 => "9"
-    }
-    assert CheckForWins.convert_diagonal_to_row(initial_board) == [["1", "5", "9"], ["3", "5", "7"]]
-  end
-
   test "[check_row] Checks each row in data and returns true if there is at least a single winning row" do
     row = [["X", "O", "X"], ["O", "X", "O"], ["X", "X", "X"]]
     assert CheckForWins.check_row(row) == true

@@ -112,4 +112,49 @@ defmodule Board_Test do
     assert Board.is_a_empty_space(2, initial_board) == true
   end
 
+
+  test "[convert_horizontal_to_row] Converts board correctly" do
+    initial_board = %{
+      1 => "1",
+      2 => "2",
+      3 => "3",
+      4 => "4",
+      5 => "5",
+      6 => "6",
+      7 => "7",
+      8 => "8",
+      9 => "9"
+    }
+    assert Board.convert_horizontal_to_row(initial_board) == [["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"]]
+  end
+
+  test "[convert_vertical_to_row] Converts board correctly" do
+    initial_board = %{
+      1 => "1",
+      2 => "2",
+      3 => "3",
+      4 => "4",
+      5 => "5",
+      6 => "6",
+      7 => "7",
+      8 => "8",
+      9 => "9"
+    }
+    assert Board.convert_vertical_to_row(initial_board) == [["1", "4", "7"], ["2", "5", "8"], ["3", "6", "9"]]
+  end
+
+  test "[convert_diagonal_to_row] Converts board correctly" do
+    initial_board = %{
+      1 => "1",
+      2 => "2",
+      3 => "3",
+      4 => "4",
+      5 => "5",
+      6 => "6",
+      7 => "7",
+      8 => "8",
+      9 => "9"
+    }
+    assert Board.convert_diagonal_to_row(initial_board) == [["1", "5", "9"], ["3", "5", "7"]]
+  end
 end

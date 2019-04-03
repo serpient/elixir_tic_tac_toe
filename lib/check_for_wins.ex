@@ -3,25 +3,6 @@ defmodule CheckForWins do
     Enum.all?(row_data, fn symbol -> symbol == player_symbol end)
   end
 
-  def convert_horizontal_to_row(board) do
-    board
-    |> Map.values()
-    |> Enum.chunk_every(3)
-  end
-
-  def convert_vertical_to_row(board) do
-    Enum.map(1..3, fn row_idx -> [board[row_idx], board[row_idx + 3], board[row_idx + 6]] end)
-  end
-
-  def convert_diagonal_to_row(board) do
-    Enum.map([1, 3], fn row_idx ->
-      cond do
-        row_idx == 1 -> [board[row_idx], board[row_idx + 4], board[row_idx + 8]]
-        row_idx == 3 -> [board[row_idx], board[row_idx + 2], board[row_idx + 4]]
-      end
-    end)
-  end
-
   def check_row(row_data) do
     wins_list = Enum.map(row_data, fn row -> is_win?(row, "X") || is_win?(row, "O") end)
 
@@ -32,11 +13,11 @@ defmodule CheckForWins do
   end
 
   def analyze(board) do
-    horizontal = convert_horizontal_to_row(board) |> check_row
+    horizontal = Board.convert_horizontal_to_row(board) |> check_row
 
-    vertical = convert_vertical_to_row(board) |> check_row
+    vertical = Board.convert_vertical_to_row(board) |> check_row
 
-    diagonal = convert_diagonal_to_row(board) |> check_row
+    diagonal = Board.convert_diagonal_to_row(board) |> check_row
 
     board_has_win? = [horizontal, vertical, diagonal]
 
@@ -51,7 +32,7 @@ defmodule CheckForWins do
     {result_code, result_value} = result
 
     case result_code do
-      :ok -> CheckForWins.analyze(result_value)
+      :ok -> analyze(result_value)
       :error -> Tuple.append(result, board)
     end
   end
