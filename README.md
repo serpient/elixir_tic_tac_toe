@@ -1,6 +1,8 @@
 # TTT - Build a tic tac toe game in the command line. 
 
 Rule 1: Follow TDD
+Rule 2: Single Responsibility Principle
+Rule 3: Elixir / Functional Programming Best Practices
 
 ### Phase 1: 2 Local Players
 - Simple instructions for the user should be provided
