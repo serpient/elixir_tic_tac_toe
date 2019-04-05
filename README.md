@@ -1,8 +1,10 @@
 # TTT - Build a tic tac toe game in the command line. 
 
-Rule 1: Follow TDD
+### Rule 1: Follow TDD
+### Rule 2: Single Responsibility Principle
+### Rule 3: Elixir / Functional Programming Best Practices
 
-### Phase 1: 2 Local Players
+## Phase 1: 2 Local Players
 - Simple instructions for the user should be provided
 - Standard 3 X 3 board
 - "X" and "O" markers
@@ -19,6 +21,10 @@ If no win -- continue
 7. Toggle current player
 
 ![gif](https://media.giphy.com/media/SHdUoTyvbDLc1XRv4S/giphy.gif)
+
+## Phase 2: Simple Computer Player
+- Ability to play against a computer player. The computer should just choose random moves. 
+- Ability to choose between a 3x3 and 4x4 board.
 
 ## Installation
 
