@@ -22,7 +22,7 @@ If no win -- continue
 
 ![gif](https://media.giphy.com/media/SHdUoTyvbDLc1XRv4S/giphy.gif)
 
-## Phase 2: Computer Player
+## Phase 2: Simple Computer Player
 - Ability to play against a computer player. The computer should just choose random moves. 
 - Ability to choose between a 3x3 and 4x4 board.
 
