@@ -20,6 +20,10 @@ If no win -- continue
 
 ![gif](https://media.giphy.com/media/SHdUoTyvbDLc1XRv4S/giphy.gif)
 
+### Phase 2: Computer Player
+- Ability to play against a computer player. The computer should just choose random moves. 
+- Ability to choose between a 3x3 and 4x4 board.
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
