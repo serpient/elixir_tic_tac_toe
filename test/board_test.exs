@@ -181,4 +181,39 @@ defmodule Board_Test do
     }
     assert Board.generate_board_data(row, column) == new_4x4_board
   end
+
+  test "[generate_board_for_print] Generates 4x4 board data for printing" do
+    row=4
+    column=4
+
+    new_4x4_board = %{
+      1 => "1",
+      2 => "2",
+      3 => "3",
+      4 => "4",
+      5 => "5",
+      6 => "6",
+      7 => "7",
+      8 => "8",
+      9 => "9",
+      10 => "10",
+      11 => "11",
+      12 => "12",
+      13 => "13",
+      14 => "14",
+      15 => "15",
+      16 => "16",
+    }
+    [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16] = Map.values(new_4x4_board)
+
+    margin_top = "\n"
+    row1 = "1    |2    |3    |4    \n  #{p1}  |  #{p2}  |  #{p3}  |  #{p4}  \n_____|_____|_____|_____\n"
+    row2 = "5    |6    |7    |8    \n  #{p5}  |  #{p6}  |  #{p7}  |  #{p8}  \n_____|_____|_____|_____\n"
+    row3 = "9    |10    |11    |12    \n  #{p9}  |  #{p10}  |  #{p11}  |  #{p12}  \n     |     |     |     \n"
+    row4 = "13    |14    |15    |16    \n  #{p13}  |  #{p14}  |  #{p15}  |  #{p16}  \n     |     |     |     \n"
+    margin_bottom = "\n\n\n"
+
+
+    assert Board.generate_board_for_print(row, column, new_4x4_board) == ~s(#{margin_top <> row1 <> row2 <> row3 <> row4 <> margin_bottom})
+  end
 end
