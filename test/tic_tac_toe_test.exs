@@ -25,8 +25,7 @@ defmodule Tic_Tac_Toe_Test do
                "O"
              )
            end) ==
-             GameIO.get_board(initial_board) <> "\n" <>
-             GameIO.get_message(:game_is_a_tie) <> "\n"
+            capture_io(fn -> GameIO.print_tie(initial_board) end)
   end
 
   test "[handle_win_check_result] Winning result will end the game and output Win Game message" do
@@ -49,9 +48,7 @@ defmodule Tic_Tac_Toe_Test do
                "X"
              )
            end) ==
-             GameIO.get_board(initial_board) <>
-               "\n" <>
-               "Player X - " <> GameIO.get_message(:wins_game) <> "\n"
+           capture_io(fn -> GameIO.print_win(initial_board, "X") end)
   end
 
   # test "No win continues the game" do
