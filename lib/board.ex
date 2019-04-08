@@ -41,4 +41,44 @@ defmodule Board do
     1..(num_of_rows * num_of_columns)
     |> Enum.reduce(%{}, fn (num, acc) -> Map.put(acc, num, " ") end)
   end
+
+  def generate_board_for_print(num_of_rows, num_of_columns, _board_data) do
+    new_line = "\n"
+    margin_bottom = "\n\n\n"
+    Enum.reduce(0..num_of_rows - 1, new_line, fn (row_idx, acc) ->
+      acc <> Enum.reduce(1..num_of_columns, "", fn (column_idx, acc) ->
+        curr_column_number = row_idx * num_of_columns + (column_idx)
+        print = cond do
+          (column_idx == num_of_columns) == false -> "#{curr_column_number}    |"
+          (column_idx == num_of_columns) == true -> "#{curr_column_number}    "
+        end
+        acc <> print
+      end )
+      <> new_line
+      <> Enum.reduce(1..num_of_columns, "", fn (column_idx, acc) ->
+        curr_column_number = row_idx * num_of_columns + (column_idx)
+        print = cond do
+          (column_idx == num_of_columns) == false -> "  #{curr_column_number}  |"
+          (column_idx == num_of_columns) == true -> "  #{curr_column_number}  "
+        end
+        acc <> print
+      end )
+      <> new_line
+      <> Enum.reduce(1..num_of_columns, "", fn (column_idx, acc) ->
+        print = if (num_of_rows - 1 == row_idx) do
+          cond do
+            (column_idx == num_of_columns) == false -> "     |"
+            (column_idx == num_of_columns) == true -> "     "
+          end
+        else
+          cond do
+            (column_idx == num_of_columns) == false -> "_____|"
+            (column_idx == num_of_columns) == true -> "_____"
+          end
+        end
+        acc <> print
+      end ) <> new_line
+    end
+    ) <> margin_bottom
+  end
 end
