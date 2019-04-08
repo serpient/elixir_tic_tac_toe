@@ -180,7 +180,7 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.analyze(no_diagonal_win_board) == {:ok, :no_win, no_diagonal_win_board}
   end
 
-  test "[handle_win_check] Winning board is passed to analyze and results in ok tuple" do
+  test "[handle_check_for_win] Winning board is passed to analyze and results in ok tuple" do
     winning_board = %{
       1 => "X",
       2 => "X",
@@ -193,11 +193,11 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.handle_win_check({:ok, winning_board}, winning_board, "X") ==
+    assert CheckForWins.handle_check_for_win({:ok, winning_board}, winning_board, "X") ==
              {:ok, :wins_game, winning_board}
   end
 
-  test "[handle_win_check] Non winning board results in error tuple" do
+  test "[handle_check_for_win] Non winning board results in :no_win tuple" do
     non_winning_board = %{
       1 => "X",
       2 => "X",
@@ -210,11 +210,11 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.handle_win_check({:ok, non_winning_board}, non_winning_board, "X") ==
+    assert CheckForWins.handle_check_for_win({:ok, non_winning_board}, non_winning_board, "X") ==
              {:ok, :no_win, non_winning_board}
   end
 
-  test "[handle_win_check] Error passed to this function results in error tuple" do
+  test "[handle_check_for_win] Error tuple passed to this function results in another error tuple" do
     board_with_error = %{
       1 => "X",
       2 => "X",
@@ -227,25 +227,25 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.handle_win_check({:error, :invalid_input}, board_with_error, "X") ==
+    assert CheckForWins.handle_check_for_win({:error, :invalid_input}, board_with_error, "X") ==
              {:error, :invalid_input, board_with_error}
   end
 
-  test "[is_win?] Returns true if every symbol in list matches current player symbol" do
-    assert CheckForWins.is_win?(["X", "X", "X"], "X") == true
+  test "[is_row_a_win?] Returns true if every symbol in list matches current player symbol" do
+    assert CheckForWins.is_row_a_win?(["X", "X", "X"], "X") == true
   end
 
-  test "[is_win?] Returns false if every symbol in list does not match current player symbol" do
-    assert CheckForWins.is_win?(["X", "X", "X"], "O") == false
+  test "[is_row_a_win?] Returns false if every symbol in list does not match current player symbol" do
+    assert CheckForWins.is_row_a_win?(["X", "X", "X"], "O") == false
   end
 
-  test "[check_row] Checks each row in data and returns true if there is at least a single winning row" do
-    row = [["X", "O", "X"], ["O", "X", "O"], ["X", "X", "X"]]
-    assert CheckForWins.check_row(row) == true
+  test "[is_any_row_within_board_a_win?] Checks each row in data and returns true if there is at least a single winning row" do
+    board_data_split_by_row = [["X", "O", "X"], ["O", "X", "O"], ["X", "X", "X"]]
+    assert CheckForWins.is_any_row_within_board_a_win?(board_data_split_by_row) == true
   end
 
-  test "[check_row] Checks each row in data and returns false if there is no winning row" do
-    row = [["X", "O", "X"], ["O", "X", "O"], ["X", "O", "X"]]
-    assert CheckForWins.check_row(row) == false
+  test "[is_any_row_within_board_a_win?] Checks each row in data and returns false if there is no winning row" do
+    board_data_split_by_row = [["X", "O", "X"], ["O", "X", "O"], ["X", "O", "X"]]
+    assert CheckForWins.is_any_row_within_board_a_win?(board_data_split_by_row) == false
   end
 end
