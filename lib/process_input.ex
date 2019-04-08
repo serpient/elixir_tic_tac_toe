@@ -1,19 +1,19 @@
 defmodule ProcessInput do
-  def transform_to_integer(string) do
+  defp transform_to_integer(string) do
     Integer.parse(string)
   end
 
-  def process_input(string, _board, _current_player) when is_tuple(string) do
+  defp process_input(string, _board, _current_player) when is_tuple(string) do
     string
     |> Tuple.to_list()
     |> Enum.fetch!(0)
   end
 
-  def process_input(_string, _board, _current_player) do
+  defp process_input(_string, _board, _current_player) do
     {:error, :invalid_input}
   end
 
-  def validate_input(result, board, _current_player) when is_integer(result) do
+  defp validate_input(result, board, _current_player) when is_integer(result) do
     cond do
       Board.is_a_empty_space(result, board) == true -> {:ok, result}
       result > 9 || result < 1 -> {:error, :invalid_input_range}
@@ -21,7 +21,7 @@ defmodule ProcessInput do
     end
   end
 
-  def validate_input(error, _board, _current_player) do
+  defp validate_input(error, _board, _current_player) do
     error
   end
 
