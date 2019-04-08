@@ -47,8 +47,9 @@ defmodule Board do
       "top" => String.pad_trailing("#{value}", 5),
       "middle" => "  #{value}  ",
       "bottom" => "_____",
-      "bottom_of_last_row" => "     ",
+      "bottom_of_last_row" => "     "
     }
+
     cond do
       at_end_of_cell_line? -> line[cell_level]
       true -> line[cell_level] <> "|"
@@ -61,15 +62,15 @@ defmodule Board do
       curr_column_number = row_idx * num_of_columns + column_idx
       at_end_of_cell? = column_idx == num_of_columns
       bottom = if num_of_rows - 1 == row_idx, do: "bottom_of_last_row", else: "bottom"
-      {}
-      |> Tuple.append(get_cell_part("top", at_end_of_cell?, curr_column_number))
-      |> Tuple.append(get_cell_part("middle", at_end_of_cell?, Map.get(board_data, curr_column_number)))
-      |> Tuple.append(get_cell_part(bottom, at_end_of_cell?, nil))
-      |> Tuple.to_list
+      [
+        get_cell_part("top", at_end_of_cell?, curr_column_number),
+        get_cell_part("middle", at_end_of_cell?, Map.get(board_data, curr_column_number)),
+        get_cell_part(bottom, at_end_of_cell?, nil)
+      ]
     end)
-    |> Enum.zip
+    |> Enum.zip()
     |> Enum.map_join(fn value ->
-      Tuple.append(value, "\n") |> Tuple.to_list
+      Tuple.append(value, "\n") |> Tuple.to_list()
     end)
   end
 
