@@ -51,8 +51,8 @@ defmodule Board do
     }
 
     cond do
-      at_end_of_cell_line? -> line[cell_level]
-      true -> line[cell_level] <> "|"
+      at_end_of_cell_line? == false -> line[cell_level] <> "|"
+      true -> line[cell_level]
     end
   end
 
@@ -78,10 +78,12 @@ defmodule Board do
     new_line = "\n"
     margin_bottom = "\n\n\n"
 
-    0..(num_of_rows - 1)
-    |> Enum.reduce(new_line, fn row_idx, acc ->
-      acc <> compile_row_of_cells(num_of_columns, num_of_rows, row_idx, board_data)
-    end)
-    |> (fn (value) -> value <> margin_bottom end).()
+    string_board =
+      0..(num_of_rows - 1)
+      |> Enum.reduce(new_line, fn row_idx, acc ->
+        acc <> compile_row_of_cells(num_of_columns, num_of_rows, row_idx, board_data)
+      end)
+
+    string_board <> margin_bottom
   end
 end
