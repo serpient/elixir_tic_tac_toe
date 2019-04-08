@@ -1,10 +1,10 @@
 defmodule CheckForWins do
-  def is_win?(row_data, player_symbol) do
+  def is_row_a_win?(row_data, player_symbol) do
     Enum.all?(row_data, fn symbol -> symbol == player_symbol end)
   end
 
-  def check_row(row_data) do
-    wins_list = Enum.map(row_data, fn row -> is_win?(row, "X") || is_win?(row, "O") end)
+  def is_any_row_within_board_a_win?(row_data) do
+    wins_list = Enum.map(row_data, fn row -> is_row_a_win?(row, "X") || is_row_a_win?(row, "O") end)
 
     cond do
       Enum.member?(wins_list, true) -> true
@@ -13,11 +13,11 @@ defmodule CheckForWins do
   end
 
   def analyze(board) do
-    horizontal = Board.convert_horizontal_to_row(board) |> check_row
+    horizontal = Board.convert_horizontal_to_row(board) |> is_any_row_within_board_a_win?
 
-    vertical = Board.convert_vertical_to_row(board) |> check_row
+    vertical = Board.convert_vertical_to_row(board) |> is_any_row_within_board_a_win?
 
-    diagonal = Board.convert_diagonal_to_row(board) |> check_row
+    diagonal = Board.convert_diagonal_to_row(board) |> is_any_row_within_board_a_win?
 
     board_has_win? = [horizontal, vertical, diagonal]
 
@@ -28,7 +28,7 @@ defmodule CheckForWins do
     end
   end
 
-  def handle_win_check(result, board, _current_player) do
+  def handle_check_for_win(result, board, _current_player) do
     {result_code, result_value} = result
 
     case result_code do
