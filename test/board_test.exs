@@ -49,7 +49,7 @@ defmodule Board_Test do
   end
 
   test "[has_empty_spaces] Returns False if board is filled." do
-    initial_board = %{
+    has_no_empty_spaces_board = %{
       1 => "X",
       2 => "O",
       3 => "X",
@@ -61,11 +61,11 @@ defmodule Board_Test do
       9 => "X"
     }
 
-    assert Board.has_empty_spaces?(initial_board) == false
+    assert Board.has_empty_spaces?(has_no_empty_spaces_board) == false
   end
 
   test "[has_empty_spaces] Returns True if board has more spaces to play." do
-    initial_board = %{
+    has_empty_spaces_board = %{
       1 => "X",
       2 => "O",
       3 => "X",
@@ -77,11 +77,11 @@ defmodule Board_Test do
       9 => " "
     }
 
-    assert Board.has_empty_spaces?(initial_board) == true
+    assert Board.has_empty_spaces?(has_empty_spaces_board) == true
   end
 
   test "[is_a_empty_space] Returns false if position has player symbol." do
-    initial_board = %{
+    space_is_already_taken_board = %{
       1 => "X",
       2 => " ",
       3 => " ",
@@ -93,11 +93,11 @@ defmodule Board_Test do
       9 => " "
     }
 
-    assert Board.is_a_empty_space(1, initial_board) == false
+    assert Board.is_a_empty_space(1, space_is_already_taken_board) == false
   end
 
   test "[is_a_empty_space] Returns true if position has no player symbol." do
-    initial_board = %{
+    space_is_not_taken_board = %{
       1 => "X",
       2 => " ",
       3 => " ",
@@ -109,7 +109,7 @@ defmodule Board_Test do
       9 => " "
     }
 
-    assert Board.is_a_empty_space(2, initial_board) == true
+    assert Board.is_a_empty_space(2, space_is_not_taken_board) == true
   end
 
 

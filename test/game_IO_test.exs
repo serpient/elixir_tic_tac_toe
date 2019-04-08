@@ -4,7 +4,7 @@ defmodule Game_Output_Test do
   doctest GameIO
 
   test "[print_board] Prints 3x3 board to CL" do
-    initial_board = %{
+    initial_3x3_board = %{
       1 => " ",
       2 => " ",
       3 => " ",
@@ -16,8 +16,8 @@ defmodule Game_Output_Test do
       9 => " "
     }
 
-    assert capture_io(fn -> GameIO.print_board(initial_board) end) ==
-             GameIO.get_board(initial_board) <> "\n"
+    assert capture_io(fn -> GameIO.print_board(initial_3x3_board) end) ==
+             GameIO.get_board(initial_3x3_board) <> "\n"
   end
 
   test "[get_other_player_symbol] Toggles player symbols from X -> O" do
@@ -37,7 +37,7 @@ defmodule Game_Output_Test do
   end
 
   test "[print_win] Prints win message" do
-    initial_board = %{
+    winning_board = %{
       1 => " ",
       2 => " ",
       3 => " ",
@@ -48,13 +48,13 @@ defmodule Game_Output_Test do
       8 => " ",
       9 => " "
     }
-    assert capture_io(fn -> GameIO.print_win(initial_board, "X") end) ==
-             GameIO.get_board(initial_board) <> "\n"
+    assert capture_io(fn -> GameIO.print_win(winning_board, "X") end) ==
+             GameIO.get_board(winning_board) <> "\n"
              <>  "Player X - " <> GameIO.get_message(:wins_game) <> "\n"
   end
 
   test "[print_tie] Prints tie message" do
-    initial_board = %{
+    tie_board = %{
       1 => " ",
       2 => " ",
       3 => " ",
@@ -65,8 +65,8 @@ defmodule Game_Output_Test do
       8 => " ",
       9 => " "
     }
-    assert capture_io(fn -> GameIO.print_tie(initial_board) end) ==
-             GameIO.get_board(initial_board) <> "\n"
+    assert capture_io(fn -> GameIO.print_tie(tie_board) end) ==
+             GameIO.get_board(tie_board) <> "\n"
              <> GameIO.get_message(:game_is_a_tie) <> "\n"
   end
 end
