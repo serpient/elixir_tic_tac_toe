@@ -269,4 +269,43 @@ defmodule Board_Test do
     assert Board.generate_board_for_print(row, column, new_3x3_board) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
   end
+
+  test "[generate_board_for_print] Generates 3x4 board data for printing" do
+    row = 3
+    column = 4
+
+    new_3x4_board = %{
+      1 => "1",
+      2 => "2",
+      3 => "3",
+      4 => "4",
+      5 => "5",
+      6 => "6",
+      7 => "7",
+      8 => "8",
+      9 => "9",
+      10 => "10",
+      11 => "11",
+      12 => "12",
+    }
+
+    [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12] =
+      Map.values(new_3x4_board)
+
+    margin_top = "\n"
+
+    row1 =
+      "1    |2    |3    |4    \n  #{p1}  |  #{p2}  |  #{p3}  |  #{p4}  \n_____|_____|_____|_____\n"
+
+    row2 =
+      "5    |6    |7    |8    \n  #{p5}  |  #{p6}  |  #{p7}  |  #{p8}  \n_____|_____|_____|_____\n"
+
+    row3 =
+      "9    |10   |11   |12   \n  #{p9}  |  #{p10}  |  #{p11}  |  #{p12}  \n     |     |     |     \n"
+
+    margin_bottom = "\n\n\n"
+
+    assert Board.generate_board_for_print(row, column, new_3x4_board) ==
+             ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
+  end
 end
