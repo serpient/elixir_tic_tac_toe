@@ -36,4 +36,9 @@ defmodule Board do
       end
     end)
   end
+
+  def generate_board_data(num_of_rows, num_of_columns) do
+    1..(num_of_rows * num_of_columns)
+    |> Enum.reduce(%{}, fn (num, acc) -> Map.put(acc, num, " ") end)
+  end
 end

@@ -157,4 +157,28 @@ defmodule Board_Test do
     }
     assert Board.convert_diagonal_to_row(initial_board) == [["1", "5", "9"], ["3", "5", "7"]]
   end
+
+  test "[generate_board_data] Generates board data" do
+    row = 4
+    column = 4
+    new_4x4_board = %{
+      1 => " ",
+      2 => " ",
+      3 => " ",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " ",
+      10 => " ",
+      11 => " ",
+      12 => " ",
+      13 => " ",
+      14 => " ",
+      15 => " ",
+      16 => " ",
+    }
+    assert Board.generate_board_data(row, column) == new_4x4_board
+  end
 end
