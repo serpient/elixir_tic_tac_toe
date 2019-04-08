@@ -50,36 +50,4 @@ defmodule Tic_Tac_Toe_Test do
            end) ==
            capture_io(fn -> GameIO.print_win(winning_board, "X") end)
   end
-
-  # test "No win continues the game" do
-  #   initial_board = %{
-  #     1 => "X",
-  #     2 => "O",
-  #     3 => "X",
-  #     4 => " ",
-  #     5 => " ",
-  #     6 => " ",
-  #     7 => " ",
-  #     8 => " ",
-  #     9 => " "
-  #   }
-
-  #   updated_board = %{
-  #     1 => "X",
-  #     2 => "O",
-  #     3 => "X",
-  #     4 => "O",
-  #     5 => " ",
-  #     6 => " ",
-  #     7 => " ",
-  #     8 => " ",
-  #     9 => " "
-  #   }
-
-  #   assert TicTacToe.handle_check_for_win_result(
-  #            {:error, :no_win, updated_board},
-  #            initial_board,
-  #            "X"
-  #          ) !== {:error}
-  # end
 end
