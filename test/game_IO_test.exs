@@ -35,4 +35,38 @@ defmodule Game_Output_Test do
   test "[get_message] Gets default message on nil param" do
     assert GameIO.get_message(nil) == ~s(Select a numbered spot: )
   end
+
+  test "[print_win] Prints win message" do
+    initial_board = %{
+      1 => " ",
+      2 => " ",
+      3 => " ",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " "
+    }
+    assert capture_io(fn -> GameIO.print_win(initial_board, "X") end) ==
+             GameIO.get_board(initial_board) <> "\n"
+             <>  "Player X - " <> GameIO.get_message(:wins_game) <> "\n"
+  end
+
+  test "[print_tie] Prints tie message" do
+    initial_board = %{
+      1 => " ",
+      2 => " ",
+      3 => " ",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " "
+    }
+    assert capture_io(fn -> GameIO.print_tie(initial_board) end) ==
+             GameIO.get_board(initial_board) <> "\n"
+             <> GameIO.get_message(:game_is_a_tie) <> "\n"
+  end
 end
