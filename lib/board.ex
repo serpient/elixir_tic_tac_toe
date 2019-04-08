@@ -70,7 +70,7 @@ defmodule Board do
     end)
     |> Enum.zip()
     |> Enum.map_join(fn value ->
-      Tuple.append(value, "\n") |> Tuple.to_list()
+      Tuple.append(value, "\n") |> Tuple.to_list
     end)
   end
 
@@ -78,8 +78,10 @@ defmodule Board do
     new_line = "\n"
     margin_bottom = "\n\n\n"
 
-    Enum.reduce(0..(num_of_rows - 1), new_line, fn row_idx, acc ->
+    0..(num_of_rows - 1)
+    |> Enum.reduce(new_line, fn row_idx, acc ->
       acc <> compile_row_of_cells(num_of_columns, num_of_rows, row_idx, board_data)
-    end) <> margin_bottom
+    end)
+    |> (fn (value) -> value <> margin_bottom end).()
   end
 end
