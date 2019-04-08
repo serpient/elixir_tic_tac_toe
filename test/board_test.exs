@@ -239,4 +239,34 @@ defmodule Board_Test do
     assert Board.generate_board_for_print(row, column, new_4x4_board) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> row4 <> margin_bottom})
   end
+
+  test "[generate_board_for_print] Generates 3x3 board data for printing" do
+    row = 3
+    column = 3
+
+    new_3x3_board = %{
+      1 => "1",
+      2 => "2",
+      3 => "3",
+      4 => "4",
+      5 => "5",
+      6 => "6",
+      7 => "7",
+      8 => "8",
+      9 => "9",
+    }
+
+    [p1, p2, p3, p4, p5, p6, p7, p8, p9] = Map.values(new_3x3_board)
+
+    margin_top = "\n"
+
+    row1 = "1    |2    |3    \n  #{p1}  |  #{p2}  |  #{p3}  \n_____|_____|_____\n"
+    row2 = "4    |5    |6    \n  #{p4}  |  #{p5}  |  #{p6}  \n_____|_____|_____\n"
+    row3 = "7    |8    |9    \n  #{p7}  |  #{p8}  |  #{p9}  \n     |     |     \n"
+
+    margin_bottom = "\n\n\n"
+
+    assert Board.generate_board_for_print(row, column, new_3x3_board) ==
+             ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
+  end
 end
