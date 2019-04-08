@@ -42,9 +42,10 @@ defmodule Board do
     |> Enum.reduce(%{}, fn (num, acc) -> Map.put(acc, num, " ") end)
   end
 
-  def generate_board_for_print(num_of_rows, num_of_columns, _board_data) do
+  def generate_board_for_print(num_of_rows, num_of_columns, board_data) do
     new_line = "\n"
     margin_bottom = "\n\n\n"
+
     Enum.reduce(0..num_of_rows - 1, new_line, fn (row_idx, acc) ->
       acc <> Enum.reduce(1..num_of_columns, "", fn (column_idx, acc) ->
         curr_column_number = row_idx * num_of_columns + (column_idx)
@@ -57,9 +58,10 @@ defmodule Board do
       <> new_line
       <> Enum.reduce(1..num_of_columns, "", fn (column_idx, acc) ->
         curr_column_number = row_idx * num_of_columns + (column_idx)
+        curr_column_value = Map.get(board_data, curr_column_number)
         print = cond do
-          (column_idx == num_of_columns) == false -> "  #{curr_column_number}  |"
-          (column_idx == num_of_columns) == true -> "  #{curr_column_number}  "
+          (column_idx == num_of_columns) == false -> "  #{curr_column_value}  |"
+          (column_idx == num_of_columns) == true -> "  #{curr_column_value}  "
         end
         acc <> print
       end )
