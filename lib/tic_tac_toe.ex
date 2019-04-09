@@ -27,15 +27,28 @@ defmodule TicTacToe do
     end
   end
 
+  def game_start() do
+    board_size = GameIO.get_input_for_game_settings(:game_board_settings)
+    |> ProcessInput.transform_to_integer
+    |> ProcessInput.process_input
+
+    GameIO.clear_io()
+
+    Board.generate_board_data(board_size, board_size)
+    |> Board.update_board_spec(board_size, board_size)
+    |> play(nil, "X")
+  end
+
   def play(
         board \\ %Board{},
         prompt \\ :initial_player_prompt,
         current_player \\ "X"
       ) do
+    GameIO.clear_io()
     GameIO.print_board(board)
 
     GameIO.get_player_input(current_player, prompt)
-    |> ProcessInput.handle_input(board, current_player)
+    |> ProcessInput.handle_input(board)
     |> Board.handle_board_update(board, current_player)
     |> CheckForWins.check_for_win(board, current_player)
     |> handle_check_for_win_result(board, current_player)
