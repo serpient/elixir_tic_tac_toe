@@ -243,6 +243,34 @@ defmodule Board_Test do
            ]
   end
 
+  test "[convert_diagonal_to_row] Converts 4x4 board correctly" do
+    new_4x4_board = %{
+      1 => "1",
+      2 => "2",
+      3 => "3",
+      4 => "4",
+      5 => "5",
+      6 => "6",
+      7 => "7",
+      8 => "8",
+      9 => "9",
+      10 => "10",
+      11 => "11",
+      12 => "12",
+      13 => "13",
+      14 => "14",
+      15 => "15",
+      16 => "16"
+    }
+
+    diagonal_conversion_board_spec = Board.update_board_spec(new_4x4_board, 4, 4)
+
+    assert Board.convert_diagonal_to_row(diagonal_conversion_board_spec) == [
+             ["1", "6", "11", "15"],
+             ["4", "7", "10", "13"]
+           ]
+  end
+
   test "[generate_board_data] Generates board data" do
     row = 4
     column = 4
