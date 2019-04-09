@@ -126,7 +126,11 @@ defmodule Board_Test do
       9 => "9"
     }
 
-    assert Board.convert_horizontal_to_row(initial_board) == [
+    horizontal_conversion_board_spec = %Board{
+      board_data: initial_board,
+    }
+
+    assert Board.convert_horizontal_to_row(horizontal_conversion_board_spec) == [
              ["1", "2", "3"],
              ["4", "5", "6"],
              ["7", "8", "9"]
@@ -146,7 +150,11 @@ defmodule Board_Test do
       9 => "9"
     }
 
-    assert Board.convert_vertical_to_row(initial_board) == [
+    vertical_conversion_board_spec = %Board{
+      board_data: initial_board,
+    }
+
+    assert Board.convert_vertical_to_row(vertical_conversion_board_spec) == [
              ["1", "4", "7"],
              ["2", "5", "8"],
              ["3", "6", "9"]
@@ -166,7 +174,11 @@ defmodule Board_Test do
       9 => "9"
     }
 
-    assert Board.convert_diagonal_to_row(initial_board) == [["1", "5", "9"], ["3", "5", "7"]]
+    diagonal_conversion_board_spec = %Board{
+      board_data: initial_board,
+    }
+
+    assert Board.convert_diagonal_to_row(diagonal_conversion_board_spec) == [["1", "5", "9"], ["3", "5", "7"]]
   end
 
   test "[generate_board_data] Generates board data" do

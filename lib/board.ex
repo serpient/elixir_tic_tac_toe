@@ -29,17 +29,21 @@ defmodule Board do
     Map.get(board, board_position) == " "
   end
 
-  def convert_horizontal_to_row(board) do
+  def convert_horizontal_to_row(board_spec) do
+    board = board_spec.board_data
+
     board
     |> Map.values()
-    |> Enum.chunk_every(3)
+    |> Enum.chunk_every(board_spec.num_of_columns)
   end
 
-  def convert_vertical_to_row(board) do
+  def convert_vertical_to_row(board_spec) do
+    board = board_spec.board_data
     Enum.map(1..3, fn row_idx -> [board[row_idx], board[row_idx + 3], board[row_idx + 6]] end)
   end
 
-  def convert_diagonal_to_row(board) do
+  def convert_diagonal_to_row(board_spec) do
+    board = board_spec.board_data
     Enum.map([1, 3], fn row_idx ->
       cond do
         row_idx == 1 -> [board[row_idx], board[row_idx + 4], board[row_idx + 8]]

@@ -11,11 +11,11 @@ defmodule CheckForWins do
   def analyze(board_spec) do
     board = board_spec.board_data
 
-    horizontal = Board.convert_horizontal_to_row(board) |> is_any_row_within_board_a_win?
+    horizontal = Board.convert_horizontal_to_row(board_spec) |> is_any_row_within_board_a_win?
 
-    vertical = Board.convert_vertical_to_row(board) |> is_any_row_within_board_a_win?
+    vertical = Board.convert_vertical_to_row(board_spec) |> is_any_row_within_board_a_win?
 
-    diagonal = Board.convert_diagonal_to_row(board) |> is_any_row_within_board_a_win?
+    diagonal = Board.convert_diagonal_to_row(board_spec) |> is_any_row_within_board_a_win?
 
     board_has_win? = [horizontal, vertical, diagonal]
 
