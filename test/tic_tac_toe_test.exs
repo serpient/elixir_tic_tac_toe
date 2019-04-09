@@ -58,4 +58,8 @@ defmodule Tic_Tac_Toe_Test do
            end) ==
              capture_io(fn -> GameIO.print_win(winning_board_spec, "X") end)
   end
+
+  # test "[handle_game_start] Gets game settings, updates default board data, and starts game" do
+  #   assert Board.game_start() == {:ok}
+  # end
 end
