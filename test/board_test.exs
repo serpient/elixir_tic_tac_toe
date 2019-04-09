@@ -266,7 +266,7 @@ defmodule Board_Test do
     diagonal_conversion_board_spec = Board.update_board_spec(new_4x4_board, 4, 4)
 
     assert Board.convert_diagonal_to_row(diagonal_conversion_board_spec) == [
-             ["1", "6", "11", "15"],
+             ["1", "6", "11", "16"],
              ["4", "7", "10", "13"]
            ]
   end

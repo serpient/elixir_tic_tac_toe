@@ -54,12 +54,20 @@ defmodule Board do
   end
 
   def convert_diagonal_to_row(board_spec) do
-    board = board_spec.board_data
+    %Board{board_data: board, num_of_columns: columns, max_spaces: max_spaces} =
+      board_spec
 
-    Enum.map([1, 3], fn row_idx ->
-      cond do
-        row_idx == 1 -> [board[row_idx], board[row_idx + 4], board[row_idx + 8]]
-        row_idx == 3 -> [board[row_idx], board[row_idx + 2], board[row_idx + 4]]
+    [1, columns]
+    |> Enum.map(fn corner_idx ->
+      case corner_idx do
+        1 -> corner_idx..max_spaces
+          |> Enum.take_every(columns + 1)
+          |> Enum.take(columns)
+          |> Enum.map(fn row -> board[row] end)
+        _ -> corner_idx..max_spaces
+          |> Enum.take_every(columns - 1)
+          |> Enum.take(columns)
+          |> Enum.map(fn row -> board[row] end)
       end
     end)
   end
