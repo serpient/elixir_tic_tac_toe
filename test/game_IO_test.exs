@@ -3,23 +3,6 @@ defmodule Game_Output_Test do
   import ExUnit.CaptureIO
   doctest GameIO
 
-  # test "[print_board] Prints 3x3 board to CL" do
-  #   initial_3x3_board = %{
-  #     1 => " ",
-  #     2 => " ",
-  #     3 => " ",
-  #     4 => " ",
-  #     5 => " ",
-  #     6 => " ",
-  #     7 => " ",
-  #     8 => " ",
-  #     9 => " "
-  #   }
-
-  #   assert capture_io(fn -> GameIO.print_board(initial_3x3_board) end) ==
-  #            GameIO.get_board(initial_3x3_board) <> "\n"
-  # end
-
   test "[get_other_player_symbol] Toggles player symbols from X -> O" do
     assert GameIO.get_other_player_symbol("X") == "O"
   end

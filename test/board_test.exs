@@ -1,5 +1,6 @@
 defmodule Board_Test do
   use ExUnit.Case
+  import ExUnit.CaptureIO
   doctest Board
 
   test "[handle_board_update] On :ok, updates board data and returns ok + updated data tuple" do
@@ -308,4 +309,22 @@ defmodule Board_Test do
     assert Board.generate_board_for_print(new_3x4_board, row, column) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
   end
+
+  test "[print_board] Prints 3x3 board to CL" do
+    initial_3x3_board = %{
+      1 => " ",
+      2 => " ",
+      3 => " ",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " "
+    }
+
+    assert capture_io(fn -> GameIO.print_board(initial_3x3_board) end) ==
+             Board.generate_board_for_print(initial_3x3_board) <> "\n"
+  end
+
 end
