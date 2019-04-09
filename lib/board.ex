@@ -64,7 +64,7 @@ defmodule Board do
       bottom = if num_of_rows - 1 == row_idx, do: "bottom_of_last_row", else: "bottom"
       [
         get_cell_part("top", at_end_of_cell?, curr_column_number),
-        get_cell_part("middle", at_end_of_cell?, Map.get(board_data, curr_column_number)),
+        get_cell_part("middle", at_end_of_cell?,  board_data[curr_column_number]),
         get_cell_part(bottom, at_end_of_cell?, nil)
       ]
     end)
