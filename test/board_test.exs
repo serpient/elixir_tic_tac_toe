@@ -327,4 +327,11 @@ defmodule Board_Test do
              Board.generate_board_for_print(initial_3x3_board) <> "\n"
   end
 
+  test "[update_board_spec] returns new struct with updated params" do
+    new_4x4_board_data = Board.generate_board_data(4,4)
+
+    assert Board.update_board_spec(new_4x4_board_data, 4, 4) ==
+              %Board{board_data: new_4x4_board_data, num_of_rows: 4, num_of_columns: 4}
+  end
+
 end

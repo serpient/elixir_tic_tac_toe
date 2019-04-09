@@ -1,4 +1,15 @@
 defmodule Board do
+  defstruct num_of_rows: 3, num_of_columns: 3, board_data: %{
+    1 => " ",
+    2 => " ",
+    3 => " ",
+    4 => " ",
+    5 => " ",
+    6 => " ",
+    7 => " ",
+    8 => " ",
+    9 => " "
+  }
   def handle_board_update(result, board_data, player_symbol) do
     {status, position_to_update} = result
 
@@ -85,5 +96,8 @@ defmodule Board do
       end)
 
     string_board <> margin_bottom
+  end
+
+  def update_board_spec(board_data, num_of_rows, num_of_columns) do
   end
 end
