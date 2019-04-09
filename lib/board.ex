@@ -37,7 +37,7 @@ defmodule Board do
     end)
   end
 
-  def generate_board_data(num_of_rows, num_of_columns) do
+  def generate_board_data(num_of_rows \\ 3, num_of_columns \\ 3) do
     1..(num_of_rows * num_of_columns)
     |> Enum.reduce(%{}, fn num, acc -> Map.put(acc, num, " ") end)
   end
@@ -74,7 +74,7 @@ defmodule Board do
     end)
   end
 
-  def generate_board_for_print(num_of_rows, num_of_columns, board_data) do
+  def generate_board_for_print(board_data, num_of_rows \\ 3, num_of_columns \\ 3) do
     new_line = "\n"
     margin_bottom = "\n\n\n"
 
