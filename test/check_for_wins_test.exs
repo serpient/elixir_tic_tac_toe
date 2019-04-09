@@ -267,7 +267,33 @@ defmodule Check_For_Wins_Test do
              {:ok, :no_win, no_diagonal_win_board_spec}
   end
 
-  test "[check_for_win] Winning board is passed to analyze and results in ok tuple" do
+  test "[analyze][Diagonal Wins] Wins if there are 4 matching diagonally" do
+    diagonal_win_board = %{
+      1 => " ",
+      2 => " ",
+      3 => " ",
+      4 => "O",
+      5 => " ",
+      6 => " ",
+      7 => "O",
+      8 => " ",
+      9 => " ",
+      10 => "O",
+      11 => " ",
+      12 => " ",
+      13 => "O",
+      14 => " ",
+      15 => " ",
+      16 => " ",
+    }
+
+    diagonal_win_board_spec = Board.update_board_spec(diagonal_win_board, 4, 4)
+
+    assert CheckForWins.analyze(diagonal_win_board_spec) ==
+             {:ok, :wins_game, diagonal_win_board_spec}
+  end
+
+  test "[handle_check_for_win] Winning board is passed to analyze and results in ok tuple" do
     winning_board = %{
       1 => "X",
       2 => "X",
