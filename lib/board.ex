@@ -39,8 +39,9 @@ defmodule Board do
 
   def convert_vertical_to_row(board_spec) do
     board = board_spec.board_data
-    Enum.map(1..3, fn row_idx -> [board[row_idx], board[row_idx + 3], board[row_idx + 6]] end)
+    Enum.map(1..board_spec.num_of_rows, fn row_idx -> Enum.map(0..board_spec.num_of_columns - 1, fn column_idx -> board[row_idx + (column_idx * board_spec.num_of_columns)] end) end)
   end
+
 
   def convert_diagonal_to_row(board_spec) do
     board = board_spec.board_data
@@ -114,3 +115,8 @@ defmodule Board do
     }
   end
 end
+
+# 1 2 3 4
+# 5 6 7 8
+# 9 10 11 12
+# 13 14 15 16
