@@ -9,7 +9,7 @@ defmodule Board do
     7 => " ",
     8 => " ",
     9 => " "
-  }
+  }, max_spaces: 9
   def handle_board_update(result, board_data, player_symbol) do
     {status, position_to_update} = result
 
@@ -98,6 +98,14 @@ defmodule Board do
     string_board <> margin_bottom
   end
 
-  def update_board_spec(board_data, num_of_rows, num_of_columns) do
+  def update_board_spec(new_board_data, new_num_of_rows, new_num_of_columns) do
+    existing_board = %Board{}
+    %Board{
+      existing_board
+      | board_data: new_board_data,
+        num_of_rows: new_num_of_rows,
+        num_of_columns: new_num_of_columns,
+        max_spaces: new_num_of_rows * new_num_of_columns
+    }
   end
 end

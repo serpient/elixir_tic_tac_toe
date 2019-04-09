@@ -331,7 +331,7 @@ defmodule Board_Test do
     new_4x4_board_data = Board.generate_board_data(4,4)
 
     assert Board.update_board_spec(new_4x4_board_data, 4, 4) ==
-              %Board{board_data: new_4x4_board_data, num_of_rows: 4, num_of_columns: 4}
+              %Board{board_data: new_4x4_board_data, num_of_rows: 4, num_of_columns: 4, max_spaces: 16}
   end
 
 end
