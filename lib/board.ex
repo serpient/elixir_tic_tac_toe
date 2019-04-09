@@ -46,11 +46,7 @@ defmodule Board do
       board_spec
 
       1..rows
-      |> Enum.map(fn row_idx ->
-        row_idx..max_spaces
-        |> Enum.take_every(columns)
-        |> Enum.map(fn row -> board[row] end)
-      end)
+      |> Enum.map(fn row_idx -> take_board_value_by_every_num(row_idx..max_spaces, columns, columns, board) end)
   end
 
   def convert_diagonal_to_row(board_spec) do
@@ -60,16 +56,17 @@ defmodule Board do
     [1, columns]
     |> Enum.map(fn corner_idx ->
       case corner_idx do
-        1 -> corner_idx..max_spaces
-          |> Enum.take_every(columns + 1)
-          |> Enum.take(columns)
-          |> Enum.map(fn row -> board[row] end)
-        _ -> corner_idx..max_spaces
-          |> Enum.take_every(columns - 1)
-          |> Enum.take(columns)
-          |> Enum.map(fn row -> board[row] end)
+        1 -> take_board_value_by_every_num(corner_idx..max_spaces, columns + 1, columns, board)
+        _ -> take_board_value_by_every_num(corner_idx..max_spaces, columns - 1, columns, board)
       end
     end)
+  end
+
+  def take_board_value_by_every_num(range, num_to_take, trim, board) do
+    range
+    |> Enum.take_every(num_to_take)
+    |> Enum.take(trim)
+    |> Enum.map(fn row -> board[row] end)
   end
 
   def generate_board_data(num_of_rows \\ 3, num_of_columns \\ 3) do
