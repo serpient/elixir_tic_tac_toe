@@ -19,7 +19,7 @@ defmodule Tic_Tac_Toe_Test do
     }
 
     tie_board_spec = %Board{
-      board_data: tie_board,
+      board_data: tie_board
     }
 
     assert capture_io(fn ->
@@ -29,7 +29,7 @@ defmodule Tic_Tac_Toe_Test do
                "O"
              )
            end) ==
-            capture_io(fn -> GameIO.print_tie(tie_board_spec) end)
+             capture_io(fn -> GameIO.print_tie(tie_board_spec) end)
   end
 
   test "[handle_check_for_win_result] Winning result will end the game and output Win Game message" do
@@ -46,7 +46,7 @@ defmodule Tic_Tac_Toe_Test do
     }
 
     winning_board_spec = %Board{
-      board_data: winning_board,
+      board_data: winning_board
     }
 
     assert capture_io(fn ->
@@ -56,6 +56,6 @@ defmodule Tic_Tac_Toe_Test do
                "X"
              )
            end) ==
-           capture_io(fn -> GameIO.print_win(winning_board_spec, "X") end)
+             capture_io(fn -> GameIO.print_win(winning_board_spec, "X") end)
   end
 end

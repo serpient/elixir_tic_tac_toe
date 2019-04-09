@@ -127,7 +127,7 @@ defmodule Board_Test do
     }
 
     horizontal_conversion_board_spec = %Board{
-      board_data: initial_board,
+      board_data: initial_board
     }
 
     assert Board.convert_horizontal_to_row(horizontal_conversion_board_spec) == [
@@ -163,10 +163,9 @@ defmodule Board_Test do
              ["1", "2", "3", "4"],
              ["5", "6", "7", "8"],
              ["9", "10", "11", "12"],
-             ["13", "14", "15", "16"],
+             ["13", "14", "15", "16"]
            ]
   end
-
 
   test "[convert_vertical_to_row] Converts board correctly" do
     new_4x4_board = %{
@@ -191,11 +190,11 @@ defmodule Board_Test do
     vertical_conversion_board_spec = Board.update_board_spec(new_4x4_board, 4, 4)
 
     assert Board.convert_vertical_to_row(vertical_conversion_board_spec) == [
-        ["1", "5", "9", "13"],
-        ["2", "6", "10", "14"],
-        ["3", "7", "11", "15"],
-        ["4", "8", "12", "16"],
-      ]
+             ["1", "5", "9", "13"],
+             ["2", "6", "10", "14"],
+             ["3", "7", "11", "15"],
+             ["4", "8", "12", "16"]
+           ]
   end
 
   test "[convert_diagonal_to_row] Converts board correctly" do
@@ -212,10 +211,13 @@ defmodule Board_Test do
     }
 
     diagonal_conversion_board_spec = %Board{
-      board_data: initial_board,
+      board_data: initial_board
     }
 
-    assert Board.convert_diagonal_to_row(diagonal_conversion_board_spec) == [["1", "5", "9"], ["3", "5", "7"]]
+    assert Board.convert_diagonal_to_row(diagonal_conversion_board_spec) == [
+             ["1", "5", "9"],
+             ["3", "5", "7"]
+           ]
   end
 
   test "[generate_board_data] Generates board data" do
@@ -303,7 +305,7 @@ defmodule Board_Test do
       6 => "6",
       7 => "7",
       8 => "8",
-      9 => "9",
+      9 => "9"
     }
 
     three_board_spec = %Board{
@@ -339,7 +341,7 @@ defmodule Board_Test do
       9 => "9",
       10 => "10",
       11 => "11",
-      12 => "12",
+      12 => "12"
     }
 
     three_by_four_board_spec = %Board{
@@ -348,8 +350,7 @@ defmodule Board_Test do
       num_of_columns: 4
     }
 
-    [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12] =
-      Map.values(new_3x4_board)
+    [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12] = Map.values(new_3x4_board)
 
     margin_top = "\n"
 
@@ -382,7 +383,7 @@ defmodule Board_Test do
     }
 
     three_board_spec = %Board{
-      board_data: initial_3x3_board,
+      board_data: initial_3x3_board
     }
 
     assert capture_io(fn -> GameIO.print_board(three_board_spec) end) ==
@@ -390,10 +391,14 @@ defmodule Board_Test do
   end
 
   test "[update_board_spec] returns new struct with updated params" do
-    new_4x4_board_data = Board.generate_board_data(4,4)
+    new_4x4_board_data = Board.generate_board_data(4, 4)
 
     assert Board.update_board_spec(new_4x4_board_data, 4, 4) ==
-              %Board{board_data: new_4x4_board_data, num_of_rows: 4, num_of_columns: 4, max_spaces: 16}
+             %Board{
+               board_data: new_4x4_board_data,
+               num_of_rows: 4,
+               num_of_columns: 4,
+               max_spaces: 16
+             }
   end
-
 end

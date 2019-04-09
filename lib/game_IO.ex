@@ -15,7 +15,7 @@ defmodule GameIO do
 
   def print_board(board_spec) do
     board_spec
-    |> Board.generate_board_for_print
+    |> Board.generate_board_for_print()
     |> IO.puts()
   end
 
@@ -40,6 +40,7 @@ defmodule GameIO do
 
   def print_tie(board_spec) do
     print_board(board_spec)
+
     GameIO.get_message(:game_is_a_tie)
     |> IO.puts()
   end

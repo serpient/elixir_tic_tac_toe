@@ -1,15 +1,19 @@
 defmodule Board do
-  defstruct num_of_rows: 3, num_of_columns: 3, board_data: %{
-    1 => " ",
-    2 => " ",
-    3 => " ",
-    4 => " ",
-    5 => " ",
-    6 => " ",
-    7 => " ",
-    8 => " ",
-    9 => " "
-  }, max_spaces: 9
+  defstruct num_of_rows: 3,
+            num_of_columns: 3,
+            board_data: %{
+              1 => " ",
+              2 => " ",
+              3 => " ",
+              4 => " ",
+              5 => " ",
+              6 => " ",
+              7 => " ",
+              8 => " ",
+              9 => " "
+            },
+            max_spaces: 9
+
   def handle_board_update(result, board_data, player_symbol) do
     {status, position_to_update} = result
 
@@ -38,13 +42,19 @@ defmodule Board do
   end
 
   def convert_vertical_to_row(board_spec) do
-    board = board_spec.board_data
-    Enum.map(1..board_spec.num_of_rows, fn row_idx -> Enum.map(0..board_spec.num_of_columns - 1, fn column_idx -> board[row_idx + (column_idx * board_spec.num_of_columns)] end) end)
-  end
+    %Board{board_data: board, num_of_columns: num_of_columns, num_of_rows: num_of_rows} =
+      board_spec
 
+    Enum.map(1..num_of_rows, fn row_idx ->
+      Enum.map(0..(num_of_columns - 1), fn column_idx ->
+        board[row_idx + column_idx * num_of_columns]
+      end)
+    end)
+  end
 
   def convert_diagonal_to_row(board_spec) do
     board = board_spec.board_data
+
     Enum.map([1, 3], fn row_idx ->
       cond do
         row_idx == 1 -> [board[row_idx], board[row_idx + 4], board[row_idx + 8]]
@@ -78,22 +88,25 @@ defmodule Board do
       curr_column_number = row_idx * num_of_columns + column_idx
       at_end_of_cell? = column_idx == num_of_columns
       bottom = if num_of_rows - 1 == row_idx, do: "bottom_of_last_row", else: "bottom"
+
       [
         get_cell_part("top", at_end_of_cell?, curr_column_number),
-        get_cell_part("middle", at_end_of_cell?,  board_data[curr_column_number]),
+        get_cell_part("middle", at_end_of_cell?, board_data[curr_column_number]),
         get_cell_part(bottom, at_end_of_cell?, nil)
       ]
     end)
     |> Enum.zip()
     |> Enum.map_join(fn value ->
-      Tuple.append(value, "\n") |> Tuple.to_list
+      Tuple.append(value, "\n") |> Tuple.to_list()
     end)
   end
 
   def generate_board_for_print(board_spec) do
     new_line = "\n"
     margin_bottom = "\n\n\n"
-    %Board{board_data: board_data, num_of_columns: num_of_columns, num_of_rows: num_of_rows} = board_spec
+
+    %Board{board_data: board_data, num_of_columns: num_of_columns, num_of_rows: num_of_rows} =
+      board_spec
 
     string_board =
       0..(num_of_rows - 1)
@@ -106,6 +119,7 @@ defmodule Board do
 
   def update_board_spec(new_board_data, new_num_of_rows, new_num_of_columns) do
     existing_board = %Board{}
+
     %Board{
       existing_board
       | board_data: new_board_data,

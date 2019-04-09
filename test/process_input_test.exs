@@ -49,9 +49,9 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    assert ProcessInput.handle_input("1", board_with_error_input, "O") == {:error, :duplicate_input}
+    assert ProcessInput.handle_input("1", board_with_error_input, "O") ==
+             {:error, :duplicate_input}
   end
-
 
   test "[handle_input] After non-number input, returns error tuple with correct error message" do
     board_with_error_input = %{
@@ -66,7 +66,8 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    assert ProcessInput.handle_input("string", board_with_error_input, "X") == {:error, :invalid_input}
+    assert ProcessInput.handle_input("string", board_with_error_input, "X") ==
+             {:error, :invalid_input}
   end
 
   test "[handle_input] Inputting a number NOT 1-9, returns a error tuple with correct error message" do
@@ -82,7 +83,7 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    assert ProcessInput.handle_input("10", board_with_error_input, "X") == {:error, :invalid_input_range}
+    assert ProcessInput.handle_input("10", board_with_error_input, "X") ==
+             {:error, :invalid_input_range}
   end
-
 end
