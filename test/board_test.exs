@@ -271,7 +271,7 @@ defmodule Board_Test do
            ]
   end
 
-  test "[generate_board_data] Generates board data" do
+  test "[generate_board_data] Generates 4x4 board data" do
     row = 4
     column = 4
 
@@ -295,6 +295,22 @@ defmodule Board_Test do
     }
 
     assert Board.generate_board_data(row, column) == new_4x4_board
+  end
+
+  test "[generate_board_data] Generates default 3x3 board data" do
+    new_3x3_board = %{
+      1 => " ",
+      2 => " ",
+      3 => " ",
+      4 => " ",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => " ",
+      9 => " ",
+    }
+
+    assert Board.generate_board_data() == new_3x3_board
   end
 
   test "[generate_board_for_print] Generates 4x4 board data for printing" do
