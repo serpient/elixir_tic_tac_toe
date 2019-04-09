@@ -16,6 +16,8 @@ defmodule Board_Test do
       9 => " "
     }
 
+    initial_board_spec = Board.update_board_spec(initial_board)
+
     updated_board = %{
       1 => "X",
       2 => "X",
@@ -28,8 +30,10 @@ defmodule Board_Test do
       9 => " "
     }
 
-    assert Board.handle_board_update({:ok, 4}, initial_board, "X") ==
-             {:ok, updated_board}
+    updated_board_spec = Board.update_board_spec(updated_board)
+
+    assert Board.handle_board_update({:ok, 4}, initial_board_spec, "X") ==
+             {:ok, updated_board_spec}
   end
 
   test "[handle_board_update] On :error, returns the error tuple" do
@@ -45,7 +49,9 @@ defmodule Board_Test do
       9 => " "
     }
 
-    assert Board.handle_board_update({:error, :invalid_input}, initial_board, "X") ==
+    initial_board_spec = Board.update_board_spec(initial_board)
+
+    assert Board.handle_board_update({:error, :invalid_input}, initial_board_spec, "X") ==
              {:error, :invalid_input}
   end
 
