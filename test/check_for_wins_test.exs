@@ -101,9 +101,7 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    vertical_win_board_spec = %Board{
-      board_data: vertical_win_board
-    }
+    vertical_win_board_spec = Board.update_board_spec(vertical_win_board)
 
     assert CheckForWins.analyze(vertical_win_board_spec) ==
              {:ok, :wins_game, vertical_win_board_spec}

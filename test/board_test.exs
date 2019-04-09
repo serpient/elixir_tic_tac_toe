@@ -167,7 +167,30 @@ defmodule Board_Test do
            ]
   end
 
-  test "[convert_vertical_to_row] Converts board correctly" do
+  test "[convert_vertical_to_row] Converts 3x3 board correctly" do
+    new_3x3_board = %{
+      1 => "1",
+      2 => "2",
+      3 => "3",
+      4 => "4",
+      5 => "5",
+      6 => "6",
+      7 => "7",
+      8 => "8",
+      9 => "9",
+    }
+
+    vertical_conversion_board_spec = Board.update_board_spec(new_3x3_board)
+
+    assert Board.convert_vertical_to_row(vertical_conversion_board_spec) == [
+             ["1", "4", "7"],
+             ["2", "5", "8"],
+             ["3", "6", "9"],
+           ]
+  end
+
+
+  test "[convert_vertical_to_row] Converts 4x4 board correctly" do
     new_4x4_board = %{
       1 => "1",
       2 => "2",

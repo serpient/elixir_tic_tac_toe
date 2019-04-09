@@ -42,14 +42,15 @@ defmodule Board do
   end
 
   def convert_vertical_to_row(board_spec) do
-    %Board{board_data: board, num_of_columns: num_of_columns, num_of_rows: num_of_rows} =
+    %Board{board_data: board, num_of_columns: columns, num_of_rows: rows, max_spaces: max_spaces} =
       board_spec
 
-    Enum.map(1..num_of_rows, fn row_idx ->
-      Enum.map(0..(num_of_columns - 1), fn column_idx ->
-        board[row_idx + column_idx * num_of_columns]
+      1..rows
+      |> Enum.map(fn row_idx ->
+        row_idx..max_spaces
+        |> Enum.take_every(columns)
+        |> Enum.map(fn row -> board[row] end)
       end)
-    end)
   end
 
   def convert_diagonal_to_row(board_spec) do
@@ -117,7 +118,7 @@ defmodule Board do
     string_board <> margin_bottom
   end
 
-  def update_board_spec(new_board_data, new_num_of_rows, new_num_of_columns) do
+  def update_board_spec(new_board_data, new_num_of_rows \\ 3, new_num_of_columns \\ 3) do
     existing_board = %Board{}
 
     %Board{
