@@ -29,6 +29,7 @@ defmodule GameIO do
   end
 
   def print_win(board_spec, current_player) do
+    clear_io()
     print_board(board_spec)
 
     ("Player #{current_player} - " <> GameIO.get_message(:wins_game))
@@ -41,6 +42,7 @@ defmodule GameIO do
   end
 
   def print_tie(board_spec) do
+    clear_io()
     print_board(board_spec)
 
     GameIO.get_message(:game_is_a_tie)
