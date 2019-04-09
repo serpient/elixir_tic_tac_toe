@@ -17,7 +17,7 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    assert ProcessInput.handle_input("1", initial_board, "X") == {:ok, 1}
+    assert ProcessInput.handle_input("1", initial_board) == {:ok, 1}
   end
 
   test "[handle_input] On valid input to non-empty board, returns a ok tuple with converted value" do
@@ -33,7 +33,7 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    assert ProcessInput.handle_input("4", initial_board, "O") == {:ok, 4}
+    assert ProcessInput.handle_input("4", initial_board) == {:ok, 4}
   end
 
   test "[handle_input] On overlapping input, returns error tuple with correct error message" do
@@ -49,7 +49,7 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    assert ProcessInput.handle_input("1", board_with_error_input, "O") ==
+    assert ProcessInput.handle_input("1", board_with_error_input) ==
              {:error, :duplicate_input}
   end
 
@@ -66,7 +66,7 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    assert ProcessInput.handle_input("string", board_with_error_input, "X") ==
+    assert ProcessInput.handle_input("string", board_with_error_input) ==
              {:error, :invalid_input}
   end
 
@@ -83,7 +83,7 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    assert ProcessInput.handle_input("10", board_with_error_input, "X") ==
+    assert ProcessInput.handle_input("10", board_with_error_input) ==
              {:error, :invalid_input_range}
   end
 end
