@@ -28,17 +28,7 @@ defmodule TicTacToe do
   end
 
   def play(
-        board \\ %{
-          1 => " ",
-          2 => " ",
-          3 => " ",
-          4 => " ",
-          5 => " ",
-          6 => " ",
-          7 => " ",
-          8 => " ",
-          9 => " "
-        },
+        board \\ %Board{}.board_data,
         prompt \\ :initial_player_prompt,
         current_player \\ "X"
       ) do

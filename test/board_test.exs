@@ -196,9 +196,6 @@ defmodule Board_Test do
   end
 
   test "[generate_board_for_print] Generates 4x4 board data for printing" do
-    row = 4
-    column = 4
-
     new_4x4_board = %{
       1 => "1",
       2 => "2",
@@ -216,6 +213,12 @@ defmodule Board_Test do
       14 => "14",
       15 => "15",
       16 => "16"
+    }
+
+    four_board_spec = %Board{
+      board_data: new_4x4_board,
+      num_of_rows: 4,
+      num_of_columns: 4
     }
 
     [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16] =
@@ -237,14 +240,11 @@ defmodule Board_Test do
 
     margin_bottom = "\n\n\n"
 
-    assert Board.generate_board_for_print(new_4x4_board, row, column) ==
+    assert Board.generate_board_for_print(four_board_spec) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> row4 <> margin_bottom})
   end
 
   test "[generate_board_for_print] Generates 3x3 board data for printing" do
-    row = 3
-    column = 3
-
     new_3x3_board = %{
       1 => "1",
       2 => "2",
@@ -257,6 +257,12 @@ defmodule Board_Test do
       9 => "9",
     }
 
+    three_board_spec = %Board{
+      board_data: new_3x3_board,
+      num_of_rows: 3,
+      num_of_columns: 3
+    }
+
     [p1, p2, p3, p4, p5, p6, p7, p8, p9] = Map.values(new_3x3_board)
 
     margin_top = "\n"
@@ -267,14 +273,11 @@ defmodule Board_Test do
 
     margin_bottom = "\n\n\n"
 
-    assert Board.generate_board_for_print(new_3x3_board, row, column) ==
+    assert Board.generate_board_for_print(three_board_spec) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
   end
 
   test "[generate_board_for_print] Generates 3x4 board data for printing" do
-    row = 3
-    column = 4
-
     new_3x4_board = %{
       1 => "1",
       2 => "2",
@@ -288,6 +291,12 @@ defmodule Board_Test do
       10 => "10",
       11 => "11",
       12 => "12",
+    }
+
+    three_by_four_board_spec = %Board{
+      board_data: new_3x4_board,
+      num_of_rows: 3,
+      num_of_columns: 4
     }
 
     [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12] =
@@ -306,7 +315,7 @@ defmodule Board_Test do
 
     margin_bottom = "\n\n\n"
 
-    assert Board.generate_board_for_print(new_3x4_board, row, column) ==
+    assert Board.generate_board_for_print(three_by_four_board_spec) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
   end
 
@@ -323,8 +332,12 @@ defmodule Board_Test do
       9 => " "
     }
 
-    assert capture_io(fn -> GameIO.print_board(initial_3x3_board) end) ==
-             Board.generate_board_for_print(initial_3x3_board) <> "\n"
+    three_board_spec = %Board{
+      board_data: initial_3x3_board,
+    }
+
+    assert capture_io(fn -> GameIO.print_board(three_board_spec) end) ==
+             Board.generate_board_for_print(three_board_spec) <> "\n"
   end
 
   test "[update_board_spec] returns new struct with updated params" do

@@ -85,9 +85,10 @@ defmodule Board do
     end)
   end
 
-  def generate_board_for_print(board_data, num_of_rows \\ 3, num_of_columns \\ 3) do
+  def generate_board_for_print(board_spec) do
     new_line = "\n"
     margin_bottom = "\n\n\n"
+    %Board{board_data: board_data, num_of_columns: num_of_columns, num_of_rows: num_of_rows} = board_spec
 
     string_board =
       0..(num_of_rows - 1)
