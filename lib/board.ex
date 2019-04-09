@@ -34,11 +34,11 @@ defmodule Board do
   end
 
   def convert_horizontal_to_row(board_spec) do
-    board = board_spec.board_data
+    %Board{board_data: board, num_of_columns: num_of_columns} = board_spec
 
     board
     |> Map.values()
-    |> Enum.chunk_every(board_spec.num_of_columns)
+    |> Enum.chunk_every(num_of_columns)
   end
 
   def convert_vertical_to_row(board_spec) do
@@ -62,10 +62,10 @@ defmodule Board do
     end)
   end
 
-  def take_board_value_by_every_num(range, num_to_take, trim, board) do
+  def take_board_value_by_every_num(range, num_to_take, num_of_values_wanted, board) do
     range
     |> Enum.take_every(num_to_take)
-    |> Enum.take(trim)
+    |> Enum.take(num_of_values_wanted)
     |> Enum.map(fn row -> board[row] end)
   end
 
