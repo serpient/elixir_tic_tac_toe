@@ -64,4 +64,8 @@ defmodule Game_Output_Test do
                "\n" <>
                GameIO.get_message(:game_is_a_tie) <> "\n"
   end
+
+  test "[get_input_for_game_settings] Will get player settings input at beginning of game" do
+    assert capture_io(fn ->  GameIO.get_input_for_game_settings() end) == GameIO.get_message(:game_settings)
+  end
 end
