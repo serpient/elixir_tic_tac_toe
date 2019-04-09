@@ -88,24 +88,32 @@ defmodule Check_For_Wins_Test do
              {:ok, :no_win, no_horizontal_win_board_spec}
   end
 
-  test "[analyze][Vertical Wins] Column 1 - Wins if there are 3 matching vertical" do
-    vertical_win_board = %{
-      1 => "X",
+  test "[analyze][Horizontal Wins] Row 2 - Wins if there are 4 in a row" do
+    horizontal_win_board = %{
+      1 => " ",
       2 => " ",
       3 => " ",
-      4 => "X",
-      5 => " ",
-      6 => " ",
-      7 => "X",
-      8 => " ",
-      9 => " "
+      4 => " ",
+      5 => "O",
+      6 => "O",
+      7 => "O",
+      8 => "O",
+      9 => " ",
+      10 => " ",
+      11 => " ",
+      12 => " ",
+      13 => " ",
+      14 => " ",
+      15 => " ",
+      16 => " ",
     }
 
-    vertical_win_board_spec = Board.update_board_spec(vertical_win_board)
+    horizontal_win_board_spec = Board.update_board_spec(horizontal_win_board, 4, 4)
 
-    assert CheckForWins.analyze(vertical_win_board_spec) ==
-             {:ok, :wins_game, vertical_win_board_spec}
+    assert CheckForWins.analyze(horizontal_win_board_spec) ==
+             {:ok, :wins_game, horizontal_win_board_spec}
   end
+
 
   test "[analyze][Vertical Wins] Column 2 - Wins if there are 3 matching vertical" do
     vertical_win_board = %{
@@ -144,6 +152,32 @@ defmodule Check_For_Wins_Test do
     vertical_win_board_spec = %Board{
       board_data: vertical_win_board
     }
+
+    assert CheckForWins.analyze(vertical_win_board_spec) ==
+             {:ok, :wins_game, vertical_win_board_spec}
+  end
+
+  test "[analyze][Vertical Wins] Column 3 - Wins if there are 4 matching vertical" do
+    vertical_win_board = %{
+      1 => " ",
+      2 => " ",
+      3 => " ",
+      4 => "O",
+      5 => " ",
+      6 => " ",
+      7 => " ",
+      8 => "O",
+      9 => " ",
+      10 => " ",
+      11 => " ",
+      12 => "O",
+      13 => " ",
+      14 => " ",
+      15 => " ",
+      16 => "O",
+    }
+
+    vertical_win_board_spec = Board.update_board_spec(vertical_win_board, 4, 4)
 
     assert CheckForWins.analyze(vertical_win_board_spec) ==
              {:ok, :wins_game, vertical_win_board_spec}
