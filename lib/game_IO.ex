@@ -62,7 +62,10 @@ defmodule GameIO do
         border_row <>
         String.duplicate(empty_row, 2) <>
         title_row <>
-        question_row <> String.duplicate(empty_row, 2) <> border_row <> padding_bottom
+        question_row <>
+        String.duplicate(empty_row, 2) <>
+        border_row <>
+      padding_bottom
     })
   end
 
