@@ -90,20 +90,24 @@ defmodule Board do
 
   def compile_row_of_cells(num_of_columns, num_of_rows, row_idx, board_data) do
     1..num_of_columns
+    |> compile_list_of_cell_parts(num_of_columns, num_of_rows, row_idx, board_data)
+    |> Enum.zip()
+    |> Enum.map_join(fn value ->
+      Tuple.append(value, "\n") |> Tuple.to_list()
+    end)
+  end
+
+  def compile_list_of_cell_parts(num_of_cells_to_create, num_of_columns, num_of_rows, row_idx, board_data) do
+    num_of_cells_to_create
     |> Enum.map(fn column_idx ->
       curr_column_number = row_idx * num_of_columns + column_idx
       at_end_of_cell? = column_idx == num_of_columns
       bottom = if num_of_rows - 1 == row_idx, do: "bottom_of_last_row", else: "bottom"
-
       [
         get_cell_part("top", at_end_of_cell?, curr_column_number),
         get_cell_part("middle", at_end_of_cell?, board_data[curr_column_number]),
         get_cell_part(bottom, at_end_of_cell?, nil)
       ]
-    end)
-    |> Enum.zip()
-    |> Enum.map_join(fn value ->
-      Tuple.append(value, "\n") |> Tuple.to_list()
     end)
   end
 
