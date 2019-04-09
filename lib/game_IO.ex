@@ -7,7 +7,8 @@ defmodule GameIO do
       game_is_a_tie: ~s(No more positions to play! The game is a tie.),
       invalid_input_range: ~s{Please enter a valid number: },
       wins_game: ~s(Wins! \n\n),
-      nil: ~s(Select a numbered spot: )
+      nil: ~s(Select a numbered spot: ),
+      game_settings: ~s(Please select a board size -- 3 or 4: )
     }
 
     game_text[key]
@@ -43,5 +44,10 @@ defmodule GameIO do
 
     GameIO.get_message(:game_is_a_tie)
     |> IO.puts()
+  end
+
+  def get_input_for_game_settings() do
+    GameIO.get_message(:game_settings)
+    |> IO.gets()
   end
 end
