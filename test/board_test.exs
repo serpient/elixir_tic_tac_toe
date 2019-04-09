@@ -113,7 +113,7 @@ defmodule Board_Test do
     assert Board.is_a_empty_space(2, space_is_not_taken_board) == true
   end
 
-  test "[convert_horizontal_to_row] Converts board correctly" do
+  test "[convert_horizontal_to_row] Converts 3x3 board correctly" do
     initial_board = %{
       1 => "1",
       2 => "2",
@@ -136,6 +136,37 @@ defmodule Board_Test do
              ["7", "8", "9"]
            ]
   end
+
+  test "[convert_horizontal_to_row] Converts 4x4 board correctly" do
+    new_4x4_board = %{
+      1 => "1",
+      2 => "2",
+      3 => "3",
+      4 => "4",
+      5 => "5",
+      6 => "6",
+      7 => "7",
+      8 => "8",
+      9 => "9",
+      10 => "10",
+      11 => "11",
+      12 => "12",
+      13 => "13",
+      14 => "14",
+      15 => "15",
+      16 => "16"
+    }
+
+    horizontal_conversion_board_spec = Board.update_board_spec(new_4x4_board, 4, 4)
+
+    assert Board.convert_horizontal_to_row(horizontal_conversion_board_spec) == [
+             ["1", "2", "3", "4"],
+             ["5", "6", "7", "8"],
+             ["9", "10", "11", "12"],
+             ["13", "14", "15", "16"],
+           ]
+  end
+
 
   test "[convert_vertical_to_row] Converts board correctly" do
     initial_board = %{
