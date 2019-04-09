@@ -236,7 +236,7 @@ defmodule Board_Test do
 
     margin_bottom = "\n\n\n"
 
-    assert Board.generate_board_for_print(row, column, new_4x4_board) ==
+    assert Board.generate_board_for_print(new_4x4_board, row, column) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> row4 <> margin_bottom})
   end
 
@@ -266,7 +266,7 @@ defmodule Board_Test do
 
     margin_bottom = "\n\n\n"
 
-    assert Board.generate_board_for_print(row, column, new_3x3_board) ==
+    assert Board.generate_board_for_print(new_3x3_board, row, column) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
   end
 
@@ -305,7 +305,7 @@ defmodule Board_Test do
 
     margin_bottom = "\n\n\n"
 
-    assert Board.generate_board_for_print(row, column, new_3x4_board) ==
+    assert Board.generate_board_for_print(new_3x4_board, row, column) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
   end
 end

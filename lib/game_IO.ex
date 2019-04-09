@@ -13,21 +13,21 @@ defmodule GameIO do
     game_text[key]
   end
 
-  def get_board(board_data) do
-    [p1, p2, p3, p4, p5, p6, p7, p8, p9] = Map.values(board_data)
+  # def get_board(board_data) do
+  #   [p1, p2, p3, p4, p5, p6, p7, p8, p9] = Map.values(board_data)
 
-    margin_top = "\n"
-    row1 = "1    |2    |3    \n  #{p1}  |  #{p2}  |  #{p3}  \n_____|_____|_____\n"
-    row2 = "4    |5    |6    \n  #{p4}  |  #{p5}  |  #{p6}  \n_____|_____|_____\n"
-    row3 = "7    |8    |9    \n  #{p7}  |  #{p8}  |  #{p9}  \n     |     |     \n"
-    margin_bottom = "\n\n\n"
+  #   margin_top = "\n"
+  #   row1 = "1    |2    |3    \n  #{p1}  |  #{p2}  |  #{p3}  \n_____|_____|_____\n"
+  #   row2 = "4    |5    |6    \n  #{p4}  |  #{p5}  |  #{p6}  \n_____|_____|_____\n"
+  #   row3 = "7    |8    |9    \n  #{p7}  |  #{p8}  |  #{p9}  \n     |     |     \n"
+  #   margin_bottom = "\n\n\n"
 
-    ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
-  end
+  #   ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
+  # end
 
   def print_board(board_data) do
     board_data
-    |> get_board
+    |> Board.generate_board_for_print
     |> IO.puts()
   end
 
