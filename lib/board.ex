@@ -14,13 +14,19 @@ defmodule Board do
             },
             max_spaces: 9
 
-  def handle_board_update(result, board_data, player_symbol) do
+  def handle_board_update(result, board_spec, player_symbol) do
     {status, position_to_update} = result
 
     case status do
-      :ok -> {:ok, Map.replace!(board_data, position_to_update, player_symbol)}
+      :ok -> {:ok, update_board_data(position_to_update, board_spec, player_symbol)}
       :error -> result
     end
+  end
+
+  def update_board_data(position_to_update, board_spec, player_symbol) do
+    %Board{board_data: board_data, num_of_columns: columns, num_of_rows: rows} = board_spec
+    Map.replace!(board_data, position_to_update, player_symbol)
+    |> update_board_spec(columns, rows)
   end
 
   def has_empty_spaces?(board) do
