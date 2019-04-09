@@ -8,7 +8,8 @@ defmodule GameIO do
       invalid_input_range: ~s{Please enter a valid number: },
       wins_game: ~s(Wins! \n\n),
       nil: ~s(Select a numbered spot: ),
-      game_settings: ~s(Please select a board size -- 3 or 4: )
+      game_board_settings: ~s(     Please select a board size -- 3 or 4: ),
+      game_player_settings: "Select your opponent -- Local (l) or Computer (c):"
     }
 
     game_text[key]
@@ -46,8 +47,29 @@ defmodule GameIO do
     |> IO.puts()
   end
 
-  def get_input_for_game_settings() do
-    GameIO.get_message(:game_settings)
-    |> IO.gets()
+  def game_start_banner(message) do
+    padding_top = "\n"
+    border_row = ~s(#######################################################     \n)
+    empty_row = ~s(                                                            \n\n)
+    title_row = ~s(               T I C . T A C . T O E                         \n\n)
+    question_row = ~s(  #{GameIO.get_message(message)}             \n)
+    padding_bottom = "\n"
+
+    ~s(#{
+      padding_top <>
+        border_row <>
+        String.duplicate(empty_row, 2) <>
+        title_row <>
+        question_row <> String.duplicate(empty_row, 2) <> border_row <> padding_bottom
+    })
+  end
+
+  def get_input_for_game_settings(message) do
+    GameIO.game_start_banner(message)
+    |> IO.gets
+  end
+
+  def clear_io() do
+    IO.write "\e[H\e[J"; IEx.dont_display_result
   end
 end
