@@ -180,7 +180,7 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.analyze(no_diagonal_win_board) == {:ok, :no_win, no_diagonal_win_board}
   end
 
-  test "[handle_check_for_win] Winning board is passed to analyze and results in ok tuple" do
+  test "[check_for_win] Winning board is passed to analyze and results in ok tuple" do
     winning_board = %{
       1 => "X",
       2 => "X",
@@ -193,11 +193,11 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.handle_check_for_win({:ok, winning_board}, winning_board, "X") ==
+    assert CheckForWins.check_for_win({:ok, winning_board}, winning_board, "X") ==
              {:ok, :wins_game, winning_board}
   end
 
-  test "[handle_check_for_win] Non winning board results in :no_win tuple" do
+  test "[check_for_win] Non winning board results in :no_win tuple" do
     non_winning_board = %{
       1 => "X",
       2 => "X",
@@ -210,11 +210,11 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.handle_check_for_win({:ok, non_winning_board}, non_winning_board, "X") ==
+    assert CheckForWins.check_for_win({:ok, non_winning_board}, non_winning_board, "X") ==
              {:ok, :no_win, non_winning_board}
   end
 
-  test "[handle_check_for_win] Error tuple passed to this function results in another error tuple" do
+  test "[check_for_win] Error tuple passed to this function results in another error tuple" do
     board_with_error = %{
       1 => "X",
       2 => "X",
@@ -227,7 +227,7 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    assert CheckForWins.handle_check_for_win({:error, :invalid_input}, board_with_error, "X") ==
+    assert CheckForWins.check_for_win({:error, :invalid_input}, board_with_error, "X") ==
              {:error, :invalid_input, board_with_error}
   end
 
