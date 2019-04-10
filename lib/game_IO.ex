@@ -17,7 +17,7 @@ defmodule GameIO do
 
   def print_board(board_spec) do
     board_spec
-    |> Board.generate_board_for_print()
+    |> PrintBoard.generate_board_for_print()
     |> IO.puts()
   end
 
