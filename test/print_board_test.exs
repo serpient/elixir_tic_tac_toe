@@ -144,6 +144,6 @@ defmodule Print_Board_Test do
     }
 
     assert capture_io(fn -> GameIO.print_board(three_board_spec) end) ==
-      PrintBoard.generate_board_for_print(three_board_spec) <> "\n"
+             PrintBoard.generate_board_for_print(three_board_spec) <> "\n"
   end
 end
