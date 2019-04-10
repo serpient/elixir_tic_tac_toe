@@ -24,7 +24,8 @@ defmodule Board do
   end
 
   def update_data(position_to_update, board_spec, player_symbol) do
-    %Board{board_data: board_data, num_of_columns: num_of_columns, num_of_rows: num_of_rows} = board_spec
+    %Board{board_data: board_data, num_of_columns: num_of_columns, num_of_rows: num_of_rows} =
+      board_spec
 
     board_data
     |> Map.replace!(position_to_update, player_symbol)
@@ -50,8 +51,12 @@ defmodule Board do
   end
 
   def convert_vertical_to_row(board_spec) do
-    %Board{board_data: board, num_of_columns: columns, num_of_rows: num_of_rows, max_spaces: max_spaces} =
-      board_spec
+    %Board{
+      board_data: board,
+      num_of_columns: columns,
+      num_of_rows: num_of_rows,
+      max_spaces: max_spaces
+    } = board_spec
 
     1..num_of_rows
     |> Enum.map(fn row_idx ->
@@ -65,8 +70,11 @@ defmodule Board do
     [1, columns]
     |> Enum.map(fn top_corners_idx ->
       case top_corners_idx do
-        1 -> take_board_value_by_every_num(top_corners_idx..max_spaces, columns + 1, columns, board)
-        _ -> take_board_value_by_every_num(top_corners_idx..max_spaces, columns - 1, columns, board)
+        1 ->
+          take_board_value_by_every_num(top_corners_idx..max_spaces, columns + 1, columns, board)
+
+        _ ->
+          take_board_value_by_every_num(top_corners_idx..max_spaces, columns - 1, columns, board)
       end
     end)
   end
@@ -78,7 +86,7 @@ defmodule Board do
     |> Enum.map(fn row -> board[row] end)
   end
 
-  def generate_board_data(num_of_rows \\ 3, num_of_columns \\ 3) do
+  def generate_board_data(num_of_rows, num_of_columns) do
     1..(num_of_rows * num_of_columns)
     |> Enum.reduce(%{}, fn num, acc -> Map.put(acc, num, " ") end)
   end
@@ -95,4 +103,3 @@ defmodule Board do
     }
   end
 end
-
