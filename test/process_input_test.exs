@@ -97,9 +97,8 @@ defmodule Process_Input_Test do
              {:error, :invalid_input_range}
   end
 
-
   test "[handle_input] Inputting a number NOT 1-16 on a 4x4 board returns a error tuple with correct error message" do
-    error_board_spec = Board.new_struct(%{},4,4)
+    error_board_spec = Board.new_struct(%{}, 4, 4)
 
     assert ProcessInput.handle_input("17", error_board_spec) ==
              {:error, :invalid_input_range}

@@ -38,7 +38,7 @@ defmodule Game_Output_Test do
 
     assert capture_io(fn -> GameIO.print_win(winning_board_spec, "X") end) ==
              capture_io(fn -> GameIO.clear_io() end) <>
-             PrintBoard.generate_board_for_print(winning_board_spec) <>
+               PrintBoard.generate_board_for_print(winning_board_spec) <>
                "\n" <>
                "Player X - " <> GameIO.get_message(:wins_game) <> "\n"
   end
@@ -61,13 +61,14 @@ defmodule Game_Output_Test do
     }
 
     assert capture_io(fn -> GameIO.print_tie(tie_board_spec) end) ==
-            capture_io(fn -> GameIO.clear_io() end) <>
-            PrintBoard.generate_board_for_print(tie_board_spec) <>
+             capture_io(fn -> GameIO.clear_io() end) <>
+               PrintBoard.generate_board_for_print(tie_board_spec) <>
                "\n" <>
                GameIO.get_message(:game_is_a_tie) <> "\n"
   end
 
   test "[get_input_for_game_settings] Will get player settings input at beginning of game" do
-    assert capture_io(fn ->  GameIO.get_input_for_game_settings(:game_board_settings) end) == GameIO.game_start_banner(:game_board_settings)
+    assert capture_io(fn -> GameIO.get_input_for_game_settings(:game_board_settings) end) ==
+             GameIO.game_start_banner(:game_board_settings)
   end
 end

@@ -105,7 +105,7 @@ defmodule Check_For_Wins_Test do
       13 => " ",
       14 => " ",
       15 => " ",
-      16 => " ",
+      16 => " "
     }
 
     horizontal_win_board_spec = Board.new_struct(horizontal_win_board, 4, 4)
@@ -113,7 +113,6 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.analyze(horizontal_win_board_spec) ==
              {:ok, :wins_game, horizontal_win_board_spec}
   end
-
 
   test "[analyze][Vertical Wins] Column 2 - Wins if there are 3 matching vertical" do
     vertical_win_board = %{
@@ -174,7 +173,7 @@ defmodule Check_For_Wins_Test do
       13 => " ",
       14 => " ",
       15 => " ",
-      16 => "O",
+      16 => "O"
     }
 
     vertical_win_board_spec = Board.new_struct(vertical_win_board, 4, 4)
@@ -284,7 +283,7 @@ defmodule Check_For_Wins_Test do
       13 => "O",
       14 => " ",
       15 => " ",
-      16 => " ",
+      16 => " "
     }
 
     diagonal_win_board_spec = Board.new_struct(diagonal_win_board, 4, 4)

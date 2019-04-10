@@ -15,6 +15,7 @@ defmodule ProcessInput do
 
   defp validate_input(result, board_spec) when is_integer(result) do
     %Board{board_data: board_data, num_of_columns: columns, num_of_rows: rows} = board_spec
+
     cond do
       Board.is_a_empty_space(result, board_data) == true -> {:ok, result}
       result > columns * rows || result < 1 -> {:error, :invalid_input_range}

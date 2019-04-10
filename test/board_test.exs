@@ -183,7 +183,7 @@ defmodule Board_Test do
       6 => "6",
       7 => "7",
       8 => "8",
-      9 => "9",
+      9 => "9"
     }
 
     vertical_conversion_board_spec = Board.new_struct(new_3x3_board)
@@ -191,10 +191,9 @@ defmodule Board_Test do
     assert Board.convert_vertical_to_row(vertical_conversion_board_spec) == [
              ["1", "4", "7"],
              ["2", "5", "8"],
-             ["3", "6", "9"],
+             ["3", "6", "9"]
            ]
   end
-
 
   test "[convert_vertical_to_row] Converts 4x4 board correctly" do
     new_4x4_board = %{
@@ -313,10 +312,10 @@ defmodule Board_Test do
       6 => " ",
       7 => " ",
       8 => " ",
-      9 => " ",
+      9 => " "
     }
 
-    assert Board.generate_board_data() == new_3x3_board
+    assert Board.generate_board_data(3, 3) == new_3x3_board
   end
 
   test "[new_struct] returns new struct with updated params" do

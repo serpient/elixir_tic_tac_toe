@@ -65,16 +65,17 @@ defmodule GameIO do
         question_row <>
         String.duplicate(empty_row, 2) <>
         border_row <>
-      padding_bottom
+        padding_bottom
     })
   end
 
   def get_input_for_game_settings(message) do
     GameIO.game_start_banner(message)
-    |> IO.gets
+    |> IO.gets()
   end
 
   def clear_io() do
-    IO.write "\e[H\e[J"; IEx.dont_display_result
+    IO.write("\e[H\e[J")
+    IEx.dont_display_result()
   end
 end
