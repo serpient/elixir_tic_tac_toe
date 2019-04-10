@@ -50,22 +50,15 @@ defmodule GameIO do
   end
 
   def game_start_banner(message) do
-    padding_top = "\n"
-    border_row = ~s(#######################################################     \n)
     empty_row = ~s(                                                            \n\n)
-    title_row = ~s(               T I C . T A C . T O E                         \n\n)
-    question_row = ~s(  #{GameIO.get_message(message)}             \n)
-    padding_bottom = "\n"
-
-
-    padding_top <>
-    border_row <>
+    "\n" <>
+    ~s(#######################################################     \n) <>
     String.duplicate(empty_row, 2) <>
-    title_row <>
-    question_row <>
+    ~s(               T I C . T A C . T O E                         \n\n) <>
+    ~s(  #{GameIO.get_message(message)}             \n) <>
     String.duplicate(empty_row, 2) <>
-    border_row <>
-    padding_bottom
+    ~s(#######################################################     \n) <>
+    "\n"
   end
 
   def get_input_for_game_settings(message) do
