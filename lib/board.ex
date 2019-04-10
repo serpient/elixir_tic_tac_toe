@@ -28,7 +28,7 @@ defmodule Board do
 
     board_data
     |> Map.replace!(position_to_update, player_symbol)
-    |> update_board_spec(num_of_columns, num_of_rows)
+    |> new_struct(num_of_columns, num_of_rows)
   end
 
   def has_empty_spaces?(board) do
@@ -83,7 +83,7 @@ defmodule Board do
     |> Enum.reduce(%{}, fn num, acc -> Map.put(acc, num, " ") end)
   end
 
-  def update_board_spec(new_board_data, new_num_of_rows \\ 3, new_num_of_columns \\ 3) do
+  def new_struct(new_board_data, new_num_of_rows \\ 3, new_num_of_columns \\ 3) do
     existing_board = %Board{}
 
     %Board{

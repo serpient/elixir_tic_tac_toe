@@ -16,7 +16,7 @@ defmodule Board_Test do
       9 => " "
     }
 
-    initial_board_spec = Board.update_board_spec(initial_board)
+    initial_board_spec = Board.new_struct(initial_board)
 
     updated_board = %{
       1 => "X",
@@ -30,7 +30,7 @@ defmodule Board_Test do
       9 => " "
     }
 
-    updated_board_spec = Board.update_board_spec(updated_board)
+    updated_board_spec = Board.new_struct(updated_board)
 
     assert Board.handle_board_update({:ok, 4}, initial_board_spec, "X") ==
              {:ok, updated_board_spec}
@@ -49,7 +49,7 @@ defmodule Board_Test do
       9 => " "
     }
 
-    initial_board_spec = Board.update_board_spec(initial_board)
+    initial_board_spec = Board.new_struct(initial_board)
 
     assert Board.handle_board_update({:error, :invalid_input}, initial_board_spec, "X") ==
              {:error, :invalid_input}
@@ -163,7 +163,7 @@ defmodule Board_Test do
       16 => "16"
     }
 
-    horizontal_conversion_board_spec = Board.update_board_spec(new_4x4_board, 4, 4)
+    horizontal_conversion_board_spec = Board.new_struct(new_4x4_board, 4, 4)
 
     assert Board.convert_horizontal_to_row(horizontal_conversion_board_spec) == [
              ["1", "2", "3", "4"],
@@ -186,7 +186,7 @@ defmodule Board_Test do
       9 => "9",
     }
 
-    vertical_conversion_board_spec = Board.update_board_spec(new_3x3_board)
+    vertical_conversion_board_spec = Board.new_struct(new_3x3_board)
 
     assert Board.convert_vertical_to_row(vertical_conversion_board_spec) == [
              ["1", "4", "7"],
@@ -216,7 +216,7 @@ defmodule Board_Test do
       16 => "16"
     }
 
-    vertical_conversion_board_spec = Board.update_board_spec(new_4x4_board, 4, 4)
+    vertical_conversion_board_spec = Board.new_struct(new_4x4_board, 4, 4)
 
     assert Board.convert_vertical_to_row(vertical_conversion_board_spec) == [
              ["1", "5", "9", "13"],
@@ -269,7 +269,7 @@ defmodule Board_Test do
       16 => "16"
     }
 
-    diagonal_conversion_board_spec = Board.update_board_spec(new_4x4_board, 4, 4)
+    diagonal_conversion_board_spec = Board.new_struct(new_4x4_board, 4, 4)
 
     assert Board.convert_diagonal_to_row(diagonal_conversion_board_spec) == [
              ["1", "6", "11", "16"],
@@ -319,10 +319,10 @@ defmodule Board_Test do
     assert Board.generate_board_data() == new_3x3_board
   end
 
-  test "[update_board_spec] returns new struct with updated params" do
+  test "[new_struct] returns new struct with updated params" do
     new_4x4_board_data = Board.generate_board_data(4, 4)
 
-    assert Board.update_board_spec(new_4x4_board_data, 4, 4) ==
+    assert Board.new_struct(new_4x4_board_data, 4, 4) ==
              %Board{
                board_data: new_4x4_board_data,
                num_of_rows: 4,
