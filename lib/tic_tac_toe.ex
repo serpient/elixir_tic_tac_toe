@@ -35,9 +35,9 @@ defmodule TicTacToe do
 
     GameIO.clear_io()
 
-    Board.generate_board_data(board_size, board_size)
-    |> Board.new_struct(board_size, board_size)
-    |> play(nil, "X")
+    Board.generate_board_data(board_size)
+    |> Board.new_struct(board_size)
+    |> play(:initial_player_prompt, "X")
   end
 
   def play(

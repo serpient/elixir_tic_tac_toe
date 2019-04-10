@@ -108,7 +108,7 @@ defmodule Check_For_Wins_Test do
       16 => " "
     }
 
-    horizontal_win_board_spec = Board.new_struct(horizontal_win_board, 4, 4)
+    horizontal_win_board_spec = Board.new_struct(horizontal_win_board, 4)
 
     assert CheckForWins.analyze(horizontal_win_board_spec) ==
              {:ok, :wins_game, horizontal_win_board_spec}
@@ -176,7 +176,7 @@ defmodule Check_For_Wins_Test do
       16 => "O"
     }
 
-    vertical_win_board_spec = Board.new_struct(vertical_win_board, 4, 4)
+    vertical_win_board_spec = Board.new_struct(vertical_win_board, 4)
 
     assert CheckForWins.analyze(vertical_win_board_spec) ==
              {:ok, :wins_game, vertical_win_board_spec}
@@ -286,7 +286,7 @@ defmodule Check_For_Wins_Test do
       16 => " "
     }
 
-    diagonal_win_board_spec = Board.new_struct(diagonal_win_board, 4, 4)
+    diagonal_win_board_spec = Board.new_struct(diagonal_win_board, 4)
 
     assert CheckForWins.analyze(diagonal_win_board_spec) ==
              {:ok, :wins_game, diagonal_win_board_spec}

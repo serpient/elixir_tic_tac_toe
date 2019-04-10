@@ -28,11 +28,11 @@ defmodule PrintBoard do
     ]
   end
 
-  def create_row_of_cells(num_of_columns, row_idx, at_bottom_of_last_row?, board_data) do
-    1..num_of_columns
+  def create_row_of_cells(board_size, row_idx, at_bottom_of_last_row?, board_data) do
+    1..board_size
     |> Enum.map(fn column_idx ->
-      curr_column_number = row_idx * num_of_columns + column_idx
-      at_end_of_cell? = column_idx == num_of_columns
+      curr_column_number = row_idx * board_size + column_idx
+      at_end_of_cell? = column_idx == board_size
 
       create_parts_for_a_single_cell(
         curr_column_number,
@@ -60,14 +60,14 @@ defmodule PrintBoard do
   end
 
   def generate_board_for_print(board_spec) do
-    %Board{board_data: board_data, num_of_columns: num_of_columns, num_of_rows: num_of_rows} =
+    %Board{board_data: board_data, board_size: board_size} =
       board_spec
 
-    0..(num_of_rows - 1)
+    0..(board_size - 1)
     |> Enum.map(fn row_idx ->
-      at_bottom_of_last_row? = num_of_rows - 1 == row_idx
+      at_bottom_of_last_row? = board_size - 1 == row_idx
 
-      create_row_of_cells(num_of_columns, row_idx, at_bottom_of_last_row?, board_data)
+      create_row_of_cells(board_size, row_idx, at_bottom_of_last_row?, board_data)
       |> zip_cell_parts_into_list
     end)
     |> add_top_and_bottom_padding

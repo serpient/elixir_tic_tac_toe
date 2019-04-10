@@ -57,16 +57,15 @@ defmodule GameIO do
     question_row = ~s(  #{GameIO.get_message(message)}             \n)
     padding_bottom = "\n"
 
-    ~s(#{
-      padding_top <>
-        border_row <>
-        String.duplicate(empty_row, 2) <>
-        title_row <>
-        question_row <>
-        String.duplicate(empty_row, 2) <>
-        border_row <>
-        padding_bottom
-    })
+
+    padding_top <>
+    border_row <>
+    String.duplicate(empty_row, 2) <>
+    title_row <>
+    question_row <>
+    String.duplicate(empty_row, 2) <>
+    border_row <>
+    padding_bottom
   end
 
   def get_input_for_game_settings(message) do
