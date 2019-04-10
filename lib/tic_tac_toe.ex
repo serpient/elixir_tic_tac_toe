@@ -4,7 +4,7 @@ defmodule TicTacToe do
 
     case error_message do
       :game_is_a_tie -> GameIO.print_tie(updated_board)
-      _ -> play(initial_board, error_message, current_player)
+      _ -> move(initial_board, error_message, current_player)
     end
   end
 
@@ -13,7 +13,7 @@ defmodule TicTacToe do
 
     cond do
       message == :no_win ->
-        play(
+        move(
           updated_board,
           :initial_player_prompt,
           GameIO.get_other_player_symbol(current_player)
@@ -37,10 +37,10 @@ defmodule TicTacToe do
 
     Board.generate_board_data(board_size)
     |> Board.new_struct(board_size)
-    |> play(:initial_player_prompt, "X")
+    |> move(:initial_player_prompt, "X")
   end
 
-  def play(
+  def move(
         board \\ %Board{},
         prompt \\ :initial_player_prompt,
         current_player \\ "X"
