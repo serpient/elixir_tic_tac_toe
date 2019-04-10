@@ -63,9 +63,11 @@ defmodule Board do
 
   def convert_diagonal_to_row(board_spec) do
     %Board{board_data: board, board_size: board_size} = board_spec
+    top_left_corner_idx = 1
+    top_right_corner_idx = board_size
     [
-      generate_row_values(1..max_spaces(board_size), board_size + 1, board_size, board),
-      generate_row_values(board_size..max_spaces(board_size), board_size - 1, board_size, board)
+      generate_row_values(top_left_corner_idx..max_spaces(board_size), board_size + 1, board_size, board),
+      generate_row_values(top_right_corner_idx..max_spaces(board_size), board_size - 1, board_size, board)
     ]
   end
 
