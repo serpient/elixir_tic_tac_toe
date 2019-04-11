@@ -3,13 +3,13 @@ defmodule ProcessInput do
     Integer.parse(string)
   end
 
-  def process_input(string) when is_tuple(string) do
+  def handle_integer_conversion_result(string) when is_tuple(string) do
     string
     |> Tuple.to_list()
     |> Enum.fetch!(0)
   end
 
-  def process_input(_string) do
+  def handle_integer_conversion_result(_string) do
     {:error, :invalid_input}
   end
 
@@ -31,7 +31,7 @@ defmodule ProcessInput do
   def handle_input(input, board_state) do
     input
     |> transform_to_integer
-    |> process_input
+    |> handle_integer_conversion_result
     |> validate_input(board_state)
   end
 end

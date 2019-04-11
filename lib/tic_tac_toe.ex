@@ -31,7 +31,7 @@ defmodule TicTacToe do
     board_size =
       GameIO.get_input_for_game_settings(:game_board_settings)
       |> ProcessInput.transform_to_integer()
-      |> ProcessInput.process_input()
+      |> ProcessInput.handle_integer_conversion_result()
 
     GameIO.clear_io()
 
