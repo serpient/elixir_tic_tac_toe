@@ -1,7 +1,7 @@
-defmodule Print_Board_Test do
+defmodule String_Board_Test do
   use ExUnit.Case
   import ExUnit.CaptureIO
-  doctest PrintBoard
+  doctest StringBoard
 
   test "[generate_board_for_print] Generates 4x4 board data for printing" do
     new_4x4_board = %{
@@ -47,7 +47,7 @@ defmodule Print_Board_Test do
 
     margin_bottom = "\n\n\n"
 
-    assert PrintBoard.generate_board_for_print(four_board_spec) ==
+    assert StringBoard.generate_board_for_print(four_board_spec) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> row4 <> margin_bottom})
   end
 
@@ -79,7 +79,7 @@ defmodule Print_Board_Test do
 
     margin_bottom = "\n\n\n"
 
-    assert PrintBoard.generate_board_for_print(three_board_spec) ==
+    assert StringBoard.generate_board_for_print(three_board_spec) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
   end
 
@@ -101,6 +101,6 @@ defmodule Print_Board_Test do
     }
 
     assert capture_io(fn -> GameIO.print_board(three_board_spec) end) ==
-             PrintBoard.generate_board_for_print(three_board_spec) <> "\n"
+             StringBoard.generate_board_for_print(three_board_spec) <> "\n"
   end
 end
