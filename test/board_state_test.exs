@@ -11,4 +11,13 @@ defmodule Board_State_Test do
                board_size: 4
              }
   end
+
+  test "[get_string_values] returns string values of atoms in board data" do
+    new_3x3_board_state = BoardState.new_state(BoardState.new_board(1..3), 3)
+    assert BoardState.get_string_values(new_3x3_board_state) == [
+      " ",
+      " ",
+      " "
+    ]
+  end
 end

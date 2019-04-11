@@ -363,12 +363,22 @@ defmodule Check_For_Wins_Test do
   end
 
   test "[is_any_row_within_board_a_win?] Checks each row in data and returns true if there is at least a single winning row" do
-    board_data_split_by_row = [[:player, :opponent, :player], [:opponent, :player, :opponent], [:player, :player, :player]]
+    board_data_split_by_row = [
+      [:player, :opponent, :player],
+      [:opponent, :player, :opponent],
+      [:player, :player, :player]
+    ]
+
     assert CheckForWins.is_any_row_within_board_a_win?(board_data_split_by_row) == true
   end
 
   test "[is_any_row_within_board_a_win?] Checks each row in data and returns false if there is no winning row" do
-    board_data_split_by_row = [[:player, :opponent, :player], [:opponent, :player, :opponent], [:player, :opponent, :player]]
+    board_data_split_by_row = [
+      [:player, :opponent, :player],
+      [:opponent, :player, :opponent],
+      [:player, :opponent, :player]
+    ]
+
     assert CheckForWins.is_any_row_within_board_a_win?(board_data_split_by_row) == false
   end
 end

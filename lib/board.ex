@@ -28,6 +28,7 @@ defmodule Board do
     board_size = BoardState.size(board_state)
     board = BoardState.board(board_state)
     max_spaces = BoardState.max_spaces(board_state)
+
     1..board_size
     |> Enum.map(fn row_idx ->
       generate_row_values(row_idx..max_spaces, board_size, board_size, board)
@@ -40,6 +41,7 @@ defmodule Board do
     max_spaces = BoardState.max_spaces(board_state)
     top_left_corner_idx = 1
     top_right_corner_idx = board_size
+
     [
       generate_row_values(top_left_corner_idx..max_spaces, board_size + 1, board_size, board),
       generate_row_values(top_right_corner_idx..max_spaces, board_size - 1, board_size, board)
@@ -55,6 +57,6 @@ defmodule Board do
 
   def generate_board_data(board_size) do
     1..(board_size * board_size)
-    |> BoardState.new_board
+    |> BoardState.new_board()
   end
 end

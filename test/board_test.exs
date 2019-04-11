@@ -7,7 +7,7 @@ defmodule Board_Test do
     initial_board = %{
       1 => :player,
       2 => :empty,
-      3 => :empty,
+      3 => :empty
     }
 
     initial_board_spec = BoardState.new_state(initial_board, 3)
@@ -15,7 +15,7 @@ defmodule Board_Test do
     updated_board = %{
       1 => :player,
       2 => :empty,
-      3 => :opponent,
+      3 => :opponent
     }
 
     updated_board_spec = BoardState.new_state(updated_board, 3)
@@ -71,7 +71,7 @@ defmodule Board_Test do
     space_is_already_taken_board = %{
       1 => :player,
       2 => :empty,
-      3 => :empty,
+      3 => :empty
     }
 
     assert Board.is_a_empty_space(1, space_is_already_taken_board) == false
@@ -81,7 +81,7 @@ defmodule Board_Test do
     space_is_not_taken_board = %{
       1 => :opponent,
       2 => :empty,
-      3 => :empty,
+      3 => :empty
     }
 
     assert Board.is_a_empty_space(2, space_is_not_taken_board) == true

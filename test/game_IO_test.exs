@@ -21,15 +21,15 @@ defmodule Game_Output_Test do
 
   test "[print_win] Prints win message" do
     winning_board = %{
-      1 => " ",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
+      1 => :empty,
+      2 => :empty,
+      3 => :empty,
+      4 => :empty,
+      5 => :empty,
+      6 => :empty,
+      7 => :empty,
+      8 => :empty,
+      9 => :empty
     }
 
     winning_board_spec = %BoardState{
@@ -38,22 +38,22 @@ defmodule Game_Output_Test do
 
     assert capture_io(fn -> GameIO.print_win(winning_board_spec, "X") end) ==
              capture_io(fn -> GameIO.clear_io() end) <>
-             PrintableBoard.generate_board_for_print(winning_board_spec) <>
+               PrintableBoard.generate_board_for_print(winning_board_spec) <>
                "\n" <>
                "Player X - " <> GameIO.get_message(:wins_game) <> "\n"
   end
 
   test "[print_tie] Prints tie message" do
     tie_board = %{
-      1 => " ",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
+      1 => :empty,
+      2 => :empty,
+      3 => :empty,
+      4 => :empty,
+      5 => :empty,
+      6 => :empty,
+      7 => :empty,
+      8 => :empty,
+      9 => :empty
     }
 
     tie_board_spec = %BoardState{
@@ -62,7 +62,7 @@ defmodule Game_Output_Test do
 
     assert capture_io(fn -> GameIO.print_tie(tie_board_spec) end) ==
              capture_io(fn -> GameIO.clear_io() end) <>
-                PrintableBoard.generate_board_for_print(tie_board_spec) <>
+               PrintableBoard.generate_board_for_print(tie_board_spec) <>
                "\n" <>
                GameIO.get_message(:game_is_a_tie) <> "\n"
   end

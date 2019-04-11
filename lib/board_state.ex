@@ -31,6 +31,19 @@ defmodule BoardState do
     |> Map.values()
   end
 
+  def get_string_values(state) do
+    state
+    |> board()
+    |> Enum.map(fn {_key, value} ->
+      case value do
+        :empty -> " "
+        :player -> "X"
+        :opponent -> "O"
+        _ -> value
+      end
+    end)
+  end
+
   def update_board(position_to_update, board_state, player_symbol) do
     board(board_state)
     |> Map.replace!(position_to_update, player_symbol)

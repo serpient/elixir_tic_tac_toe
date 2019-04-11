@@ -25,7 +25,7 @@ defmodule Printable_Board_Test do
 
     four_board_spec = %BoardState{
       board_data: new_4x4_board,
-      board_size: 4,
+      board_size: 4
     }
 
     [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16] =
@@ -66,7 +66,7 @@ defmodule Printable_Board_Test do
 
     three_board_spec = %BoardState{
       board_data: new_3x3_board,
-      board_size: 3,
+      board_size: 3
     }
 
     [p1, p2, p3, p4, p5, p6, p7, p8, p9] = Map.values(new_3x3_board)
@@ -85,15 +85,15 @@ defmodule Printable_Board_Test do
 
   test "[print_board] Prints 3x3 board to CL" do
     initial_3x3_board = %{
-      1 => " ",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
+      1 => :empty,
+      2 => :empty,
+      3 => :empty,
+      4 => :empty,
+      5 => :empty,
+      6 => :empty,
+      7 => :empty,
+      8 => :empty,
+      9 => :empty
     }
 
     three_board_spec = %BoardState{

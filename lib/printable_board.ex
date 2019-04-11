@@ -23,7 +23,7 @@ defmodule PrintableBoard do
 
     [
       get_cell_part("label", at_end_of_cell?, curr_column_number),
-      get_cell_part("symbol", at_end_of_cell?, board_data[curr_column_number]),
+      get_cell_part("symbol", at_end_of_cell?, Enum.at(board_data, curr_column_number - 1)),
       get_cell_part(bottom, at_end_of_cell?, nil)
     ]
   end
@@ -61,7 +61,7 @@ defmodule PrintableBoard do
 
   def generate_board_for_print(board_state) do
     board_size = BoardState.size(board_state)
-    board = BoardState.board(board_state)
+    board = BoardState.get_string_values(board_state)
 
     0..(board_size - 1)
     |> Enum.map(fn row_idx ->
