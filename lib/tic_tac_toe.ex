@@ -4,16 +4,16 @@ defmodule TicTacToe do
 
     case error_message do
       :game_is_a_tie -> GameIO.print_tie(updated_board)
-      _ -> move(initial_board, error_message, current_player)
+      _ -> play(initial_board, error_message, current_player)
     end
   end
 
-  def handle_check_for_win_result(result, initial_board, current_player) do
+  def handle_play(result, initial_board, current_player) do
     {status, message, updated_board} = result
 
     cond do
       message == :no_win ->
-        move(
+        play(
           updated_board,
           :initial_player_prompt,
           GameIO.get_other_player_symbol(current_player)
@@ -37,10 +37,10 @@ defmodule TicTacToe do
 
     Board.generate_board_data(board_size)
     |> BoardState.new_state(board_size)
-    |> move(:initial_player_prompt, "X")
+    |> play(:initial_player_prompt, "X")
   end
 
-  def move(
+  def play(
         board \\ %BoardState{},
         prompt \\ :initial_player_prompt,
         current_player \\ "X"
@@ -52,6 +52,6 @@ defmodule TicTacToe do
     |> ProcessInput.handle_input(board)
     |> Board.handle_board_update(board, current_player)
     |> CheckForWins.check_for_win(board, current_player)
-    |> handle_check_for_win_result(board, current_player)
+    |> handle_play(board, current_player)
   end
 end

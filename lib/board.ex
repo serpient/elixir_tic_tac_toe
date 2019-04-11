@@ -1,16 +1,16 @@
 defmodule Board do
-  def handle_board_update(result, board_spec, player_symbol) do
+  def handle_board_update(result, board_state, player_symbol) do
     {status, position_to_update} = result
 
     case status do
-      :ok -> {:ok, BoardState.update_board(position_to_update, board_spec, player_symbol)}
+      :ok -> {:ok, BoardState.update_board(position_to_update, board_state, player_symbol)}
       :error -> result
     end
   end
 
-  def has_empty_spaces?(board) do
-    board
-    |> Map.values()
+  def has_empty_spaces?(board_state) do
+    board_state
+    |> BoardState.all_keys()
     |> Enum.any?(fn value -> value == " " end)
   end
 
@@ -19,8 +19,8 @@ defmodule Board do
   end
 
   def convert_horizontal_to_row(board_state) do
-    BoardState.board(board_state)
-    |> Map.values()
+    board_state
+    |> BoardState.all_keys()
     |> Enum.chunk_every(BoardState.size(board_state))
   end
 

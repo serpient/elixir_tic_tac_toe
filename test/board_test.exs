@@ -68,7 +68,9 @@ defmodule Board_Test do
       9 => "X"
     }
 
-    assert Board.has_empty_spaces?(has_no_empty_spaces_board) == false
+    initial_board_spec = BoardState.new_state(has_no_empty_spaces_board, 3)
+
+    assert Board.has_empty_spaces?(initial_board_spec) == false
   end
 
   test "[has_empty_spaces] Returns True if board has more spaces to play." do
@@ -84,7 +86,9 @@ defmodule Board_Test do
       9 => " "
     }
 
-    assert Board.has_empty_spaces?(has_empty_spaces_board) == true
+    initial_board_spec = BoardState.new_state(has_empty_spaces_board, 3)
+
+    assert Board.has_empty_spaces?(initial_board_spec) == true
   end
 
   test "[is_a_empty_space] Returns false if position has player symbol." do

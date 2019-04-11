@@ -25,6 +25,12 @@ defmodule BoardState do
     state.board_data
   end
 
+  def all_keys(state) do
+    state
+    |> board()
+    |> Map.values()
+  end
+
   def update_board(position_to_update, board_state, player_symbol) do
     board(board_state)
     |> Map.replace!(position_to_update, player_symbol)

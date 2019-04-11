@@ -9,8 +9,6 @@ defmodule CheckForWins do
   end
 
   def analyze(board_state) do
-    board = BoardState.board(board_state)
-
     horizontal = Board.convert_horizontal_to_row(board_state) |> is_any_row_within_board_a_win?
 
     vertical = Board.convert_vertical_to_row(board_state) |> is_any_row_within_board_a_win?
@@ -20,8 +18,8 @@ defmodule CheckForWins do
     board_has_win? = [horizontal, vertical, diagonal]
 
     cond do
-      Enum.member?(board_has_win?, true) -> {:ok, :wins_game, board_state}
-      Board.has_empty_spaces?(board) == false -> {:error, :game_is_a_tie, board_state}
+      Enum.any?(board_has_win?) -> {:ok, :wins_game, board_state}
+      Board.has_empty_spaces?(board_state) == false -> {:error, :game_is_a_tie, board_state}
       true -> {:ok, :no_win, board_state}
     end
   end
