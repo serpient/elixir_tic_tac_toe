@@ -4,8 +4,8 @@ defmodule CheckForWins do
   end
 
   def is_any_row_within_board_a_win?(all_rows) do
-    Enum.map(all_rows, fn row -> is_row_a_win?(row, "X") || is_row_a_win?(row, "O") end)
-    |> Enum.member?(true)
+    all_rows
+    |> Enum.any?(fn row -> is_row_a_win?(row, "X") || is_row_a_win?(row, "O") end)
   end
 
   def analyze(board_spec) do
