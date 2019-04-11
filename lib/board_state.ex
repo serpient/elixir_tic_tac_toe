@@ -56,12 +56,9 @@ defmodule BoardState do
   end
 
   def new_state(new_board_data, new_board_size \\ 3) do
-    state = %BoardState{}
-
     %BoardState{
-      state
-      | board_data: new_board_data,
-        board_size: new_board_size
+      board_data: new_board_data,
+      board_size: new_board_size
     }
   end
 end
