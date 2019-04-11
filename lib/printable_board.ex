@@ -1,5 +1,5 @@
 defmodule PrintableBoard do
-  def get_cell_part(cell_part, at_end_of_cell?, value) do
+  defp get_cell_part(cell_part, at_end_of_cell?, value) do
     draw = %{
       "label" => String.pad_trailing("#{value}", 5),
       "symbol" => "  #{value}  ",
@@ -13,7 +13,7 @@ defmodule PrintableBoard do
     end
   end
 
-  def create_parts_for_a_single_cell(
+  defp create_parts_for_a_single_cell(
         curr_column_number,
         at_end_of_cell?,
         at_bottom_of_last_row?,
@@ -28,7 +28,7 @@ defmodule PrintableBoard do
     ]
   end
 
-  def create_row_of_cells(board_size, row_idx, at_bottom_of_last_row?, board_data) do
+  defp create_row_of_cells(board_size, row_idx, at_bottom_of_last_row?, board_data) do
     1..board_size
     |> Enum.map(fn column_idx ->
       curr_column_number = row_idx * board_size + column_idx
@@ -43,7 +43,7 @@ defmodule PrintableBoard do
     end)
   end
 
-  def zip_cell_parts_into_list(list_of_parts) do
+  defp zip_cell_parts_into_list(list_of_parts) do
     list_of_parts
     |> Enum.zip()
     |> Enum.map_join(fn value ->
@@ -53,7 +53,7 @@ defmodule PrintableBoard do
     end)
   end
 
-  def add_top_and_bottom_padding(list) do
+  defp add_top_and_bottom_padding(list) do
     list
     |> List.insert_at(0, "\n")
     |> List.insert_at(-1, "\n\n\n")

@@ -48,7 +48,7 @@ defmodule Board do
     ]
   end
 
-  def generate_row_values(range, num_to_take, board_size, board) do
+  defp generate_row_values(range, num_to_take, board_size, board) do
     range
     |> Enum.take_every(num_to_take)
     |> Enum.take(board_size)
