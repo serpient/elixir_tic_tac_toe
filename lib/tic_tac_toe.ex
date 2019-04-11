@@ -53,4 +53,15 @@ defmodule TicTacToe do
     |> CheckForWins.check_for_win(board)
     |> handle_play(board, current_player)
   end
+
+  def computer_turn(
+      board \\ %BoardState{},
+      current_player \\ :ai
+    ) do
+    GameIO.clear_io()
+    space = ComputerPlayer.picks(board)
+
+    {:ok, space}
+    |> Board.handle_board_update(board, current_player)
+    end
 end
