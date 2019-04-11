@@ -51,13 +51,14 @@ defmodule GameIO do
 
   def game_start_banner(message) do
     empty_row = ~s(                                                            \n\n)
+    border_row = ~s(#######################################################     \n)
     "\n" <>
-    ~s(#######################################################     \n) <>
+    border_row <>
     String.duplicate(empty_row, 2) <>
     ~s(               T I C . T A C . T O E                         \n\n) <>
     ~s(  #{GameIO.get_message(message)}             \n) <>
     String.duplicate(empty_row, 2) <>
-    ~s(#######################################################     \n) <>
+    border_row <>
     "\n"
   end
 
