@@ -13,24 +13,25 @@ defmodule ProcessInput do
     {:error, :invalid_input}
   end
 
-  defp validate_input(result, board_spec) when is_integer(result) do
-    %Board{board_data: board_data, board_size: board_size} = board_spec
+  defp validate_input(result, board_state) when is_integer(result) do
+    board = BoardState.board(board_state)
+    max_spaces = BoardState.max_spaces(board_state)
 
     cond do
-      Board.is_a_empty_space(result, board_data) == true -> {:ok, result}
-      result > Board.max_spaces(board_size) || result < 1 -> {:error, :invalid_input_range}
+      Board.is_a_empty_space(result, board) == true -> {:ok, result}
+      result > max_spaces || result < 1 -> {:error, :invalid_input_range}
       true -> {:error, :duplicate_input}
     end
   end
 
-  defp validate_input(error, _board_spec) do
+  defp validate_input(error, _board_state) do
     error
   end
 
-  def handle_input(input, board) do
+  def handle_input(input, board_state) do
     input
     |> transform_to_integer
     |> process_input
-    |> validate_input(board)
+    |> validate_input(board_state)
   end
 end

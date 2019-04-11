@@ -32,7 +32,7 @@ defmodule Game_Output_Test do
       9 => " "
     }
 
-    winning_board_spec = %Board{
+    winning_board_spec = %BoardState{
       board_data: winning_board
     }
 
@@ -56,7 +56,7 @@ defmodule Game_Output_Test do
       9 => " "
     }
 
-    tie_board_spec = %Board{
+    tie_board_spec = %BoardState{
       board_data: tie_board
     }
 

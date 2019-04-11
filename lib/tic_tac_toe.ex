@@ -36,12 +36,12 @@ defmodule TicTacToe do
     GameIO.clear_io()
 
     Board.generate_board_data(board_size)
-    |> Board.new_struct(board_size)
+    |> BoardState.new_state(board_size)
     |> move(:initial_player_prompt, "X")
   end
 
   def move(
-        board \\ %Board{},
+        board \\ %BoardState{},
         prompt \\ :initial_player_prompt,
         current_player \\ "X"
       ) do

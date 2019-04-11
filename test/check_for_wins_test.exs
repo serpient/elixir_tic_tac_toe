@@ -17,7 +17,7 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    horizontal_win_board_spec = %Board{
+    horizontal_win_board_spec = %BoardState{
       board_data: horizontal_win_board
     }
 
@@ -38,7 +38,7 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    horizontal_win_board_spec = %Board{
+    horizontal_win_board_spec = %BoardState{
       board_data: horizontal_win_board
     }
 
@@ -59,7 +59,7 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    no_horizontal_win_board_spec = %Board{
+    no_horizontal_win_board_spec = %BoardState{
       board_data: no_horizontal_win_board
     }
 
@@ -80,7 +80,7 @@ defmodule Check_For_Wins_Test do
       9 => "O"
     }
 
-    no_horizontal_win_board_spec = %Board{
+    no_horizontal_win_board_spec = %BoardState{
       board_data: no_horizontal_win_board
     }
 
@@ -108,7 +108,7 @@ defmodule Check_For_Wins_Test do
       16 => " "
     }
 
-    horizontal_win_board_spec = Board.new_struct(horizontal_win_board, 4)
+    horizontal_win_board_spec = BoardState.new_state(horizontal_win_board, 4)
 
     assert CheckForWins.analyze(horizontal_win_board_spec) ==
              {:ok, :wins_game, horizontal_win_board_spec}
@@ -127,7 +127,7 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    vertical_win_board_spec = %Board{
+    vertical_win_board_spec = %BoardState{
       board_data: vertical_win_board
     }
 
@@ -148,7 +148,7 @@ defmodule Check_For_Wins_Test do
       9 => "X"
     }
 
-    vertical_win_board_spec = %Board{
+    vertical_win_board_spec = %BoardState{
       board_data: vertical_win_board
     }
 
@@ -176,7 +176,7 @@ defmodule Check_For_Wins_Test do
       16 => "O"
     }
 
-    vertical_win_board_spec = Board.new_struct(vertical_win_board, 4)
+    vertical_win_board_spec = BoardState.new_state(vertical_win_board, 4)
 
     assert CheckForWins.analyze(vertical_win_board_spec) ==
              {:ok, :wins_game, vertical_win_board_spec}
@@ -195,7 +195,7 @@ defmodule Check_For_Wins_Test do
       9 => "X"
     }
 
-    no_vertical_win_board_spec = %Board{
+    no_vertical_win_board_spec = %BoardState{
       board_data: no_vertical_win_board
     }
 
@@ -216,7 +216,7 @@ defmodule Check_For_Wins_Test do
       9 => "X"
     }
 
-    diagonal_win_board_spec = %Board{
+    diagonal_win_board_spec = %BoardState{
       board_data: diagonal_win_board
     }
 
@@ -237,7 +237,7 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    diagonal_win_board_spec = %Board{
+    diagonal_win_board_spec = %BoardState{
       board_data: diagonal_win_board
     }
 
@@ -258,7 +258,7 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    no_diagonal_win_board_spec = %Board{
+    no_diagonal_win_board_spec = %BoardState{
       board_data: no_diagonal_win_board
     }
 
@@ -286,7 +286,7 @@ defmodule Check_For_Wins_Test do
       16 => " "
     }
 
-    diagonal_win_board_spec = Board.new_struct(diagonal_win_board, 4)
+    diagonal_win_board_spec = BoardState.new_state(diagonal_win_board, 4)
 
     assert CheckForWins.analyze(diagonal_win_board_spec) ==
              {:ok, :wins_game, diagonal_win_board_spec}
@@ -305,7 +305,7 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    winning_board_spec = %Board{
+    winning_board_spec = %BoardState{
       board_data: winning_board
     }
 
@@ -326,7 +326,7 @@ defmodule Check_For_Wins_Test do
       9 => " "
     }
 
-    non_winning_board_spec = %Board{
+    non_winning_board_spec = %BoardState{
       board_data: non_winning_board
     }
 

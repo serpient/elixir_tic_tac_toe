@@ -23,7 +23,7 @@ defmodule Print_Board_Test do
       16 => "16"
     }
 
-    four_board_spec = %Board{
+    four_board_spec = %BoardState{
       board_data: new_4x4_board,
       board_size: 4,
     }
@@ -64,7 +64,7 @@ defmodule Print_Board_Test do
       9 => "9"
     }
 
-    three_board_spec = %Board{
+    three_board_spec = %BoardState{
       board_data: new_3x3_board,
       board_size: 3,
     }
@@ -96,7 +96,7 @@ defmodule Print_Board_Test do
       9 => " "
     }
 
-    three_board_spec = %Board{
+    three_board_spec = %BoardState{
       board_data: initial_3x3_board
     }
 

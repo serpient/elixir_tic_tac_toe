@@ -18,7 +18,7 @@ defmodule Tic_Tac_Toe_Test do
       9 => "X"
     }
 
-    tie_board_spec = %Board{
+    tie_board_spec = %BoardState{
       board_data: tie_board
     }
 
@@ -45,7 +45,7 @@ defmodule Tic_Tac_Toe_Test do
       9 => " "
     }
 
-    winning_board_spec = %Board{
+    winning_board_spec = %BoardState{
       board_data: winning_board
     }
 

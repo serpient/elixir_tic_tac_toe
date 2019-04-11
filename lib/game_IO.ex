@@ -15,8 +15,8 @@ defmodule GameIO do
     game_text[key]
   end
 
-  def print_board(board_spec) do
-    board_spec
+  def print_board(board_state) do
+    board_state
     |> PrintBoard.generate_board_for_print()
     |> IO.puts()
   end
@@ -28,9 +28,9 @@ defmodule GameIO do
     end
   end
 
-  def print_win(board_spec, current_player) do
+  def print_win(board_state, current_player) do
     clear_io()
-    print_board(board_spec)
+    print_board(board_state)
 
     ("Player #{current_player} - " <> GameIO.get_message(:wins_game))
     |> IO.puts()
@@ -41,9 +41,9 @@ defmodule GameIO do
     |> IO.gets()
   end
 
-  def print_tie(board_spec) do
+  def print_tie(board_state) do
     clear_io()
-    print_board(board_spec)
+    print_board(board_state)
 
     GameIO.get_message(:game_is_a_tie)
     |> IO.puts()

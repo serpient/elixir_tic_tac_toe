@@ -59,15 +59,15 @@ defmodule PrintBoard do
     |> List.insert_at(-1, "\n\n\n")
   end
 
-  def generate_board_for_print(board_spec) do
-    %Board{board_data: board_data, board_size: board_size} =
-      board_spec
+  def generate_board_for_print(board_state) do
+    board_size = BoardState.size(board_state)
+    board = BoardState.board(board_state)
 
     0..(board_size - 1)
     |> Enum.map(fn row_idx ->
       at_bottom_of_last_row? = board_size - 1 == row_idx
 
-      create_row_of_cells(board_size, row_idx, at_bottom_of_last_row?, board_data)
+      create_row_of_cells(board_size, row_idx, at_bottom_of_last_row?, board)
       |> zip_cell_parts_into_list
     end)
     |> add_top_and_bottom_padding

@@ -17,7 +17,7 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    initial_board_spec = Board.new_struct(initial_board, 3)
+    initial_board_spec = BoardState.new_state(initial_board, 3)
 
     assert ProcessInput.handle_input("1", initial_board_spec) == {:ok, 1}
   end
@@ -35,7 +35,7 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    initial_board_spec = Board.new_struct(initial_board, 3)
+    initial_board_spec = BoardState.new_state(initial_board, 3)
 
     assert ProcessInput.handle_input("4", initial_board_spec) == {:ok, 4}
   end
@@ -53,7 +53,7 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    error_board_spec = Board.new_struct(board_with_error_input, 3)
+    error_board_spec = BoardState.new_state(board_with_error_input, 3)
 
     assert ProcessInput.handle_input("1", error_board_spec) ==
              {:error, :duplicate_input}
@@ -72,7 +72,7 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    error_board_spec = Board.new_struct(board_with_error_input, 3)
+    error_board_spec = BoardState.new_state(board_with_error_input, 3)
 
     assert ProcessInput.handle_input("string", error_board_spec) ==
              {:error, :invalid_input}
@@ -91,14 +91,14 @@ defmodule Process_Input_Test do
       9 => " "
     }
 
-    error_board_spec = Board.new_struct(board_with_error_input, 3)
+    error_board_spec = BoardState.new_state(board_with_error_input, 3)
 
     assert ProcessInput.handle_input("10", error_board_spec) ==
              {:error, :invalid_input_range}
   end
 
   test "[handle_input] Inputting a number NOT 1-16 on a 4x4 board returns a error tuple with correct error message" do
-    error_board_spec = Board.new_struct(%{}, 4)
+    error_board_spec = BoardState.new_state(%{}, 4)
 
     assert ProcessInput.handle_input("17", error_board_spec) ==
              {:error, :invalid_input_range}
