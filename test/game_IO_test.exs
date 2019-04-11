@@ -38,7 +38,7 @@ defmodule Game_Output_Test do
 
     assert capture_io(fn -> GameIO.print_win(winning_board_spec, "X") end) ==
              capture_io(fn -> GameIO.clear_io() end) <>
-               PrintBoard.generate_board_for_print(winning_board_spec) <>
+             PrintableBoard.generate_board_for_print(winning_board_spec) <>
                "\n" <>
                "Player X - " <> GameIO.get_message(:wins_game) <> "\n"
   end
@@ -62,7 +62,7 @@ defmodule Game_Output_Test do
 
     assert capture_io(fn -> GameIO.print_tie(tie_board_spec) end) ==
              capture_io(fn -> GameIO.clear_io() end) <>
-               PrintBoard.generate_board_for_print(tie_board_spec) <>
+                PrintableBoard.generate_board_for_print(tie_board_spec) <>
                "\n" <>
                GameIO.get_message(:game_is_a_tie) <> "\n"
   end

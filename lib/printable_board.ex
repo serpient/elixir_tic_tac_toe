@@ -1,4 +1,4 @@
-defmodule PrintBoard do
+defmodule PrintableBoard do
   def get_cell_part(cell_part, at_end_of_cell?, value) do
     draw = %{
       "label" => String.pad_trailing("#{value}", 5),
