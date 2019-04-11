@@ -6,15 +6,15 @@ defmodule Process_Input_Test do
 
   test "[handle_input] On valid input to empty board, returns a ok tuple with converted value" do
     initial_board = %{
-      1 => " ",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
+      1 => :empty,
+      2 => :empty,
+      3 => :empty,
+      4 => :empty,
+      5 => :empty,
+      6 => :empty,
+      7 => :empty,
+      8 => :empty,
+      9 => :empty
     }
 
     initial_board_spec = BoardState.new_state(initial_board, 3)
@@ -24,15 +24,15 @@ defmodule Process_Input_Test do
 
   test "[handle_input] On valid input to non-empty board, returns a ok tuple with converted value" do
     initial_board = %{
-      1 => "X",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
+      1 => :player,
+      2 => :empty,
+      3 => :empty,
+      4 => :empty,
+      5 => :empty,
+      6 => :empty,
+      7 => :empty,
+      8 => :empty,
+      9 => :empty
     }
 
     initial_board_spec = BoardState.new_state(initial_board, 3)
@@ -42,15 +42,15 @@ defmodule Process_Input_Test do
 
   test "[handle_input] On overlapping input, returns error tuple with correct error message" do
     board_with_error_input = %{
-      1 => "X",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
+      1 => :player,
+      2 => :empty,
+      3 => :empty,
+      4 => :empty,
+      5 => :empty,
+      6 => :empty,
+      7 => :empty,
+      8 => :empty,
+      9 => :empty
     }
 
     error_board_spec = BoardState.new_state(board_with_error_input, 3)
@@ -61,15 +61,15 @@ defmodule Process_Input_Test do
 
   test "[handle_input] After non-number input, returns error tuple with correct error message" do
     board_with_error_input = %{
-      1 => "X",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
+      1 => :player,
+      2 => :empty,
+      3 => :empty,
+      4 => :empty,
+      5 => :empty,
+      6 => :empty,
+      7 => :empty,
+      8 => :empty,
+      9 => :empty
     }
 
     error_board_spec = BoardState.new_state(board_with_error_input, 3)
@@ -80,15 +80,15 @@ defmodule Process_Input_Test do
 
   test "[handle_input] Inputting a number NOT 1-9 on a 3x3 board returns a error tuple with correct error message" do
     board_with_error_input = %{
-      1 => " ",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
+      1 => :empty,
+      2 => :empty,
+      3 => :empty,
+      4 => :empty,
+      5 => :empty,
+      6 => :empty,
+      7 => :empty,
+      8 => :empty,
+      9 => :empty
     }
 
     error_board_spec = BoardState.new_state(board_with_error_input, 3)

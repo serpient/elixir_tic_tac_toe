@@ -23,8 +23,8 @@ defmodule GameIO do
 
   def get_other_player_symbol(player_symbol) do
     case player_symbol do
-      "X" -> "O"
-      "O" -> "X"
+      :player -> :opponent
+      :opponent -> :player
     end
   end
 

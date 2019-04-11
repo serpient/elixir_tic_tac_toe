@@ -37,13 +37,13 @@ defmodule TicTacToe do
 
     Board.generate_board_data(board_size)
     |> BoardState.new_state(board_size)
-    |> play(:initial_player_prompt, "X")
+    |> play(:initial_player_prompt, :player)
   end
 
   def play(
         board \\ %BoardState{},
         prompt \\ :initial_player_prompt,
-        current_player \\ "X"
+        current_player \\ :player
       ) do
     GameIO.clear_io()
     GameIO.print_board(board)

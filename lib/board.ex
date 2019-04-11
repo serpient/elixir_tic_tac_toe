@@ -11,11 +11,11 @@ defmodule Board do
   def has_empty_spaces?(board_state) do
     board_state
     |> BoardState.all_keys()
-    |> Enum.any?(fn value -> value == " " end)
+    |> Enum.any?(fn value -> value == :empty end)
   end
 
   def is_a_empty_space(board_position, board) do
-    board[board_position] == " "
+    board[board_position] == :empty
   end
 
   def convert_horizontal_to_row(board_state) do
