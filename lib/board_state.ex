@@ -44,6 +44,17 @@ defmodule BoardState do
     end)
   end
 
+  def get_empty_values(state) do
+    state
+    |> BoardState.board()
+    |> Enum.flat_map(fn {key, value} ->
+      case value == :empty do
+        true -> [key]
+        _ -> []
+      end
+    end )
+  end
+
   def update_board(position_to_update, board_state, player_symbol) do
     board(board_state)
     |> Map.replace!(position_to_update, player_symbol)
