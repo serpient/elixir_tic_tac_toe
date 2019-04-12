@@ -59,7 +59,7 @@ defmodule Tic_Tac_Toe_Test do
              capture_io(fn -> GameIO.print_win(winning_board_state, "X") end)
   end
 
-  test "[computer_turn] Chooses random empty space and updates board" do
+  test "[get_computer_move] Chooses random empty space and updates board" do
     computer_board = %{
       1 => :empty,
       2 => :player,
@@ -68,7 +68,7 @@ defmodule Tic_Tac_Toe_Test do
 
     computer_board_state = BoardState.new_state(computer_board, 3, :ai)
 
-    assert TicTacToe.computer_turn(computer_board_state)
+    assert TicTacToe.get_computer_move(computer_board_state)
         == {:ok, 1}
   end
 end
