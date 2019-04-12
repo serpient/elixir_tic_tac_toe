@@ -39,15 +39,7 @@ defmodule BoardState do
   def get_string_values(state) do
     state
     |> board()
-    |> Enum.map(fn {_key, value} ->
-      case value do
-        :empty -> " "
-        :player -> "X"
-        :opponent -> "O"
-        :ai -> "O"
-        _ -> value
-      end
-    end)
+    |> Enum.map(fn {_key, value} -> GameIO.get_player_token(value) end)
   end
 
   def get_empty_values(state) do

@@ -29,16 +29,26 @@ defmodule GameIO do
     end
   end
 
+  def get_player_token(player_symbol) do
+    case player_symbol do
+      :empty -> " "
+      :player -> "X"
+      :opponent -> "O"
+      :ai -> "O"
+      _ -> player_symbol
+    end
+  end
+
   def print_win(board_state, current_player) do
     clear_io()
     print_board(board_state)
 
-    ("Player #{current_player} - " <> GameIO.get_message(:wins_game))
+    ("Player #{get_player_token(current_player)} - " <> GameIO.get_message(:wins_game))
     |> IO.puts()
   end
 
   def get_player_input(player, message) do
-    ("Player #{player} - " <> GameIO.get_message(message))
+    ("Player #{get_player_token(player)} - " <> GameIO.get_message(message))
     |> IO.gets()
   end
 
