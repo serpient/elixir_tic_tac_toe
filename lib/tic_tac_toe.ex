@@ -69,7 +69,7 @@ defmodule TicTacToe do
   def get_computer_move(board) do
     next_move = ComputerPlayer.picks(board)
 
-    GameIO.print_computer_message(:chooses_spot, next_move)
+    GameIO.get_computer_message(:chooses_spot, next_move)
     |> IO.puts()
 
     {:ok, next_move}
