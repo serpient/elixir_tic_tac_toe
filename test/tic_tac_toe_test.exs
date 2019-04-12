@@ -68,15 +68,7 @@ defmodule Tic_Tac_Toe_Test do
 
     computer_board_spec = BoardState.new_state(computer_board, 3, :ai)
 
-    updated_computer_board = %{
-      1 => :ai,
-      2 => :player,
-      3 => :player,
-    }
-
-    updated_computer_board_state = BoardState.new_state(updated_computer_board, 3, :ai)
-
-    assert TicTacToe.computer_turn(computer_board_spec, :ai)
-        == {:ok, updated_computer_board_state}
+    assert TicTacToe.computer_turn(computer_board_spec)
+        == {:ok, 1}
   end
 end

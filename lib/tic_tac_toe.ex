@@ -16,7 +16,7 @@ defmodule TicTacToe do
         play(
           updated_board,
           :initial_player_prompt,
-          GameIO.get_other_player_symbol(current_player)
+          GameIO.get_other_player_symbol(current_player, BoardState.opponent(updated_board))
         )
 
       message == :wins_game ->
@@ -30,12 +30,18 @@ defmodule TicTacToe do
   def game_start() do
     board_size =
       GameIO.get_input_for_game_settings(:game_board_settings)
-      |> ProcessInput.transform_to_integer()
+      |>  ProcessInput.validate_board_size_input()
+
+    GameIO.clear_io()
+
+    opponent_type =
+      GameIO.get_input_for_game_settings(:opponent_type_setting)
+      |> ProcessInput.validate_opponent_type_input()
 
     GameIO.clear_io()
 
     Board.generate_board_data(board_size)
-    |> BoardState.new_state(board_size)
+    |> BoardState.new_state(board_size, opponent_type)
     |> play(:initial_player_prompt, :player)
   end
 
@@ -47,21 +53,24 @@ defmodule TicTacToe do
     GameIO.clear_io()
     GameIO.print_board(board)
 
-    GameIO.get_player_input(current_player, prompt)
-    |> ProcessInput.handle_input(board)
+    case current_player do
+      :ai -> computer_turn(board)
+      _ -> human_turn(board, prompt, current_player)
+    end
     |> Board.handle_board_update(board, current_player)
     |> CheckForWins.check_for_win(board)
     |> handle_play(board, current_player)
   end
 
-  def computer_turn(
+  def human_turn(
       board \\ %BoardState{},
-      current_player \\ :ai
+      prompt \\ :initial_player_prompt,
+      current_player \\ :player
     ) do
-    GameIO.clear_io()
-    space = ComputerPlayer.picks(board)
-
-    {:ok, space}
-    |> Board.handle_board_update(board, current_player)
-    end
+    GameIO.get_player_input(current_player, prompt)
+    |> ProcessInput.handle_input(board)
+  end
+  def computer_turn(board) do
+    {:ok, ComputerPlayer.picks(board) }
+  end
 end
