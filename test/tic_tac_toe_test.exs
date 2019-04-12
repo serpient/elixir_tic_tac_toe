@@ -59,7 +59,7 @@ defmodule Tic_Tac_Toe_Test do
              capture_io(fn -> GameIO.print_win(winning_board_spec, "X") end)
   end
 
-  test "[computer_turn] Triggers computer player picks when player_type is :ai" do
+  test "[computer_turn] Chooses random empty space and updates board" do
     computer_board = %{
       1 => :empty,
       2 => :player,

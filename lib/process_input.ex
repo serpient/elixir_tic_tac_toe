@@ -47,7 +47,6 @@ defmodule ProcessInput do
   def handle_board_size_input(input) do
     input
     |> transform_to_integer()
-    |> handle_integer_conversion_result()
     |> validate_board_size_input()
   end
 
