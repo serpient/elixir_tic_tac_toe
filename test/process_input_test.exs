@@ -17,9 +17,9 @@ defmodule Process_Input_Test do
       9 => :empty
     }
 
-    initial_board_spec = BoardState.new_state(initial_board, 3)
+    initial_board_state = BoardState.new_state(initial_board, 3)
 
-    assert ProcessInput.handle_input("1", initial_board_spec) == {:ok, 1}
+    assert ProcessInput.handle_input("1", initial_board_state) == {:ok, 1}
   end
 
   test "[handle_input] On valid input to non-empty board, returns a ok tuple with converted value" do
@@ -35,9 +35,9 @@ defmodule Process_Input_Test do
       9 => :empty
     }
 
-    initial_board_spec = BoardState.new_state(initial_board, 3)
+    initial_board_state = BoardState.new_state(initial_board, 3)
 
-    assert ProcessInput.handle_input("4", initial_board_spec) == {:ok, 4}
+    assert ProcessInput.handle_input("4", initial_board_state) == {:ok, 4}
   end
 
   test "[handle_input] On overlapping input, returns error tuple with correct error message" do
@@ -53,9 +53,9 @@ defmodule Process_Input_Test do
       9 => :empty
     }
 
-    error_board_spec = BoardState.new_state(board_with_error_input, 3)
+    error_board_state = BoardState.new_state(board_with_error_input, 3)
 
-    assert ProcessInput.handle_input("1", error_board_spec) ==
+    assert ProcessInput.handle_input("1", error_board_state) ==
              {:error, :duplicate_input}
   end
 
@@ -72,9 +72,9 @@ defmodule Process_Input_Test do
       9 => :empty
     }
 
-    error_board_spec = BoardState.new_state(board_with_error_input, 3)
+    error_board_state = BoardState.new_state(board_with_error_input, 3)
 
-    assert ProcessInput.handle_input("string", error_board_spec) ==
+    assert ProcessInput.handle_input("string", error_board_state) ==
              {:error, :invalid_input}
   end
 
@@ -91,16 +91,16 @@ defmodule Process_Input_Test do
       9 => :empty
     }
 
-    error_board_spec = BoardState.new_state(board_with_error_input, 3)
+    error_board_state = BoardState.new_state(board_with_error_input, 3)
 
-    assert ProcessInput.handle_input("10", error_board_spec) ==
+    assert ProcessInput.handle_input("10", error_board_state) ==
              {:error, :invalid_input_range}
   end
 
   test "[handle_input] Inputting a number NOT 1-16 on a 4x4 board returns a error tuple with correct error message" do
-    error_board_spec = BoardState.new_state(%{}, 4)
+    error_board_state = BoardState.new_state(%{}, 4)
 
-    assert ProcessInput.handle_input("17", error_board_spec) ==
+    assert ProcessInput.handle_input("17", error_board_state) ==
              {:error, :invalid_input_range}
   end
 

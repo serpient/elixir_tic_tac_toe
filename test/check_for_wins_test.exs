@@ -17,12 +17,12 @@ defmodule Check_For_Wins_Test do
       9 => :empty
     }
 
-    horizontal_win_board_spec = %BoardState{
+    horizontal_win_board_state = %BoardState{
       board_data: horizontal_win_board
     }
 
-    assert CheckForWins.analyze(horizontal_win_board_spec) ==
-             {:ok, :wins_game, horizontal_win_board_spec}
+    assert CheckForWins.analyze(horizontal_win_board_state) ==
+             {:ok, :wins_game, horizontal_win_board_state}
   end
 
   test "[analyze][Horizontal Wins] Row 2 - Wins if they have 3 matching horizontal symbols" do
@@ -38,12 +38,12 @@ defmodule Check_For_Wins_Test do
       9 => :empty
     }
 
-    horizontal_win_board_spec = %BoardState{
+    horizontal_win_board_state = %BoardState{
       board_data: horizontal_win_board
     }
 
-    assert CheckForWins.analyze(horizontal_win_board_spec) ==
-             {:ok, :wins_game, horizontal_win_board_spec}
+    assert CheckForWins.analyze(horizontal_win_board_state) ==
+             {:ok, :wins_game, horizontal_win_board_state}
   end
 
   test "[analyze][Horizontal Wins] No wins if no adjacent matches in row" do
@@ -59,12 +59,12 @@ defmodule Check_For_Wins_Test do
       9 => :empty
     }
 
-    no_horizontal_win_board_spec = %BoardState{
+    no_horizontal_win_board_state = %BoardState{
       board_data: no_horizontal_win_board
     }
 
-    assert CheckForWins.analyze(no_horizontal_win_board_spec) ==
-             {:ok, :no_win, no_horizontal_win_board_spec}
+    assert CheckForWins.analyze(no_horizontal_win_board_state) ==
+             {:ok, :no_win, no_horizontal_win_board_state}
   end
 
   test "[analyze][Horizontal Wins] Row 3 - No wins if there are 3 in a row from both players" do
@@ -80,12 +80,12 @@ defmodule Check_For_Wins_Test do
       9 => :opponent
     }
 
-    no_horizontal_win_board_spec = %BoardState{
+    no_horizontal_win_board_state = %BoardState{
       board_data: no_horizontal_win_board
     }
 
-    assert CheckForWins.analyze(no_horizontal_win_board_spec) ==
-             {:ok, :no_win, no_horizontal_win_board_spec}
+    assert CheckForWins.analyze(no_horizontal_win_board_state) ==
+             {:ok, :no_win, no_horizontal_win_board_state}
   end
 
   test "[analyze][Horizontal Wins] Row 2 - Wins if there are 4 in a row" do
@@ -108,10 +108,10 @@ defmodule Check_For_Wins_Test do
       16 => :empty
     }
 
-    horizontal_win_board_spec = BoardState.new_state(horizontal_win_board, 4)
+    horizontal_win_board_state = BoardState.new_state(horizontal_win_board, 4)
 
-    assert CheckForWins.analyze(horizontal_win_board_spec) ==
-             {:ok, :wins_game, horizontal_win_board_spec}
+    assert CheckForWins.analyze(horizontal_win_board_state) ==
+             {:ok, :wins_game, horizontal_win_board_state}
   end
 
   test "[analyze][Vertical Wins] Column 2 - Wins if there are 3 matching vertical" do
@@ -127,12 +127,12 @@ defmodule Check_For_Wins_Test do
       9 => :empty
     }
 
-    vertical_win_board_spec = %BoardState{
+    vertical_win_board_state = %BoardState{
       board_data: vertical_win_board
     }
 
-    assert CheckForWins.analyze(vertical_win_board_spec) ==
-             {:ok, :wins_game, vertical_win_board_spec}
+    assert CheckForWins.analyze(vertical_win_board_state) ==
+             {:ok, :wins_game, vertical_win_board_state}
   end
 
   test "[analyze][Vertical Wins] Column 3 - Wins if there are 3 matching vertical" do
@@ -148,12 +148,12 @@ defmodule Check_For_Wins_Test do
       9 => :player
     }
 
-    vertical_win_board_spec = %BoardState{
+    vertical_win_board_state = %BoardState{
       board_data: vertical_win_board
     }
 
-    assert CheckForWins.analyze(vertical_win_board_spec) ==
-             {:ok, :wins_game, vertical_win_board_spec}
+    assert CheckForWins.analyze(vertical_win_board_state) ==
+             {:ok, :wins_game, vertical_win_board_state}
   end
 
   test "[analyze][Vertical Wins] Column 3 - Wins if there are 4 matching vertical" do
@@ -176,10 +176,10 @@ defmodule Check_For_Wins_Test do
       16 => :opponent
     }
 
-    vertical_win_board_spec = BoardState.new_state(vertical_win_board, 4)
+    vertical_win_board_state = BoardState.new_state(vertical_win_board, 4)
 
-    assert CheckForWins.analyze(vertical_win_board_spec) ==
-             {:ok, :wins_game, vertical_win_board_spec}
+    assert CheckForWins.analyze(vertical_win_board_state) ==
+             {:ok, :wins_game, vertical_win_board_state}
   end
 
   test "[analyze][Vertical Wins] Does not win if there are non-matching" do
@@ -195,12 +195,12 @@ defmodule Check_For_Wins_Test do
       9 => :player
     }
 
-    no_vertical_win_board_spec = %BoardState{
+    no_vertical_win_board_state = %BoardState{
       board_data: no_vertical_win_board
     }
 
-    assert CheckForWins.analyze(no_vertical_win_board_spec) ==
-             {:ok, :no_win, no_vertical_win_board_spec}
+    assert CheckForWins.analyze(no_vertical_win_board_state) ==
+             {:ok, :no_win, no_vertical_win_board_state}
   end
 
   test "[analyze][Diagonal Wins] Diagonal 1 - 3 Matching Diagonal wins 1,5,9" do
@@ -216,12 +216,12 @@ defmodule Check_For_Wins_Test do
       9 => :player
     }
 
-    diagonal_win_board_spec = %BoardState{
+    diagonal_win_board_state = %BoardState{
       board_data: diagonal_win_board
     }
 
-    assert CheckForWins.analyze(diagonal_win_board_spec) ==
-             {:ok, :wins_game, diagonal_win_board_spec}
+    assert CheckForWins.analyze(diagonal_win_board_state) ==
+             {:ok, :wins_game, diagonal_win_board_state}
   end
 
   test "[analyze][Diagonal Wins] Diagon 2 - 3 Matching Diagonal wins 3,5,7" do
@@ -237,12 +237,12 @@ defmodule Check_For_Wins_Test do
       9 => :empty
     }
 
-    diagonal_win_board_spec = %BoardState{
+    diagonal_win_board_state = %BoardState{
       board_data: diagonal_win_board
     }
 
-    assert CheckForWins.analyze(diagonal_win_board_spec) ==
-             {:ok, :wins_game, diagonal_win_board_spec}
+    assert CheckForWins.analyze(diagonal_win_board_state) ==
+             {:ok, :wins_game, diagonal_win_board_state}
   end
 
   test "[analyze][Diagonal Wins] Non-Matching Diagonal does not win 3,5,7" do
@@ -258,12 +258,12 @@ defmodule Check_For_Wins_Test do
       9 => :empty
     }
 
-    no_diagonal_win_board_spec = %BoardState{
+    no_diagonal_win_board_state = %BoardState{
       board_data: no_diagonal_win_board
     }
 
-    assert CheckForWins.analyze(no_diagonal_win_board_spec) ==
-             {:ok, :no_win, no_diagonal_win_board_spec}
+    assert CheckForWins.analyze(no_diagonal_win_board_state) ==
+             {:ok, :no_win, no_diagonal_win_board_state}
   end
 
   test "[analyze][Diagonal Wins] Wins if there are 4 matching diagonally" do
@@ -286,10 +286,10 @@ defmodule Check_For_Wins_Test do
       16 => :empty
     }
 
-    diagonal_win_board_spec = BoardState.new_state(diagonal_win_board, 4)
+    diagonal_win_board_state = BoardState.new_state(diagonal_win_board, 4)
 
-    assert CheckForWins.analyze(diagonal_win_board_spec) ==
-             {:ok, :wins_game, diagonal_win_board_spec}
+    assert CheckForWins.analyze(diagonal_win_board_state) ==
+             {:ok, :wins_game, diagonal_win_board_state}
   end
 
   test "[check_for_win] Winning board is passed to analyze and results in ok tuple" do
@@ -305,12 +305,12 @@ defmodule Check_For_Wins_Test do
       9 => :empty
     }
 
-    winning_board_spec = %BoardState{
+    winning_board_state = %BoardState{
       board_data: winning_board
     }
 
-    assert CheckForWins.check_for_win({:ok, winning_board_spec}, winning_board_spec) ==
-             {:ok, :wins_game, winning_board_spec}
+    assert CheckForWins.check_for_win({:ok, winning_board_state}, winning_board_state) ==
+             {:ok, :wins_game, winning_board_state}
   end
 
   test "[check_for_win] Non winning board results in :no_win tuple" do
@@ -326,14 +326,14 @@ defmodule Check_For_Wins_Test do
       9 => :empty
     }
 
-    non_winning_board_spec = %BoardState{
+    non_winning_board_state = %BoardState{
       board_data: non_winning_board
     }
 
     assert CheckForWins.check_for_win(
-             {:ok, non_winning_board_spec},
-             non_winning_board_spec
-           ) == {:ok, :no_win, non_winning_board_spec}
+             {:ok, non_winning_board_state},
+             non_winning_board_state
+           ) == {:ok, :no_win, non_winning_board_state}
   end
 
   test "[check_for_win] Error tuple passed to this function results in another error tuple" do
