@@ -45,11 +45,7 @@ defmodule TicTacToe do
         current_player \\ :player,
         opponent_type \\ :opponent
       ) do
-    if opponent_type == :opponent or
-         current_player == :ai or
-         opponent_type == nil,
-       do: GameIO.clear_io()
-
+    GameIO.clear_console_logic(current_player, opponent_type)
     case current_player do
       :ai -> get_computer_move(board)
       _ -> get_human_move(board, prompt, current_player)

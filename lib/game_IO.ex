@@ -92,4 +92,11 @@ defmodule GameIO do
     IO.write("\e[H\e[J")
     IEx.dont_display_result()
   end
+
+  def clear_console_logic(current_player, opponent_type) do
+    if opponent_type == :opponent or
+      current_player == :ai or
+      opponent_type == nil,
+    do: GameIO.clear_io()
+  end
 end
