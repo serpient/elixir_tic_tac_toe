@@ -44,6 +44,7 @@ defmodule BoardState do
         :empty -> " "
         :player -> "X"
         :opponent -> "O"
+        :ai -> "O"
         _ -> value
       end
     end)
