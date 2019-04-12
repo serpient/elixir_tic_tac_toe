@@ -353,6 +353,31 @@ defmodule Check_For_Wins_Test do
              {:error, :invalid_input, board_with_error}
   end
 
+  test "[check_for_win] Winning computer board results in :wins_game" do
+    winning_computer_board = %{
+      1 => :ai,
+      2 => :ai,
+      3 => :ai,
+      4 => :empty,
+      5 => :empty,
+      6 => :empty,
+      7 => :empty,
+      8 => :empty,
+      9 => :empty
+    }
+
+    winning_computer_board_state = %BoardState{
+      board_data: winning_computer_board
+    }
+
+    assert CheckForWins.check_for_win(
+             {:ok, winning_computer_board_state},
+             winning_computer_board_state,
+             :player
+           ) == {:ok, :wins_game, winning_computer_board_state}
+  end
+
+
   test "[is_row_a_win?] Returns true if every symbol in list matches current player symbol" do
     assert CheckForWins.is_row_a_win?([:player, :player, :player], :player) == true
   end

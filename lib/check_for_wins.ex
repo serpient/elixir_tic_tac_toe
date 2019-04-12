@@ -5,7 +5,11 @@ defmodule CheckForWins do
 
   def has_winning_row?(all_rows) do
     all_rows
-    |> Enum.any?(fn row -> is_row_a_win?(row, :player) || is_row_a_win?(row, :opponent) || is_row_a_win?(row, :ai) end)
+    |> Enum.any?(fn row ->
+      is_row_a_win?(row, :player)
+      || is_row_a_win?(row, :opponent)
+      || is_row_a_win?(row, :ai)
+    end)
   end
 
   def analyze(board_state) do
