@@ -28,9 +28,8 @@ defmodule TicTacToe do
   end
 
   def game_start() do
-    board_size = GameSettings.set_board_size()
-
-    opponent_type = GameSettings.set_opponent_type()
+    board_size = GameSettings.get_board_size()
+    opponent_type = GameSettings.get_opponent_type()
 
     Board.generate_board_data(board_size)
     |> BoardState.new_state(board_size, opponent_type)

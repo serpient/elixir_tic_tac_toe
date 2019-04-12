@@ -1,5 +1,5 @@
 defmodule GameSettings do
-  def set_board_size(error \\ nil) do
+  def get_board_size(error \\ nil) do
     GameIO.clear_io()
 
     GameIO.get_input_for_game_settings(:game_board_settings, error)
@@ -12,11 +12,11 @@ defmodule GameSettings do
 
     case status do
       :ok -> message
-      :error -> GameSettings.set_board_size(message)
+      :error -> GameSettings.get_board_size(message)
     end
   end
 
-  def set_opponent_type(error \\ nil) do
+  def get_opponent_type(error \\ nil) do
     GameIO.clear_io()
 
     GameIO.get_input_for_game_settings(:opponent_type_setting, error)
@@ -29,7 +29,7 @@ defmodule GameSettings do
 
     case status do
       :ok -> message
-      :error -> GameSettings.set_opponent_type(message)
+      :error -> GameSettings.get_opponent_type(message)
     end
   end
 end
