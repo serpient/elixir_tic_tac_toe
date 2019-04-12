@@ -47,29 +47,11 @@ defmodule TicTacToe do
       ) do
     GameIO.clear_console_logic(current_player, opponent_type)
     case current_player do
-      :ai -> get_computer_move(board)
-      _ ->  GameIO.print_board(board); get_human_move(board, prompt, current_player)
+      :ai -> ComputerPlayer.get_move(board)
+      _ ->  GameIO.print_board(board); HumanPlayer.get_move(board, prompt, current_player)
     end
     |> Board.handle_board_update(board, current_player)
     |> CheckForWins.check_for_win(board)
     |> handle_play(board, current_player)
-  end
-
-  def get_human_move(
-        board \\ %BoardState{},
-        prompt \\ :initial_player_prompt,
-        current_player \\ :player
-      ) do
-    GameIO.get_player_input(current_player, prompt)
-    |> ProcessInput.handle_input(board)
-  end
-
-  def get_computer_move(board) do
-    next_move = ComputerPlayer.picks(board)
-
-    GameIO.get_computer_message(:chooses_spot, next_move)
-    |> IO.puts()
-
-    {:ok, next_move}
   end
 end

@@ -372,8 +372,7 @@ defmodule Check_For_Wins_Test do
 
     assert CheckForWins.check_for_win(
              {:ok, winning_computer_board_state},
-             winning_computer_board_state,
-             :player
+             winning_computer_board_state
            ) == {:ok, :wins_game, winning_computer_board_state}
   end
 
