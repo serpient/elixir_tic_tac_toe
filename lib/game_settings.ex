@@ -3,7 +3,7 @@ defmodule GameSettings do
     GameIO.clear_io()
 
     GameIO.get_input_for_game_settings(:game_board_settings, error)
-    |> ProcessInput.handle_board_size_input()
+    |> handle_board_size_input()
     |> GameSettings.handle_board_size()
   end
 
@@ -16,11 +16,25 @@ defmodule GameSettings do
     end
   end
 
+  def validate_board_size_input(result) do
+    case result do
+      3 -> {:ok, result}
+      4 -> {:ok, result}
+      _ -> {:error, :invalid_board_size_input}
+    end
+  end
+
+  def handle_board_size_input(input) do
+    input
+    |> ProcessInput.transform_to_integer()
+    |> validate_board_size_input()
+  end
+
   def get_opponent_type(error \\ nil) do
     GameIO.clear_io()
 
     GameIO.get_input_for_game_settings(:opponent_type_setting, error)
-    |> ProcessInput.handle_opponent_type_input()
+    |> handle_opponent_type_input()
     |> GameSettings.handle_opponent_type()
   end
 
@@ -31,5 +45,19 @@ defmodule GameSettings do
       :ok -> message
       :error -> GameSettings.get_opponent_type(message)
     end
+  end
+
+  def validate_opponent_type_input(result) do
+    case result do
+      "C" -> {:ok, :ai}
+      "L" -> {:ok, :opponent}
+      _ -> {:error, :invalid_opponent_type_input}
+    end
+  end
+
+  def handle_opponent_type_input(input) do
+    input
+    |> ProcessInput.transform_to_string()
+    |> validate_opponent_type_input()
   end
 end
