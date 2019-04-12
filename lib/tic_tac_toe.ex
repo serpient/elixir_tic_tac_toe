@@ -4,7 +4,7 @@ defmodule TicTacToe do
 
     case error_message do
       :game_is_a_tie -> GameIO.print_tie(updated_board)
-      _ -> play(initial_board, error_message, current_player)
+      _ -> play(initial_board, error_message, current_player, nil)
     end
   end
 
@@ -16,7 +16,8 @@ defmodule TicTacToe do
         play(
           updated_board,
           :initial_player_prompt,
-          GameIO.get_other_player_symbol(current_player, BoardState.opponent(updated_board))
+          GameIO.get_other_player_symbol(current_player, BoardState.opponent(updated_board)),
+          BoardState.opponent(updated_board)
         )
 
       message == :wins_game ->
@@ -31,17 +32,20 @@ defmodule TicTacToe do
     board_size = GameSettings.get_board_size()
     opponent_type = GameSettings.get_opponent_type()
 
+    GameIO.clear_io()
+
     Board.generate_board_data(board_size)
     |> BoardState.new_state(board_size, opponent_type)
-    |> play(:initial_player_prompt, :player)
+    |> play(:initial_player_prompt, :player, opponent_type)
   end
 
   def play(
         board \\ %BoardState{},
         prompt \\ :initial_player_prompt,
-        current_player \\ :player
+        current_player \\ :player,
+        opponent_type \\ :opponent
       ) do
-    GameIO.clear_io()
+    if opponent_type == :opponent or current_player == :ai or opponent_type == nil, do: GameIO.clear_io()
     GameIO.print_board(board)
 
     case current_player do
@@ -63,6 +67,10 @@ defmodule TicTacToe do
   end
 
   def get_computer_move(board) do
-    {:ok, ComputerPlayer.picks(board)}
+    GameIO.clear_io()
+    next_move = ComputerPlayer.picks(board)
+    IO.puts("\n\nComputer chooses spot #{next_move}.\n\n\n")
+
+    {:ok, next_move}
   end
 end
