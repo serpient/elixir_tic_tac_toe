@@ -45,8 +45,11 @@ defmodule TicTacToe do
         current_player \\ :player,
         opponent_type \\ :opponent
       ) do
-    if opponent_type == :opponent or current_player == :ai or opponent_type == nil, do: GameIO.clear_io()
-    GameIO.print_board(board)
+
+    if opponent_type == :opponent or
+         current_player == :ai or
+         opponent_type == nil,
+       do: GameIO.clear_io()
 
     case current_player do
       :ai -> get_computer_move(board)
@@ -62,12 +65,13 @@ defmodule TicTacToe do
         prompt \\ :initial_player_prompt,
         current_player \\ :player
       ) do
+    GameIO.print_board(board)
+
     GameIO.get_player_input(current_player, prompt)
     |> ProcessInput.handle_input(board)
   end
 
   def get_computer_move(board) do
-    GameIO.clear_io()
     next_move = ComputerPlayer.picks(board)
     IO.puts("\n\nComputer chooses spot #{next_move}.\n\n\n")
 
