@@ -4,11 +4,11 @@ defmodule Game_Output_Test do
   doctest GameIO
 
   test "[get_other_player_symbol] Toggles player symbols from X -> O" do
-    assert GameIO.get_other_player_symbol(:player) == :opponent
+    assert GameIO.get_other_player_symbol(:player, :local) == :opponent
   end
 
   test "[get_other_player_symbol] Toggles player symbols from O -> X" do
-    assert GameIO.get_other_player_symbol(:opponent) == :player
+    assert GameIO.get_other_player_symbol(:opponent, :local) == :player
   end
 
   test "[get_message] Gets correct message with key" do

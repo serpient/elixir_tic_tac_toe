@@ -9,7 +9,7 @@ defmodule GameIO do
       wins_game: ~s(Wins! \n\n),
       nil: ~s(Select a numbered spot: ),
       game_board_settings: ~s(     Please select a board size -- 3 or 4: ),
-      game_player_settings: "Select your opponent -- Local (l) or Computer (c):"
+      opponent_type_setting: "Select your opponent -- Local(L) or Computer(C):"
     }
 
     game_text[key]
@@ -21,10 +21,11 @@ defmodule GameIO do
     |> IO.puts()
   end
 
-  def get_other_player_symbol(player_symbol) do
+  def get_other_player_symbol(player_symbol, opponent_type) do
+    opponent = if opponent_type == :ai, do: :ai, else: :opponent
     case player_symbol do
-      :player -> :opponent
-      :opponent -> :player
+      :player -> opponent
+      _ -> :player
     end
   end
 
