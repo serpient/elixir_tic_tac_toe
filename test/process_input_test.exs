@@ -105,7 +105,7 @@ defmodule Process_Input_Test do
   end
 
   test "[validate_board_size_input] returns 3 or 4 if valid input" do
-    assert ProcessInput.validate_board_size_input(3) == 3
+    assert ProcessInput.validate_board_size_input(3) == {:ok, 3}
   end
 
   test "[validate_board_size_input] returns :error if input is not 3 or 4" do
@@ -119,17 +119,37 @@ defmodule Process_Input_Test do
   end
 
   test "[validate_opponent_type_input] returns :ai if input is c" do
-    assert ProcessInput.validate_opponent_type_input("c")
-        == :ai
+    assert ProcessInput.validate_opponent_type_input("C")
+        == {:ok, :ai}
   end
 
   test "[validate_opponent_type_input] returns :opponent if input is l" do
-    assert ProcessInput.validate_opponent_type_input("l")
-        == :opponent
+    assert ProcessInput.validate_opponent_type_input("L")
+        == {:ok, :opponent}
   end
 
   test "[validate_opponent_type_input] returns :error if input is not l or c" do
-    assert ProcessInput.validate_opponent_type_input("L")
+    assert ProcessInput.validate_opponent_type_input("a")
         == {:error, :invalid_opponent_type_input}
+  end
+
+
+  test "[handle_board_size_input] returns valid result if input is string 3" do
+    assert ProcessInput.handle_board_size_input("3")
+        == {:ok, 3}
+  end
+
+  test "[handle_board_size_input] returns :error if input is string 1" do
+    assert ProcessInput.handle_board_size_input("1")
+        == {:error, :invalid_board_size_input}
+  end
+
+  test "[handle_board_size_input] returns :error if input is string 2" do
+    assert ProcessInput.handle_board_size_input("2")
+        == {:error, :invalid_board_size_input}
+  end
+
+  test "[handle_opponent_type_input] returns :ok tuple if input is C of character type" do
+    assert ProcessInput.handle_opponent_type_input('C\n') == {:ok, :ai}
   end
 end
