@@ -68,7 +68,7 @@ defmodule Game_Output_Test do
   end
 
   test "[get_input_for_game_settings] Will get player settings input at beginning of game" do
-    assert capture_io(fn -> GameIO.get_input_for_game_settings(:game_board_settings) end) ==
+    assert capture_io(fn -> GameIO.get_input_for_game_settings(:game_board_settings, nil) end) ==
              GameIO.game_start_banner(:game_board_settings)
   end
 end

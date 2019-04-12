@@ -9,7 +9,7 @@ defmodule GameIO do
       wins_game: ~s(Wins! \n\n),
       nil: ~s(Select a numbered spot: ),
       game_board_settings: ~s(     Please select a board size -- 3 or 4: ),
-      opponent_type_setting: "Select your opponent -- Local(L) or Computer(C):"
+      opponent_type_setting: "Select your opponent -- (L)ocal or (C)omputer:"
     }
 
     game_text[key]
@@ -64,7 +64,7 @@ defmodule GameIO do
       "\n"
   end
 
-  def get_input_for_game_settings(message) do
+  def get_input_for_game_settings(message, error) do
     GameIO.game_start_banner(message)
     |> IO.gets()
   end
