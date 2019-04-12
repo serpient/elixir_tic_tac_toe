@@ -26,6 +26,8 @@ If no win -- continue
 - Ability to play against a computer player. The computer should just choose random moves. 
 - Ability to choose between a 3x3 and 4x4 board.
 
+![gif](https://media.giphy.com/media/MC8smtRsz4ajjbqTG1/giphy.gif)
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
