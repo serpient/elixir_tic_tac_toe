@@ -22,6 +22,22 @@ defmodule ProcessInput do
     error
   end
 
+  def validate_board_size_input(result) do
+    case result do
+      3 -> result
+      4 -> result
+      _-> {:error, :invalid_board_size_input}
+    end
+  end
+
+  def validate_opponent_type_input(result) do
+    case result do
+      "c" -> :ai
+      "l" -> :opponent
+      _-> {:error, :invalid_opponent_type_input}
+    end
+  end
+
   def handle_input(input, board_state) do
     input
     |> transform_to_integer

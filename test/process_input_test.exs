@@ -103,4 +103,33 @@ defmodule Process_Input_Test do
     assert ProcessInput.handle_input("17", error_board_spec) ==
              {:error, :invalid_input_range}
   end
+
+  test "[validate_board_size_input] returns 3 or 4 if valid input" do
+    assert ProcessInput.validate_board_size_input(3) == 3
+  end
+
+  test "[validate_board_size_input] returns :error if input is not 3 or 4" do
+    assert ProcessInput.validate_board_size_input(5)
+        == {:error, :invalid_board_size_input}
+  end
+
+  test "[validate_board_size_input] returns :error if input is not a number" do
+    assert ProcessInput.validate_board_size_input("a")
+        == {:error, :invalid_board_size_input}
+  end
+
+  test "[validate_opponent_type_input] returns :ai if input is c" do
+    assert ProcessInput.validate_opponent_type_input("c")
+        == :ai
+  end
+
+  test "[validate_opponent_type_input] returns :opponent if input is l" do
+    assert ProcessInput.validate_opponent_type_input("l")
+        == :opponent
+  end
+
+  test "[validate_opponent_type_input] returns :error if input is not l or c" do
+    assert ProcessInput.validate_opponent_type_input("L")
+        == {:error, :invalid_opponent_type_input}
+  end
 end
