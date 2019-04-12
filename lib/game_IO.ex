@@ -15,6 +15,14 @@ defmodule GameIO do
     game_text[key]
   end
 
+  def print_computer_message(key, value) do
+    computer_player_message = %{
+      chooses_spot: ~s(\n\nComputer chooses spot #{value}.\n\n\n)
+    }
+
+    computer_player_message[key]
+  end
+
   def print_board(board_state) do
     board_state
     |> PrintableBoard.generate_board_for_print()

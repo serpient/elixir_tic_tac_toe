@@ -45,7 +45,6 @@ defmodule TicTacToe do
         current_player \\ :player,
         opponent_type \\ :opponent
       ) do
-
     if opponent_type == :opponent or
          current_player == :ai or
          opponent_type == nil,
@@ -73,7 +72,9 @@ defmodule TicTacToe do
 
   def get_computer_move(board) do
     next_move = ComputerPlayer.picks(board)
-    IO.puts("\n\nComputer chooses spot #{next_move}.\n\n\n")
+
+    GameIO.print_computer_message(:chooses_spot, next_move)
+    |> IO.puts()
 
     {:ok, next_move}
   end
