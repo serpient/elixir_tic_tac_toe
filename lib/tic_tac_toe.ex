@@ -48,7 +48,7 @@ defmodule TicTacToe do
     GameIO.clear_console_logic(current_player, opponent_type)
     case current_player do
       :ai -> get_computer_move(board)
-      _ -> get_human_move(board, prompt, current_player)
+      _ ->  GameIO.print_board(board); get_human_move(board, prompt, current_player)
     end
     |> Board.handle_board_update(board, current_player)
     |> CheckForWins.check_for_win(board)
@@ -60,8 +60,6 @@ defmodule TicTacToe do
         prompt \\ :initial_player_prompt,
         current_player \\ :player
       ) do
-    GameIO.print_board(board)
-
     GameIO.get_player_input(current_player, prompt)
     |> ProcessInput.handle_input(board)
   end
