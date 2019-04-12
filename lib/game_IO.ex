@@ -23,6 +23,7 @@ defmodule GameIO do
 
   def get_other_player_symbol(player_symbol, opponent_type) do
     opponent = if opponent_type == :ai, do: :ai, else: :opponent
+
     case player_symbol do
       :player -> opponent
       _ -> :player

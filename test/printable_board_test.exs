@@ -109,14 +109,14 @@ defmodule Printable_Board_Test do
       1 => :empty,
       2 => :ai,
       3 => :player,
-      4 => :opponent,
+      4 => :opponent
     }
+
     three_board_state = %BoardState{
       board_data: initial_board_state
     }
 
-    assert BoardState.get_string_values(three_board_state)
-       == [" ", "O", "X", "O"]
-
+    assert BoardState.get_string_values(three_board_state) ==
+             [" ", "O", "X", "O"]
   end
 end

@@ -26,7 +26,7 @@ defmodule ProcessInput do
     case result do
       3 -> {:ok, result}
       4 -> {:ok, result}
-      _-> {:error, :invalid_board_size_input}
+      _ -> {:error, :invalid_board_size_input}
     end
   end
 
@@ -34,7 +34,7 @@ defmodule ProcessInput do
     case result do
       "C" -> {:ok, :ai}
       "L" -> {:ok, :opponent}
-      _-> {:error, :invalid_opponent_type_input}
+      _ -> {:error, :invalid_opponent_type_input}
     end
   end
 

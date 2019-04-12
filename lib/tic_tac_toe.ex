@@ -55,14 +55,15 @@ defmodule TicTacToe do
   end
 
   def human_turn(
-      board \\ %BoardState{},
-      prompt \\ :initial_player_prompt,
-      current_player \\ :player
-    ) do
+        board \\ %BoardState{},
+        prompt \\ :initial_player_prompt,
+        current_player \\ :player
+      ) do
     GameIO.get_player_input(current_player, prompt)
     |> ProcessInput.handle_input(board)
   end
+
   def computer_turn(board) do
-    {:ok, ComputerPlayer.picks(board) }
+    {:ok, ComputerPlayer.picks(board)}
   end
 end

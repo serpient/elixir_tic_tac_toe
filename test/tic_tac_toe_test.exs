@@ -63,7 +63,7 @@ defmodule Tic_Tac_Toe_Test do
     computer_board = %{
       1 => :empty,
       2 => :player,
-      3 => :player,
+      3 => :player
     }
 
     computer_board_spec = BoardState.new_state(computer_board, 3, :ai)

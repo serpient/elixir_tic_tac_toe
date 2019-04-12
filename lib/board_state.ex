@@ -50,7 +50,7 @@ defmodule BoardState do
         true -> [key]
         _ -> []
       end
-    end )
+    end)
   end
 
   def update_board(position_to_update, board_state, player_symbol) do
