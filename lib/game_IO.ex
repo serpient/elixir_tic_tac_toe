@@ -83,7 +83,7 @@ defmodule GameIO do
       "\n"
   end
 
-  def get_input_for_game_settings(message, error) do
+  def get_input_for_game_settings(message, _error) do
     GameIO.game_start_banner(message)
     |> IO.gets()
   end

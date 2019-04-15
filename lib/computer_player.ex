@@ -1,10 +1,4 @@
 defmodule ComputerPlayer do
-  def picks(board_state) do
-    board_state
-    |> BoardState.get_empty_values()
-    |> Enum.random()
-  end
-
   def get_move(board) do
     next_move = ComputerPlayer.picks(board)
 
@@ -12,5 +6,11 @@ defmodule ComputerPlayer do
     |> IO.puts()
 
     {:ok, next_move}
+  end
+
+  def picks(board_state) do
+    board_state
+    |> BoardState.get_empty_values()
+    |> Enum.random()
   end
 end

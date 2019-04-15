@@ -1,15 +1,11 @@
 defmodule CheckForWins do
-  def is_row_a_win?(row_data, player_symbol) do
-    Enum.all?(row_data, fn symbol -> symbol == player_symbol end)
-  end
+  def check_for_win(result, board_state) do
+    {result_code, result_value} = result
 
-  def has_winning_row?(all_rows) do
-    all_rows
-    |> Enum.any?(fn row ->
-      is_row_a_win?(row, :player)
-      || is_row_a_win?(row, :opponent)
-      || is_row_a_win?(row, :ai)
-    end)
+    case result_code do
+      :ok -> analyze(result_value)
+      :error -> Tuple.append(result, board_state)
+    end
   end
 
   def analyze(board_state) do
@@ -26,12 +22,16 @@ defmodule CheckForWins do
     end
   end
 
-  def check_for_win(result, board_state) do
-    {result_code, result_value} = result
+  def has_winning_row?(all_rows) do
+    all_rows
+    |> Enum.any?(fn row ->
+      is_row_a_win?(row, :player)
+      || is_row_a_win?(row, :opponent)
+      || is_row_a_win?(row, :ai)
+    end)
+  end
 
-    case result_code do
-      :ok -> analyze(result_value)
-      :error -> Tuple.append(result, board_state)
-    end
+  def is_row_a_win?(row_data, player_symbol) do
+    Enum.all?(row_data, fn symbol -> symbol == player_symbol end)
   end
 end

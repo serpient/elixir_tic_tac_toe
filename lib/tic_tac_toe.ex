@@ -1,12 +1,31 @@
 defmodule TicTacToe do
-  def handle_error(error, initial_board, current_player, updated_board \\ %{}) do
-    {_status, error_message} = error
+  def game_start() do
+    board_size = GameSettings.get_board_size()
+    opponent_type = GameSettings.get_opponent_type()
 
-    case error_message do
-      :game_is_a_tie -> GameIO.print_tie(updated_board)
-      _ -> play(initial_board, error_message, current_player, nil)
-    end
+    GameIO.clear_io()
+
+    Board.generate_board_data(board_size)
+    |> BoardState.new_state(board_size, opponent_type)
+    |> play(:initial_player_prompt, :player, opponent_type)
   end
+
+  defp play(
+        board,
+        prompt,
+        current_player,
+        opponent_type
+      ) do
+    GameIO.clear_console_logic(current_player, opponent_type)
+    case current_player do
+      :ai -> ComputerPlayer.get_move(board)
+      _ ->  GameIO.print_board(board); HumanPlayer.get_move(board, prompt, current_player)
+    end
+    |> Board.handle_board_update(board, current_player)
+    |> CheckForWins.check_for_win(board)
+    |> handle_play(board, current_player)
+  end
+
 
   def handle_play(result, initial_board, current_player) do
     {status, message, updated_board} = result
@@ -28,30 +47,12 @@ defmodule TicTacToe do
     end
   end
 
-  def game_start() do
-    board_size = GameSettings.get_board_size()
-    opponent_type = GameSettings.get_opponent_type()
+  def handle_error(error, initial_board, current_player, updated_board \\ %{}) do
+    {_status, error_message} = error
 
-    GameIO.clear_io()
-
-    Board.generate_board_data(board_size)
-    |> BoardState.new_state(board_size, opponent_type)
-    |> play(:initial_player_prompt, :player, opponent_type)
-  end
-
-  def play(
-        board \\ %BoardState{},
-        prompt \\ :initial_player_prompt,
-        current_player \\ :player,
-        opponent_type \\ :opponent
-      ) do
-    GameIO.clear_console_logic(current_player, opponent_type)
-    case current_player do
-      :ai -> ComputerPlayer.get_move(board)
-      _ ->  GameIO.print_board(board); HumanPlayer.get_move(board, prompt, current_player)
+    case error_message do
+      :game_is_a_tie -> GameIO.print_tie(updated_board)
+      _ -> play(initial_board, error_message, current_player, nil)
     end
-    |> Board.handle_board_update(board, current_player)
-    |> CheckForWins.check_for_win(board)
-    |> handle_play(board, current_player)
   end
 end
