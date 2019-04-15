@@ -14,7 +14,7 @@ defmodule PrintableBoard do
   end
 
   defp create_parts_for_a_single_cell(
-        curr_column_number,
+        current_cell_display_number,
         at_end_of_cell?,
         at_bottom_of_last_row?,
         board_data
@@ -22,8 +22,8 @@ defmodule PrintableBoard do
     bottom = if at_bottom_of_last_row?, do: "empty_space", else: "bottom_border"
 
     [
-      get_cell_part("label", at_end_of_cell?, curr_column_number),
-      get_cell_part("symbol", at_end_of_cell?, Enum.at(board_data, curr_column_number - 1)),
+      get_cell_part("label", at_end_of_cell?, current_cell_display_number),
+      get_cell_part("symbol", at_end_of_cell?, Enum.at(board_data, current_cell_display_number - 1)),
       get_cell_part(bottom, at_end_of_cell?, nil)
     ]
   end
@@ -31,11 +31,11 @@ defmodule PrintableBoard do
   defp create_row_of_cells(board_size, row_idx, at_bottom_of_last_row?, board_data) do
     1..board_size
     |> Enum.map(fn column_idx ->
-      curr_column_number = row_idx * board_size + column_idx
+      current_cell_display_number = row_idx * board_size + column_idx
       at_end_of_cell? = column_idx == board_size
 
       create_parts_for_a_single_cell(
-        curr_column_number,
+        current_cell_display_number,
         at_end_of_cell?,
         at_bottom_of_last_row?,
         board_data

@@ -25,7 +25,7 @@ defmodule BoardState do
     state.board_data
   end
 
-  def all_keys(state) do
+  def all_positions(state) do
     state
     |> board()
     |> Map.values()

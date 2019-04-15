@@ -8,23 +8,23 @@ defmodule Board do
     end
   end
 
-  def has_empty_spaces?(board_state) do
+  def is_full?(board_state) do
     board_state
-    |> BoardState.all_keys()
-    |> Enum.any?(fn value -> value == :empty end)
+    |> BoardState.all_positions()
+    |> Enum.all?(fn value -> value != :empty end)
   end
 
-  def is_a_empty_space(board_position, board) do
+  def is_position_empty?(board_position, board) do
     board[board_position] == :empty
   end
 
-  def convert_horizontal_to_row(board_state) do
+  def horizontal_rows(board_state) do
     board_state
-    |> BoardState.all_keys()
+    |> BoardState.all_positions()
     |> Enum.chunk_every(BoardState.size(board_state))
   end
 
-  def convert_vertical_to_row(board_state) do
+  def vertical_rows(board_state) do
     board_size = BoardState.size(board_state)
     board = BoardState.board(board_state)
     max_spaces = BoardState.max_spaces(board_state)
@@ -35,7 +35,7 @@ defmodule Board do
     end)
   end
 
-  def convert_diagonal_to_row(board_state) do
+  def diagonal_rows(board_state) do
     board_size = BoardState.size(board_state)
     board = BoardState.board(board_state)
     max_spaces = BoardState.max_spaces(board_state)

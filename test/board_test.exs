@@ -43,7 +43,7 @@ defmodule Board_Test do
              {:error, :invalid_input}
   end
 
-  test "[has_empty_spaces] Returns False if board is filled." do
+  test "[is_full] Returns true if board is filled." do
     has_no_empty_spaces_board = %{
       1 => :player,
       2 => :opponent,
@@ -52,42 +52,42 @@ defmodule Board_Test do
 
     initial_board_spec = BoardState.new_state(has_no_empty_spaces_board, 3)
 
-    assert Board.has_empty_spaces?(initial_board_spec) == false
+    assert Board.is_full?(initial_board_spec) == true
   end
 
-  test "[has_empty_spaces] Returns True if board has more spaces to play." do
-    has_empty_spaces_board = %{
+  test "[is_full] Returns false if board has more spaces to play." do
+    is_full_board = %{
       1 => :player,
       2 => :opponent,
       3 => :empty
     }
 
-    initial_board_spec = BoardState.new_state(has_empty_spaces_board, 3)
+    initial_board_spec = BoardState.new_state(is_full_board, 3)
 
-    assert Board.has_empty_spaces?(initial_board_spec) == true
+    assert Board.is_full?(initial_board_spec) == false
   end
 
-  test "[is_a_empty_space] Returns false if position has player symbol." do
+  test "[is_position_empty?] Returns false if position has player symbol." do
     space_is_already_taken_board = %{
       1 => :player,
       2 => :empty,
       3 => :empty
     }
 
-    assert Board.is_a_empty_space(1, space_is_already_taken_board) == false
+    assert Board.is_position_empty?(1, space_is_already_taken_board) == false
   end
 
-  test "[is_a_empty_space] Returns true if position has no player symbol." do
+  test "[is_position_empty?] Returns true if position has no player symbol." do
     space_is_not_taken_board = %{
       1 => :opponent,
       2 => :empty,
       3 => :empty
     }
 
-    assert Board.is_a_empty_space(2, space_is_not_taken_board) == true
+    assert Board.is_position_empty?(2, space_is_not_taken_board) == true
   end
 
-  test "[convert_horizontal_to_row] Converts 3x3 board correctly" do
+  test "[horizontal_rows] Converts 3x3 board correctly" do
     initial_board = %{
       1 => "1",
       2 => "2",
@@ -104,14 +104,14 @@ defmodule Board_Test do
       board_data: initial_board
     }
 
-    assert Board.convert_horizontal_to_row(horizontal_conversion_board_spec) == [
+    assert Board.horizontal_rows(horizontal_conversion_board_spec) == [
              ["1", "2", "3"],
              ["4", "5", "6"],
              ["7", "8", "9"]
            ]
   end
 
-  test "[convert_horizontal_to_row] Converts 4x4 board correctly" do
+  test "[horizontal_rows] Converts 4x4 board correctly" do
     new_4x4_board = %{
       1 => "1",
       2 => "2",
@@ -133,7 +133,7 @@ defmodule Board_Test do
 
     horizontal_conversion_board_spec = BoardState.new_state(new_4x4_board, 4)
 
-    assert Board.convert_horizontal_to_row(horizontal_conversion_board_spec) == [
+    assert Board.horizontal_rows(horizontal_conversion_board_spec) == [
              ["1", "2", "3", "4"],
              ["5", "6", "7", "8"],
              ["9", "10", "11", "12"],
@@ -141,7 +141,7 @@ defmodule Board_Test do
            ]
   end
 
-  test "[convert_vertical_to_row] Converts 3x3 board correctly" do
+  test "[vertical_rows] Converts 3x3 board correctly" do
     new_3x3_board = %{
       1 => "1",
       2 => "2",
@@ -156,14 +156,14 @@ defmodule Board_Test do
 
     vertical_conversion_board_spec = BoardState.new_state(new_3x3_board, 3)
 
-    assert Board.convert_vertical_to_row(vertical_conversion_board_spec) == [
+    assert Board.vertical_rows(vertical_conversion_board_spec) == [
              ["1", "4", "7"],
              ["2", "5", "8"],
              ["3", "6", "9"]
            ]
   end
 
-  test "[convert_vertical_to_row] Converts 4x4 board correctly" do
+  test "[vertical_rows] Converts 4x4 board correctly" do
     new_4x4_board = %{
       1 => "1",
       2 => "2",
@@ -185,7 +185,7 @@ defmodule Board_Test do
 
     vertical_conversion_board_spec = BoardState.new_state(new_4x4_board, 4)
 
-    assert Board.convert_vertical_to_row(vertical_conversion_board_spec) == [
+    assert Board.vertical_rows(vertical_conversion_board_spec) == [
              ["1", "5", "9", "13"],
              ["2", "6", "10", "14"],
              ["3", "7", "11", "15"],
@@ -193,7 +193,7 @@ defmodule Board_Test do
            ]
   end
 
-  test "[convert_diagonal_to_row] Converts board correctly" do
+  test "[diagonal_rows] Converts board correctly" do
     initial_board = %{
       1 => "1",
       2 => "2",
@@ -210,13 +210,13 @@ defmodule Board_Test do
       board_data: initial_board
     }
 
-    assert Board.convert_diagonal_to_row(diagonal_conversion_board_spec) == [
+    assert Board.diagonal_rows(diagonal_conversion_board_spec) == [
              ["1", "5", "9"],
              ["3", "5", "7"]
            ]
   end
 
-  test "[convert_diagonal_to_row] Converts 4x4 board correctly" do
+  test "[diagonal_rows] Converts 4x4 board correctly" do
     new_4x4_board = %{
       1 => "1",
       2 => "2",
@@ -238,7 +238,7 @@ defmodule Board_Test do
 
     diagonal_conversion_board_spec = BoardState.new_state(new_4x4_board, 4)
 
-    assert Board.convert_diagonal_to_row(diagonal_conversion_board_spec) == [
+    assert Board.diagonal_rows(diagonal_conversion_board_spec) == [
              ["1", "6", "11", "16"],
              ["4", "7", "10", "13"]
            ]

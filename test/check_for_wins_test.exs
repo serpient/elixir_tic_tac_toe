@@ -292,7 +292,7 @@ defmodule Check_For_Wins_Test do
              {:ok, :wins_game, diagonal_win_board_spec}
   end
 
-  test "[handle_check_for_win] Winning board is passed to analyze and results in ok tuple" do
+  test "[check_for_win] Winning board is passed to analyze and results in ok tuple" do
     winning_board = %{
       1 => :player,
       2 => :player,
@@ -309,7 +309,7 @@ defmodule Check_For_Wins_Test do
       board_data: winning_board
     }
 
-    assert CheckForWins.check_for_win({:ok, winning_board_spec}, winning_board_spec, :player) ==
+    assert CheckForWins.check_for_win({:ok, winning_board_spec}, winning_board_spec) ==
              {:ok, :wins_game, winning_board_spec}
   end
 
@@ -332,8 +332,7 @@ defmodule Check_For_Wins_Test do
 
     assert CheckForWins.check_for_win(
              {:ok, non_winning_board_spec},
-             non_winning_board_spec,
-             :player
+             non_winning_board_spec
            ) == {:ok, :no_win, non_winning_board_spec}
   end
 
@@ -350,7 +349,7 @@ defmodule Check_For_Wins_Test do
       9 => :empty
     }
 
-    assert CheckForWins.check_for_win({:error, :invalid_input}, board_with_error, :player) ==
+    assert CheckForWins.check_for_win({:error, :invalid_input}, board_with_error) ==
              {:error, :invalid_input, board_with_error}
   end
 
@@ -362,23 +361,23 @@ defmodule Check_For_Wins_Test do
     assert CheckForWins.is_row_a_win?([:player, :player, :player], :opponent) == false
   end
 
-  test "[is_any_row_within_board_a_win?] Checks each row in data and returns true if there is at least a single winning row" do
+  test "[has_winning_row?] Checks each row in data and returns true if there is at least a single winning row" do
     board_data_split_by_row = [
       [:player, :opponent, :player],
       [:opponent, :player, :opponent],
       [:player, :player, :player]
     ]
 
-    assert CheckForWins.is_any_row_within_board_a_win?(board_data_split_by_row) == true
+    assert CheckForWins.has_winning_row?(board_data_split_by_row) == true
   end
 
-  test "[is_any_row_within_board_a_win?] Checks each row in data and returns false if there is no winning row" do
+  test "[has_winning_row?] Checks each row in data and returns false if there is no winning row" do
     board_data_split_by_row = [
       [:player, :opponent, :player],
       [:opponent, :player, :opponent],
       [:player, :opponent, :player]
     ]
 
-    assert CheckForWins.is_any_row_within_board_a_win?(board_data_split_by_row) == false
+    assert CheckForWins.has_winning_row?(board_data_split_by_row) == false
   end
 end
