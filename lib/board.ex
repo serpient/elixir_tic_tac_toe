@@ -27,10 +27,9 @@ defmodule Board do
     board = BoardState.board(board_state)
     max_spaces = BoardState.max_spaces(board_state)
 
-    1..board_size
-    |> Enum.map(fn row_idx ->
+    for row_idx <- 1..board_size do
       generate_row_values(row_idx..max_spaces, board_size, board_size, board)
-    end)
+    end
   end
 
   def diagonal_rows(board_state) do
