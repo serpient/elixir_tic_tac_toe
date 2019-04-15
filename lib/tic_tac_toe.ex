@@ -5,7 +5,8 @@ defmodule TicTacToe do
 
     GameIO.clear_io()
 
-    Board.generate_board_data(board_size)
+    board_size
+    |> Board.generate_board_data
     |> BoardState.new_state(board_size, opponent_type)
     |> play(:initial_player_prompt, :player, opponent_type)
   end

@@ -8,11 +8,9 @@ defmodule GameSettings do
   end
 
   def handle_board_size(result) do
-    {status, message} = result
-
-    case status do
-      :ok -> message
-      :error -> GameSettings.get_board_size(message)
+    case result do
+      {:ok, message} -> message
+      {:error, message} -> GameSettings.get_board_size(message)
     end
   end
 
@@ -39,11 +37,9 @@ defmodule GameSettings do
   end
 
   def handle_opponent_type(result) do
-    {status, message} = result
-
-    case status do
-      :ok -> message
-      :error -> GameSettings.get_opponent_type(message)
+    case result do
+      {:ok, message} -> message
+      {:error, message} -> GameSettings.get_opponent_type(message)
     end
   end
 

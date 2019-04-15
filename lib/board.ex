@@ -1,10 +1,8 @@
 defmodule Board do
   def handle_board_update(result, board_state, player_symbol) do
-    {status, position_to_update} = result
-
-    case status do
-      :ok -> {:ok, BoardState.update_board(position_to_update, board_state, player_symbol)}
-      :error -> result
+    case result do
+      {:ok, position_to_update} -> {:ok, BoardState.update_board(position_to_update, board_state, player_symbol)}
+      {:error, _message} -> result
     end
   end
 
