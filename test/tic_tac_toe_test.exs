@@ -5,7 +5,7 @@ defmodule Tic_Tac_Toe_Test do
   doctest GameIO
   doctest ProcessInput
 
-  test "[handle_check_for_win_result] Tie result will end the game and output Tie message." do
+  test "[handle_play] Tie result will end the game and output Tie message." do
     tie_board = %{
       1 => "X",
       2 => "X",
@@ -18,17 +18,21 @@ defmodule Tic_Tac_Toe_Test do
       9 => "X"
     }
 
+    tie_board_spec = %BoardState{
+      board_data: tie_board
+    }
+
     assert capture_io(fn ->
-             TicTacToe.handle_check_for_win_result(
-               {:error, :game_is_a_tie, tie_board},
-               tie_board,
+             TicTacToe.handle_play(
+               {:error, :game_is_a_tie, tie_board_spec},
+               tie_board_spec,
                "O"
              )
            end) ==
-            capture_io(fn -> GameIO.print_tie(tie_board) end)
+             capture_io(fn -> GameIO.print_tie(tie_board_spec) end)
   end
 
-  test "[handle_check_for_win_result] Winning result will end the game and output Win Game message" do
+  test "[handle_play] Winning result will end the game and output Win Game message" do
     winning_board = %{
       1 => "X",
       2 => "X",
@@ -41,13 +45,17 @@ defmodule Tic_Tac_Toe_Test do
       9 => " "
     }
 
+    winning_board_spec = %BoardState{
+      board_data: winning_board
+    }
+
     assert capture_io(fn ->
-             TicTacToe.handle_check_for_win_result(
-               {:ok, :wins_game, winning_board},
-               winning_board,
+             TicTacToe.handle_play(
+               {:ok, :wins_game, winning_board_spec},
+               winning_board_spec,
                "X"
              )
            end) ==
-           capture_io(fn -> GameIO.print_win(winning_board, "X") end)
+             capture_io(fn -> GameIO.print_win(winning_board_spec, "X") end)
   end
 end

@@ -3,29 +3,12 @@ defmodule Game_Output_Test do
   import ExUnit.CaptureIO
   doctest GameIO
 
-  test "[print_board] Prints 3x3 board to CL" do
-    initial_3x3_board = %{
-      1 => " ",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
-    }
-
-    assert capture_io(fn -> GameIO.print_board(initial_3x3_board) end) ==
-             GameIO.get_board(initial_3x3_board) <> "\n"
-  end
-
   test "[get_other_player_symbol] Toggles player symbols from X -> O" do
-    assert GameIO.get_other_player_symbol("X") == "O"
+    assert GameIO.get_other_player_symbol(:player) == :opponent
   end
 
   test "[get_other_player_symbol] Toggles player symbols from O -> X" do
-    assert GameIO.get_other_player_symbol("O") == "X"
+    assert GameIO.get_other_player_symbol(:opponent) == :player
   end
 
   test "[get_message] Gets correct message with key" do
@@ -38,35 +21,54 @@ defmodule Game_Output_Test do
 
   test "[print_win] Prints win message" do
     winning_board = %{
-      1 => " ",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
+      1 => :empty,
+      2 => :empty,
+      3 => :empty,
+      4 => :empty,
+      5 => :empty,
+      6 => :empty,
+      7 => :empty,
+      8 => :empty,
+      9 => :empty
     }
-    assert capture_io(fn -> GameIO.print_win(winning_board, "X") end) ==
-             GameIO.get_board(winning_board) <> "\n"
-             <>  "Player X - " <> GameIO.get_message(:wins_game) <> "\n"
+
+    winning_board_spec = %BoardState{
+      board_data: winning_board
+    }
+
+    assert capture_io(fn -> GameIO.print_win(winning_board_spec, "X") end) ==
+             capture_io(fn -> GameIO.clear_io() end) <>
+               PrintableBoard.generate_board_for_print(winning_board_spec) <>
+               "\n" <>
+               "Player X - " <> GameIO.get_message(:wins_game) <> "\n"
   end
 
   test "[print_tie] Prints tie message" do
     tie_board = %{
-      1 => " ",
-      2 => " ",
-      3 => " ",
-      4 => " ",
-      5 => " ",
-      6 => " ",
-      7 => " ",
-      8 => " ",
-      9 => " "
+      1 => :empty,
+      2 => :empty,
+      3 => :empty,
+      4 => :empty,
+      5 => :empty,
+      6 => :empty,
+      7 => :empty,
+      8 => :empty,
+      9 => :empty
     }
-    assert capture_io(fn -> GameIO.print_tie(tie_board) end) ==
-             GameIO.get_board(tie_board) <> "\n"
-             <> GameIO.get_message(:game_is_a_tie) <> "\n"
+
+    tie_board_spec = %BoardState{
+      board_data: tie_board
+    }
+
+    assert capture_io(fn -> GameIO.print_tie(tie_board_spec) end) ==
+             capture_io(fn -> GameIO.clear_io() end) <>
+               PrintableBoard.generate_board_for_print(tie_board_spec) <>
+               "\n" <>
+               GameIO.get_message(:game_is_a_tie) <> "\n"
+  end
+
+  test "[get_input_for_game_settings] Will get player settings input at beginning of game" do
+    assert capture_io(fn -> GameIO.get_input_for_game_settings(:game_board_settings) end) ==
+             GameIO.game_start_banner(:game_board_settings)
   end
 end

@@ -5,41 +5,32 @@ defmodule GameIO do
       duplicate_input: ~s(That spot is taken! Please choose another number: ),
       invalid_input: ~s(Please enter a number: ),
       game_is_a_tie: ~s(No more positions to play! The game is a tie.),
-      invalid_input_range: ~s{Please enter a number from 1 - 9: },
+      invalid_input_range: ~s{Please enter a valid number: },
       wins_game: ~s(Wins! \n\n),
-      nil: ~s(Select a numbered spot: )
+      nil: ~s(Select a numbered spot: ),
+      game_board_settings: ~s(     Please select a board size -- 3 or 4: ),
+      game_player_settings: "Select your opponent -- Local (l) or Computer (c):"
     }
 
     game_text[key]
   end
 
-  def get_board(board_data) do
-    [p1, p2, p3, p4, p5, p6, p7, p8, p9] = Map.values(board_data)
-
-    margin_top = "\n"
-    row1 = "1    |2    |3    \n  #{p1}  |  #{p2}  |  #{p3}  \n_____|_____|_____\n"
-    row2 = "4    |5    |6    \n  #{p4}  |  #{p5}  |  #{p6}  \n_____|_____|_____\n"
-    row3 = "7    |8    |9    \n  #{p7}  |  #{p8}  |  #{p9}  \n     |     |     \n"
-    margin_bottom = "\n\n\n"
-
-    ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
-  end
-
-  def print_board(board_data) do
-    board_data
-    |> get_board
+  def print_board(board_state) do
+    board_state
+    |> PrintableBoard.generate_board_for_print()
     |> IO.puts()
   end
 
   def get_other_player_symbol(player_symbol) do
     case player_symbol do
-      "X" -> "O"
-      "O" -> "X"
+      :player -> :opponent
+      :opponent -> :player
     end
   end
 
-  def print_win(board_data, current_player) do
-    print_board(board_data)
+  def print_win(board_state, current_player) do
+    clear_io()
+    print_board(board_state)
 
     ("Player #{current_player} - " <> GameIO.get_message(:wins_game))
     |> IO.puts()
@@ -50,9 +41,35 @@ defmodule GameIO do
     |> IO.gets()
   end
 
-  def print_tie(board_data) do
-    print_board(board_data)
+  def print_tie(board_state) do
+    clear_io()
+    print_board(board_state)
+
     GameIO.get_message(:game_is_a_tie)
     |> IO.puts()
+  end
+
+  def game_start_banner(message) do
+    empty_row = ~s(                                                            \n\n)
+    border_row = ~s(#######################################################     \n)
+
+    "\n" <>
+      border_row <>
+      String.duplicate(empty_row, 2) <>
+      ~s(               T I C . T A C . T O E                         \n\n) <>
+      ~s(  #{GameIO.get_message(message)}             \n) <>
+      String.duplicate(empty_row, 2) <>
+      border_row <>
+      "\n"
+  end
+
+  def get_input_for_game_settings(message) do
+    GameIO.game_start_banner(message)
+    |> IO.gets()
+  end
+
+  def clear_io() do
+    IO.write("\e[H\e[J")
+    IEx.dont_display_result()
   end
 end

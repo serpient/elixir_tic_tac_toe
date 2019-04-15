@@ -8,7 +8,7 @@ defmodule TicTacToe do
     end
   end
 
-  def handle_check_for_win_result(result, initial_board, current_player) do
+  def handle_play(result, initial_board, current_player) do
     {status, message, updated_board} = result
 
     cond do
@@ -27,27 +27,30 @@ defmodule TicTacToe do
     end
   end
 
+  def game_start() do
+    board_size =
+      GameIO.get_input_for_game_settings(:game_board_settings)
+      |> ProcessInput.transform_to_integer()
+
+    GameIO.clear_io()
+
+    Board.generate_board_data(board_size)
+    |> BoardState.new_state(board_size)
+    |> play(:initial_player_prompt, :player)
+  end
+
   def play(
-        board \\ %{
-          1 => " ",
-          2 => " ",
-          3 => " ",
-          4 => " ",
-          5 => " ",
-          6 => " ",
-          7 => " ",
-          8 => " ",
-          9 => " "
-        },
+        board \\ %BoardState{},
         prompt \\ :initial_player_prompt,
-        current_player \\ "X"
+        current_player \\ :player
       ) do
+    GameIO.clear_io()
     GameIO.print_board(board)
 
     GameIO.get_player_input(current_player, prompt)
-    |> ProcessInput.handle_input(board, current_player)
+    |> ProcessInput.handle_input(board)
     |> Board.handle_board_update(board, current_player)
-    |> CheckForWins.check_for_win(board, current_player)
-    |> handle_check_for_win_result(board, current_player)
+    |> CheckForWins.check_for_win(board)
+    |> handle_play(board, current_player)
   end
 end
