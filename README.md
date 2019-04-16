@@ -20,8 +20,6 @@ If no win -- continue
 6. Updates board with current player marker
 7. Toggle current player
 
-![gif](https://media.giphy.com/media/SHdUoTyvbDLc1XRv4S/giphy.gif)
-
 ## Phase 2: Simple Computer Player
 - Ability to play against a computer player. The computer should just choose random moves. 
 - Ability to choose between a 3x3 and 4x4 board.
@@ -44,6 +42,9 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/elixir_tic_tac_toe](https://hexdocs.pm/elixir_tic_tac_toe).
+
+## Game Entry
+`TicTacToe.game_start()`
 
 ## Compile project
 `mix compile`
