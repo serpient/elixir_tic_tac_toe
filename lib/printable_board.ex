@@ -52,10 +52,7 @@ defmodule PrintableBoard do
       "empty_space" => "     "
     }
 
-    cond do
-      at_end_of_cell? -> draw[cell_part]
-      true -> draw[cell_part] <> "|"
-    end
+    if at_end_of_cell?, do: draw[cell_part], else: draw[cell_part] <> "|"
   end
 
   defp zip_cell_parts_into_list(list_of_parts) do
