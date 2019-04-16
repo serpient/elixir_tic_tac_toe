@@ -7,11 +7,10 @@ defmodule BoardSizeSettings do
     |> handle_board_size()
   end
 
-  def handle_board_size(result) do
-    case result do
-      {:ok, message} -> message
-      {:error, message} -> get_board_size(message)
-    end
+  def handle_board_size_input(input) do
+    input
+    |> ProcessInput.transform_to_integer()
+    |> validate_board_size_input()
   end
 
   def validate_board_size_input(result) do
@@ -22,9 +21,10 @@ defmodule BoardSizeSettings do
     end
   end
 
-  def handle_board_size_input(input) do
-    input
-    |> ProcessInput.transform_to_integer()
-    |> validate_board_size_input()
+  def handle_board_size(result) do
+    case result do
+      {:ok, message} -> message
+      {:error, message} -> get_board_size(message)
+    end
   end
 end

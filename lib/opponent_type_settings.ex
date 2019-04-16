@@ -7,11 +7,10 @@ defmodule OpponentTypeSettings do
     |> handle_opponent_type()
   end
 
-  def handle_opponent_type(result) do
-    case result do
-      {:ok, message} -> message
-      {:error, message} -> get_opponent_type(message)
-    end
+  def handle_opponent_type_input(input) do
+    input
+    |> ProcessInput.transform_to_string()
+    |> validate_opponent_type_input()
   end
 
   def validate_opponent_type_input(result) do
@@ -22,9 +21,10 @@ defmodule OpponentTypeSettings do
     end
   end
 
-  def handle_opponent_type_input(input) do
-    input
-    |> ProcessInput.transform_to_string()
-    |> validate_opponent_type_input()
+  def handle_opponent_type(result) do
+    case result do
+      {:ok, message} -> message
+      {:error, message} -> get_opponent_type(message)
+    end
   end
 end
