@@ -1,6 +1,6 @@
 defmodule ComputerPlayer do
   def get_move(board) do
-    next_move = ComputerPlayer.picks(board)
+    next_move = picks(board)
 
     GameIO.get_computer_message(:chooses_spot, next_move)
     |> IO.puts()
@@ -8,8 +8,8 @@ defmodule ComputerPlayer do
     {:ok, next_move}
   end
 
-  def picks(board_state) do
-    board_state
+  def picks(state) do
+    state
     |> BoardState.get_empty_values()
     |> Enum.random()
   end

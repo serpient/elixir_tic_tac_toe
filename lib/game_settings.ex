@@ -4,13 +4,13 @@ defmodule GameSettings do
 
     GameIO.get_input_for_game_settings(:game_board_settings, error)
     |> handle_board_size_input()
-    |> GameSettings.handle_board_size()
+    |> handle_board_size()
   end
 
   def handle_board_size(result) do
     case result do
       {:ok, message} -> message
-      {:error, message} -> GameSettings.get_board_size(message)
+      {:error, message} -> get_board_size(message)
     end
   end
 
@@ -33,13 +33,13 @@ defmodule GameSettings do
 
     GameIO.get_input_for_game_settings(:opponent_type_setting, error)
     |> handle_opponent_type_input()
-    |> GameSettings.handle_opponent_type()
+    |> handle_opponent_type()
   end
 
   def handle_opponent_type(result) do
     case result do
       {:ok, message} -> message
-      {:error, message} -> GameSettings.get_opponent_type(message)
+      {:error, message} -> get_opponent_type(message)
     end
   end
 

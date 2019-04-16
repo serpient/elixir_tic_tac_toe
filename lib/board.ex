@@ -1,13 +1,13 @@
 defmodule Board do
-  def handle_board_update(result, board_state, player_symbol) do
+  def handle_board_update(result, state, player_symbol) do
     case result do
-      {:ok, position_to_update} -> {:ok, BoardState.update_board(position_to_update, board_state, player_symbol)}
+      {:ok, position_to_update} -> {:ok, BoardState.update_board(position_to_update, state, player_symbol)}
       {:error, _message} -> result
     end
   end
 
-  def is_full?(board_state) do
-    board_state
+  def is_full?(state) do
+    state
     |> BoardState.all_positions()
     |> Enum.all?(fn value -> value != :empty end)
   end
@@ -16,26 +16,26 @@ defmodule Board do
     board[board_position] == :empty
   end
 
-  def horizontal_rows(board_state) do
-    board_state
+  def horizontal_rows(state) do
+    state
     |> BoardState.all_positions()
-    |> Enum.chunk_every(BoardState.size(board_state))
+    |> Enum.chunk_every(BoardState.size(state))
   end
 
-  def vertical_rows(board_state) do
-    board_size = BoardState.size(board_state)
-    board = BoardState.board(board_state)
-    max_spaces = BoardState.max_spaces(board_state)
+  def vertical_rows(state) do
+    board_size = BoardState.size(state)
+    board = BoardState.board(state)
+    max_spaces = BoardState.max_spaces(state)
 
     for row_idx <- 1..board_size do
       generate_row_values(row_idx..max_spaces, board_size, board_size, board)
     end
   end
 
-  def diagonal_rows(board_state) do
-    board_size = BoardState.size(board_state)
-    board = BoardState.board(board_state)
-    max_spaces = BoardState.max_spaces(board_state)
+  def diagonal_rows(state) do
+    board_size = BoardState.size(state)
+    board = BoardState.board(state)
+    max_spaces = BoardState.max_spaces(state)
     top_left_corner_idx = 1
     top_right_corner_idx = board_size
 

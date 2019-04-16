@@ -1,16 +1,16 @@
 defmodule PrintableBoard do
-  def generate_board_for_print(board_state) do
-    board_size = BoardState.size(board_state)
-    board = BoardState.get_string_values(board_state)
+  def generate_board_for_print(state) do
+    board_size = BoardState.size(state)
+    board = BoardState.get_string_values(state)
 
     0..(board_size - 1)
     |> Enum.map(fn row_idx ->
       at_bottom_of_last_row? = board_size - 1 == row_idx
 
       create_row_of_cells(board_size, row_idx, at_bottom_of_last_row?, board)
-      |> zip_cell_parts_into_list
+      |> zip_cell_parts_into_list()
     end)
-    |> add_top_and_bottom_padding
+    |> add_top_and_bottom_padding()
     |> Enum.join()
   end
 

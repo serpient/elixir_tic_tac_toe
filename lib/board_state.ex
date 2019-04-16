@@ -44,7 +44,7 @@ defmodule BoardState do
 
   def get_empty_values(state) do
     state
-    |> BoardState.board()
+    |> board()
     |> Enum.flat_map(fn {key, value} ->
       case value == :empty do
         true -> [key]
@@ -53,10 +53,11 @@ defmodule BoardState do
     end)
   end
 
-  def update_board(position_to_update, board_state, player_symbol) do
-    board(board_state)
+  def update_board(position_to_update, state, player_symbol) do
+    state
+    |> board()
     |> Map.replace!(position_to_update, player_symbol)
-    |> new_state(size(board_state), opponent(board_state))
+    |> new_state(size(state), opponent(state))
   end
 
   def new_board(range) do

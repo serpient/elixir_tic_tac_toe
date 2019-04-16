@@ -23,8 +23,8 @@ defmodule GameIO do
     computer_player_message[key]
   end
 
-  def print_board(board_state) do
-    board_state
+  def print_board(state) do
+    state
     |> PrintableBoard.generate_board_for_print()
     |> IO.puts()
   end
@@ -48,24 +48,24 @@ defmodule GameIO do
     end
   end
 
-  def print_win(board_state, current_player) do
+  def print_win(state, current_player) do
     clear_io()
-    print_board(board_state)
+    print_board(state)
 
-    ("Player #{get_player_token(current_player)} - " <> GameIO.get_message(:wins_game))
+    ("Player #{get_player_token(current_player)} - " <> get_message(:wins_game))
     |> IO.puts()
   end
 
   def get_player_input(player, message) do
-    ("Player #{get_player_token(player)} - " <> GameIO.get_message(message))
+    ("Player #{get_player_token(player)} - " <> get_message(message))
     |> IO.gets()
   end
 
-  def print_tie(board_state) do
+  def print_tie(state) do
     clear_io()
-    print_board(board_state)
+    print_board(state)
 
-    GameIO.get_message(:game_is_a_tie)
+    get_message(:game_is_a_tie)
     |> IO.puts()
   end
 
@@ -77,14 +77,14 @@ defmodule GameIO do
       border_row <>
       String.duplicate(empty_row, 2) <>
       ~s(               T I C . T A C . T O E                         \n\n) <>
-      ~s(  #{GameIO.get_message(message)}             \n) <>
+      ~s(  #{get_message(message)}             \n) <>
       String.duplicate(empty_row, 2) <>
       border_row <>
       "\n"
   end
 
   def get_input_for_game_settings(message, _error) do
-    GameIO.game_start_banner(message)
+    game_start_banner(message)
     |> IO.gets()
   end
 
@@ -97,6 +97,6 @@ defmodule GameIO do
     if opponent_type == :opponent or
       current_player == :ai or
       opponent_type == nil,
-    do: GameIO.clear_io()
+    do: clear_io()
   end
 end
