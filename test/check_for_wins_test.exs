@@ -378,11 +378,15 @@ defmodule Check_For_Wins_Test do
 
 
   test "[is_row_a_win?] Returns true if every symbol in list matches current player symbol" do
-    assert CheckForWins.is_row_a_win?([:player, :player, :player], :player) == true
+    assert CheckForWins.is_row_a_win?([:player, :player, :player]) == true
   end
 
   test "[is_row_a_win?] Returns false if every symbol in list does not match current player symbol" do
-    assert CheckForWins.is_row_a_win?([:player, :player, :player], :opponent) == false
+    assert CheckForWins.is_row_a_win?([:player, :empty, :player]) == false
+  end
+
+  test "[is_row_a_win?] Returns true if every symbol in list matches :ai" do
+    assert CheckForWins.is_row_a_win?([:ai, :ai, :ai]) == true
   end
 
   test "[has_winning_row?] Checks each row in data and returns true if there is at least a single winning row" do

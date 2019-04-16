@@ -22,15 +22,11 @@ defmodule CheckForWins do
 
   def has_winning_row?(all_rows) do
     all_rows
-    |> Enum.any?(fn row ->
-      is_row_a_win?(row, :player)
-      || is_row_a_win?(row, :opponent)
-      || is_row_a_win?(row, :ai)
-    end)
+    |> Enum.any?(fn row -> is_row_a_win?(row) end)
   end
 
-  def is_row_a_win?(row_data, player_symbol) do
+  def is_row_a_win?(row_data) do
     row_data
-    |> Enum.all?(fn symbol -> symbol == player_symbol end)
+    |> Enum.all?(fn symbol -> symbol != :empty and symbol == List.first(row_data) end)
   end
 end
