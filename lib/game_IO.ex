@@ -14,12 +14,8 @@ defmodule GameIO do
     game_text[key]
   end
 
-  def get_computer_message(key, value) do
-    computer_player_message = %{
-      chooses_spot: ~s(\n\nComputer chooses spot #{value}.\n\n\n)
-    }
-
-    computer_player_message[key]
+  def get_computer_message(value) do
+    ~s(\n\nComputer chooses spot #{value}.\n\n\n)
   end
 
   def print_board(state) do
