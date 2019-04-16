@@ -1,7 +1,7 @@
 defmodule TicTacToe do
   def game_start() do
-    board_size = GameSettings.get_board_size()
-    opponent_type = GameSettings.get_opponent_type()
+    board_size = BoardSizeSettings.get_board_size()
+    opponent_type = OpponentTypeSettings.get_opponent_type()
 
     GameIO.clear_io()
 
