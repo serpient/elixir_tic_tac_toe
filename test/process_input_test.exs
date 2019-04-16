@@ -1,6 +1,4 @@
-defmodule Process_Input_Test do
+defmodule ProcessInputTest do
   use ExUnit.Case
-  doctest TicTacToe
-  doctest GameIO
   doctest ProcessInput
 end

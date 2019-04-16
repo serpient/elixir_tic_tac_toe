@@ -1,7 +1,5 @@
-defmodule Check_For_Wins_Test do
+defmodule CheckForWinsTest do
   use ExUnit.Case
-  doctest TicTacToe
-  doctest GameIO
   doctest CheckForWins
 
   test "[analyze][Horizontal Wins] Row 1 - Wins if they have 3 matching horizontal symbols" do

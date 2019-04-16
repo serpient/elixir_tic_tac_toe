@@ -1,4 +1,4 @@
-defmodule Board_State_Test do
+defmodule BoardStateTest do
   use ExUnit.Case
   doctest BoardState
 

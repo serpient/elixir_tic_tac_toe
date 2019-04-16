@@ -1,7 +1,5 @@
-defmodule Human_Player_Test do
+defmodule HumanPlayerTest do
   use ExUnit.Case
-  doctest TicTacToe
-  doctest GameIO
   doctest HumanPlayer
 
   test "[handle_input] On valid input to empty board, returns a ok tuple with converted value" do

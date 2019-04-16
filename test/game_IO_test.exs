@@ -1,4 +1,4 @@
-defmodule Game_Output_Test do
+defmodule GameIOTest do
   use ExUnit.Case
   import ExUnit.CaptureIO
   doctest GameIO

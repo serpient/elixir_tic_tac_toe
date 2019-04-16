@@ -1,4 +1,4 @@
-defmodule Printable_Board_Test do
+defmodule PrintableBoardTest do
   use ExUnit.Case
   import ExUnit.CaptureIO
   doctest PrintableBoard

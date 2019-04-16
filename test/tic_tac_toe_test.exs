@@ -1,9 +1,7 @@
-defmodule Tic_Tac_Toe_Test do
+defmodule TicTacToeTest do
   use ExUnit.Case
   import ExUnit.CaptureIO
   doctest TicTacToe
-  doctest GameIO
-  doctest ProcessInput
 
   test "[handle_play] Tie result will end the game and output Tie message." do
     tie_board = %{

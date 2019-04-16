@@ -1,4 +1,4 @@
-defmodule Board_Test do
+defmodule BoardTest do
   use ExUnit.Case
   import ExUnit.CaptureIO
   doctest Board
