@@ -15,8 +15,8 @@ defmodule GameIOTest do
     assert GameIO.get_message(:initial_player_prompt) == ~s(Select a numbered spot: )
   end
 
-  test "[get_message] Gets default message on nil param" do
-    assert GameIO.get_message(nil) == ~s(Select a numbered spot: )
+  test "[get_message] Gets default message on no param" do
+    assert GameIO.get_message() == ~s(Select a numbered spot: )
   end
 
   test "[print_win] Prints win message" do

@@ -1,5 +1,5 @@
 defmodule GameIO do
-  def get_message(key) do
+  def get_message(key \\ :initial_player_prompt) do
     game_text = %{
       initial_player_prompt: ~s(Select a numbered spot: ),
       duplicate_input: ~s(That spot is taken! Please choose another number: ),
@@ -7,7 +7,6 @@ defmodule GameIO do
       game_is_a_tie: ~s(No more positions to play! The game is a tie.),
       invalid_input_range: ~s{Please enter a valid number: },
       wins_game: ~s(Wins! \n\n),
-      nil: ~s(Select a numbered spot: ),
       game_board_settings: ~s(     Please select a board size -- 3 or 4: ),
       opponent_type_setting: "Select your opponent -- (L)ocal or (C)omputer:"
     }
