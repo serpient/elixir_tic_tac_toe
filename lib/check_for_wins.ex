@@ -1,35 +1,32 @@
 defmodule CheckForWins do
-  def is_row_a_win?(row_data, player_symbol) do
-    Enum.all?(row_data, fn symbol -> symbol == player_symbol end)
+  def check_for_win(result, state) do
+    case result do
+      {:ok, value} -> analyze(value)
+      {:error, _message} -> Tuple.append(result, state)
+    end
   end
 
-  def is_any_row_within_board_a_win?(all_rows) do
-    Enum.map(all_rows, fn row -> is_row_a_win?(row, "X") || is_row_a_win?(row, "O") end)
-    |> Enum.member?(true)
-  end
+  def analyze(state) do
+    horizontal_wins = Board.horizontal_rows(state) |> has_winning_row?
 
-  def analyze(board) do
-    horizontal = Board.convert_horizontal_to_row(board) |> is_any_row_within_board_a_win?
+    vertical_wins = Board.vertical_rows(state) |> has_winning_row?
 
-    vertical = Board.convert_vertical_to_row(board) |> is_any_row_within_board_a_win?
-
-    diagonal = Board.convert_diagonal_to_row(board) |> is_any_row_within_board_a_win?
-
-    board_has_win? = [horizontal, vertical, diagonal]
+    diagonal_wins = Board.diagonal_rows(state) |> has_winning_row?
 
     cond do
-      Enum.member?(board_has_win?, true) -> {:ok, :wins_game, board}
-      Board.has_empty_spaces?(board) == false -> {:error, :game_is_a_tie, board}
-      true -> {:ok, :no_win, board}
+      Enum.any?([horizontal_wins, vertical_wins, diagonal_wins]) -> {:ok, :wins_game, state}
+      Board.is_full?(state) -> {:error, :game_is_a_tie, state}
+      true -> {:ok, :no_win, state}
     end
   end
 
-  def check_for_win(result, board, _current_player) do
-    {result_code, result_value} = result
+  def has_winning_row?(all_rows) do
+    all_rows
+    |> Enum.any?(fn row -> is_row_a_win?(row) end)
+  end
 
-    case result_code do
-      :ok -> analyze(result_value)
-      :error -> Tuple.append(result, board)
-    end
+  def is_row_a_win?(row_data) do
+    row_data
+    |> Enum.all?(fn symbol -> symbol != :empty and symbol == List.first(row_data) end)
   end
 end
