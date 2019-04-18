@@ -1,4 +1,4 @@
-defmodule Board_Test do
+defmodule BoardTest do
   use ExUnit.Case
   import ExUnit.CaptureIO
   doctest Board
@@ -10,7 +10,7 @@ defmodule Board_Test do
       3 => :empty
     }
 
-    initial_board_spec = BoardState.new_state(initial_board, 3)
+    initial_board_state = BoardState.new_state(initial_board, 3)
 
     updated_board = %{
       1 => :player,
@@ -18,10 +18,10 @@ defmodule Board_Test do
       3 => :opponent
     }
 
-    updated_board_spec = BoardState.new_state(updated_board, 3)
+    updated_board_state = BoardState.new_state(updated_board, 3)
 
-    assert Board.handle_board_update({:ok, 3}, initial_board_spec, :opponent) ==
-             {:ok, updated_board_spec}
+    assert Board.handle_board_update({:ok, 3}, initial_board_state, :opponent) ==
+             {:ok, updated_board_state}
   end
 
   test "[handle_board_update] On :error, returns the error tuple" do
@@ -37,9 +37,9 @@ defmodule Board_Test do
       9 => " "
     }
 
-    initial_board_spec = BoardState.new_state(initial_board, 3)
+    initial_board_state = BoardState.new_state(initial_board, 3)
 
-    assert Board.handle_board_update({:error, :invalid_input}, initial_board_spec, "X") ==
+    assert Board.handle_board_update({:error, :invalid_input}, initial_board_state, "X") ==
              {:error, :invalid_input}
   end
 
@@ -50,9 +50,9 @@ defmodule Board_Test do
       3 => :player
     }
 
-    initial_board_spec = BoardState.new_state(has_no_empty_spaces_board, 3)
+    initial_board_state = BoardState.new_state(has_no_empty_spaces_board, 3)
 
-    assert Board.is_full?(initial_board_spec) == true
+    assert Board.is_full?(initial_board_state) == true
   end
 
   test "[is_full] Returns false if board has more spaces to play." do
@@ -62,9 +62,9 @@ defmodule Board_Test do
       3 => :empty
     }
 
-    initial_board_spec = BoardState.new_state(is_full_board, 3)
+    initial_board_state = BoardState.new_state(is_full_board, 3)
 
-    assert Board.is_full?(initial_board_spec) == false
+    assert Board.is_full?(initial_board_state) == false
   end
 
   test "[is_position_empty?] Returns false if position has player symbol." do
@@ -100,11 +100,11 @@ defmodule Board_Test do
       9 => "9"
     }
 
-    horizontal_conversion_board_spec = %BoardState{
+    horizontal_conversion_board_state = %BoardState{
       board_data: initial_board
     }
 
-    assert Board.horizontal_rows(horizontal_conversion_board_spec) == [
+    assert Board.horizontal_rows(horizontal_conversion_board_state) == [
              ["1", "2", "3"],
              ["4", "5", "6"],
              ["7", "8", "9"]
@@ -131,9 +131,9 @@ defmodule Board_Test do
       16 => "16"
     }
 
-    horizontal_conversion_board_spec = BoardState.new_state(new_4x4_board, 4)
+    horizontal_conversion_board_state = BoardState.new_state(new_4x4_board, 4)
 
-    assert Board.horizontal_rows(horizontal_conversion_board_spec) == [
+    assert Board.horizontal_rows(horizontal_conversion_board_state) == [
              ["1", "2", "3", "4"],
              ["5", "6", "7", "8"],
              ["9", "10", "11", "12"],
@@ -154,9 +154,9 @@ defmodule Board_Test do
       9 => "9"
     }
 
-    vertical_conversion_board_spec = BoardState.new_state(new_3x3_board, 3)
+    vertical_conversion_board_state = BoardState.new_state(new_3x3_board, 3)
 
-    assert Board.vertical_rows(vertical_conversion_board_spec) == [
+    assert Board.vertical_rows(vertical_conversion_board_state) == [
              ["1", "4", "7"],
              ["2", "5", "8"],
              ["3", "6", "9"]
@@ -183,9 +183,9 @@ defmodule Board_Test do
       16 => "16"
     }
 
-    vertical_conversion_board_spec = BoardState.new_state(new_4x4_board, 4)
+    vertical_conversion_board_state = BoardState.new_state(new_4x4_board, 4)
 
-    assert Board.vertical_rows(vertical_conversion_board_spec) == [
+    assert Board.vertical_rows(vertical_conversion_board_state) == [
              ["1", "5", "9", "13"],
              ["2", "6", "10", "14"],
              ["3", "7", "11", "15"],
@@ -206,11 +206,11 @@ defmodule Board_Test do
       9 => "9"
     }
 
-    diagonal_conversion_board_spec = %BoardState{
+    diagonal_conversion_board_state = %BoardState{
       board_data: initial_board
     }
 
-    assert Board.diagonal_rows(diagonal_conversion_board_spec) == [
+    assert Board.diagonal_rows(diagonal_conversion_board_state) == [
              ["1", "5", "9"],
              ["3", "5", "7"]
            ]
@@ -236,9 +236,9 @@ defmodule Board_Test do
       16 => "16"
     }
 
-    diagonal_conversion_board_spec = BoardState.new_state(new_4x4_board, 4)
+    diagonal_conversion_board_state = BoardState.new_state(new_4x4_board, 4)
 
-    assert Board.diagonal_rows(diagonal_conversion_board_spec) == [
+    assert Board.diagonal_rows(diagonal_conversion_board_state) == [
              ["1", "6", "11", "16"],
              ["4", "7", "10", "13"]
            ]

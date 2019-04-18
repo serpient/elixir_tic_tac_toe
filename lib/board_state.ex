@@ -10,7 +10,8 @@ defmodule BoardState do
               7 => :empty,
               8 => :empty,
               9 => :empty
-            }
+            },
+            opponent_type: :local
 
   def max_spaces(state) do
     board_size = state.board_size
@@ -25,6 +26,10 @@ defmodule BoardState do
     state.board_data
   end
 
+  def opponent(state) do
+    state.opponent_type
+  end
+
   def all_positions(state) do
     state
     |> board()
@@ -34,20 +39,25 @@ defmodule BoardState do
   def get_string_values(state) do
     state
     |> board()
-    |> Enum.map(fn {_key, value} ->
-      case value do
-        :empty -> " "
-        :player -> "X"
-        :opponent -> "O"
-        _ -> value
+    |> Enum.map(fn {_key, value} -> GameIO.get_player_token(value) end)
+  end
+
+  def get_empty_values(state) do
+    state
+    |> board()
+    |> Enum.flat_map(fn {key, value} ->
+      case value == :empty do
+        true -> [key]
+        _ -> []
       end
     end)
   end
 
-  def update_board(position_to_update, board_state, player_symbol) do
-    board(board_state)
+  def update_board(position_to_update, state, player_symbol) do
+    state
+    |> board()
     |> Map.replace!(position_to_update, player_symbol)
-    |> new_state(size(board_state))
+    |> new_state(size(state), opponent(state))
   end
 
   def new_board(range) do
@@ -55,10 +65,11 @@ defmodule BoardState do
     |> Enum.reduce(%{}, fn num, acc -> Map.put(acc, num, :empty) end)
   end
 
-  def new_state(new_board_data, new_board_size \\ 3) do
+  def new_state(new_board_data, new_board_size \\ 3, new_opponent_type \\ :local) do
     %BoardState{
       board_data: new_board_data,
-      board_size: new_board_size
+      board_size: new_board_size,
+      opponent_type: new_opponent_type
     }
   end
 end

@@ -1,9 +1,7 @@
-defmodule Tic_Tac_Toe_Test do
+defmodule TicTacToeTest do
   use ExUnit.Case
   import ExUnit.CaptureIO
   doctest TicTacToe
-  doctest GameIO
-  doctest ProcessInput
 
   test "[handle_play] Tie result will end the game and output Tie message." do
     tie_board = %{
@@ -18,18 +16,18 @@ defmodule Tic_Tac_Toe_Test do
       9 => "X"
     }
 
-    tie_board_spec = %BoardState{
+    tie_board_state = %BoardState{
       board_data: tie_board
     }
 
     assert capture_io(fn ->
              TicTacToe.handle_play(
-               {:error, :game_is_a_tie, tie_board_spec},
-               tie_board_spec,
+               {:error, :game_is_a_tie, tie_board_state},
+               tie_board_state,
                "O"
              )
            end) ==
-             capture_io(fn -> GameIO.print_tie(tie_board_spec) end)
+             capture_io(fn -> GameIO.print_tie(tie_board_state) end)
   end
 
   test "[handle_play] Winning result will end the game and output Win Game message" do
@@ -45,17 +43,17 @@ defmodule Tic_Tac_Toe_Test do
       9 => " "
     }
 
-    winning_board_spec = %BoardState{
+    winning_board_state = %BoardState{
       board_data: winning_board
     }
 
     assert capture_io(fn ->
              TicTacToe.handle_play(
-               {:ok, :wins_game, winning_board_spec},
-               winning_board_spec,
+               {:ok, :wins_game, winning_board_state},
+               winning_board_state,
                "X"
              )
            end) ==
-             capture_io(fn -> GameIO.print_win(winning_board_spec, "X") end)
+             capture_io(fn -> GameIO.print_win(winning_board_state, "X") end)
   end
 end

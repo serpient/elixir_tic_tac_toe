@@ -1,4 +1,4 @@
-defmodule Printable_Board_Test do
+defmodule PrintableBoardTest do
   use ExUnit.Case
   import ExUnit.CaptureIO
   doctest PrintableBoard
@@ -23,7 +23,7 @@ defmodule Printable_Board_Test do
       16 => "16"
     }
 
-    four_board_spec = %BoardState{
+    four_board_state = %BoardState{
       board_data: new_4x4_board,
       board_size: 4
     }
@@ -47,7 +47,7 @@ defmodule Printable_Board_Test do
 
     margin_bottom = "\n\n\n"
 
-    assert PrintableBoard.generate_board_for_print(four_board_spec) ==
+    assert PrintableBoard.generate_board_for_print(four_board_state) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> row4 <> margin_bottom})
   end
 
@@ -64,7 +64,7 @@ defmodule Printable_Board_Test do
       9 => "9"
     }
 
-    three_board_spec = %BoardState{
+    three_board_state = %BoardState{
       board_data: new_3x3_board,
       board_size: 3
     }
@@ -79,7 +79,7 @@ defmodule Printable_Board_Test do
 
     margin_bottom = "\n\n\n"
 
-    assert PrintableBoard.generate_board_for_print(three_board_spec) ==
+    assert PrintableBoard.generate_board_for_print(three_board_state) ==
              ~s(#{margin_top <> row1 <> row2 <> row3 <> margin_bottom})
   end
 
@@ -96,11 +96,27 @@ defmodule Printable_Board_Test do
       9 => :empty
     }
 
-    three_board_spec = %BoardState{
+    three_board_state = %BoardState{
       board_data: initial_3x3_board
     }
 
-    assert capture_io(fn -> GameIO.print_board(three_board_spec) end) ==
-             PrintableBoard.generate_board_for_print(three_board_spec) <> "\n"
+    assert capture_io(fn -> GameIO.print_board(three_board_state) end) ==
+             PrintableBoard.generate_board_for_print(three_board_state) <> "\n"
+  end
+
+  test "[get_string_values] converts different tokens correctly" do
+    initial_board_state = %{
+      1 => :empty,
+      2 => :ai,
+      3 => :player,
+      4 => :opponent
+    }
+
+    three_board_state = %BoardState{
+      board_data: initial_board_state
+    }
+
+    assert BoardState.get_string_values(three_board_state) ==
+             [" ", "O", "X", "O"]
   end
 end
